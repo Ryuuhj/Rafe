@@ -1,0 +1,1 @@
+// 레시피 detail 보여줄 공통 component

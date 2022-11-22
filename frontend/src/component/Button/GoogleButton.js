@@ -35,13 +35,13 @@ const GoogleButton = ({onSocial}) => {
          })
          .then(res => {
             console.log(res.data[0].userid)
-            window.location.replace('/main');
-            localStorage.setItem('userid', res.data[0].userid)
+            window.location.replace('/');
+            localStorage.setItem('userid', res.data[0].userid)  //백엔드로부터 받은 userid 저장
          })
         // .then( res => {
         //     if(localStorage.getItem('login-token')){
         //         console.log(localStorage.getItem('login-token'))
-        //         window.location.replace="/main"; //뒤로 돌아가기 불가능
+        //         window.location.replace="/";
         //         console.log(localStorage.getItem('profile'))
         //     }else{
         //         console.log('failure : token undefined')
