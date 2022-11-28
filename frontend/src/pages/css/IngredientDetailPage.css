@@ -1,0 +1,19 @@
+#reName__img{
+    width: 20%;
+}
+
+.reName__th, .reName__td {
+    border: 1px solid #bcbcbc;
+    width : 33%
+}
+
+#cart_btn{
+    width: 40px;
+}
+#cart_img{
+    width:100%;
+}
+
+#inName__name{
+    width: 30%;
+}

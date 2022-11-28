@@ -16,6 +16,7 @@ import CocktailPage from './pages/CocktailPage';
 
 import MypagePage from './pages/MypagePage';
 import StoragePage from './pages/StoragePage';
+import IngredientDetailPage from './pages/IngredientDetailPage';
 import ShoppingPage from './pages/ShoppingPage';
 import LikeRecipePage from './pages/LikeRecipePage';
 
@@ -38,6 +39,7 @@ function App(){
 
           <Route path="/mypage" element={<MypagePage />} />
           <Route path="/storage" element={<StoragePage />} />
+          <Route path="/ingredient/detail" element={<IngredientDetailPage />} />
           <Route path="/shopping" element={<ShoppingPage />} />
           <Route path="/like_recipe" element={<LikeRecipePage />} />
         </Route>

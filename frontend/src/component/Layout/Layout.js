@@ -11,9 +11,7 @@ function Layout () {
             <div className="nav-wrapper">
                 <NavBar></NavBar>
             </div>
-            <div className="content">
                 <Outlet />
-            </div>
         </div>
     );
 }

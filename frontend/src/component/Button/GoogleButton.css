@@ -1,4 +1,4 @@
-.wrapper{
+.btnwrapper{
     position : relative;
     display: flex;
     justify-content: center;
@@ -20,3 +20,12 @@ div{
     color: #0D3F3D;
     font-size: 5vmin;
 } */
+
+.wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    min-height: 100vh;
+    flex-direction: column-reverse;
+}

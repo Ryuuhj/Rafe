@@ -27,16 +27,16 @@ const GoogleButton = ({onSocial}) => {
     
         
         //mock server로 진행 (post url 변경)
-        axios.post('https://302f9c07-f1c7-45dd-a83e-eece1d2596dd.mock.pstmn.io/', {
+        axios.post('http://localhost:3001/', {
             name : result.name,
             email : result.email,
             picture : result.imageUrl,
             google : result.googleId //googleId 값 보내고 서버로부터 userid 받아서 localStorage에 저장
          })
          .then(res => {
-            console.log(res.data[0].userid)
+            console.log(res.data[0].userId)
             window.location.replace('/');
-            localStorage.setItem('userid', res.data[0].userid)  //백엔드로부터 받은 userid 저장
+            localStorage.setItem('userid', res.data[0].userId)  //백엔드로부터 받은 userid 저장
          })
         // .then( res => {
         //     if(localStorage.getItem('login-token')){
@@ -54,7 +54,7 @@ const GoogleButton = ({onSocial}) => {
     };
 
     return (
-        <div className="wrapper">
+        <div className="btnwrapper">
         <div>
             <div className="img-wrapper">
             <img src="../img/rafe_logo_txt.png" alt="Rafe" width={"40%"}/>
