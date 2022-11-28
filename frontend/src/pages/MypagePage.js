@@ -1,7 +1,37 @@
 import "../component/Layout/Text.css";
+import "./css/MypagePage.css";
+import MenuBtn from "../component/Button/MenuBtn";
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+
 function MypagePage() {
+    const navigate = useNavigate();
+    const [user, setUser] = useState([]);
+
+    useEffect(() => {
+        axios.get("http://localhost:3001/mypage", {
+            params : {userId : localStorage.getItem('userid')}
+        })
+        .then(res => {
+            console.log(res.data[0]);
+            setUser(res.data[0]);
+        })
+    }, [])
+
     return (
-        <p>My Page</p>
+        <div>
+            <div className="MyPageUserContent">
+                <div><img src={ user.picture } alt="이미지가 없습니다." id="myImg"></img></div>
+                <div>{user.name}</div>
+            </div>
+            <div className="MyPageMenu">
+                <div className="menubtn"><MenuBtn onClick={(()=>{navigate('/storage')})} context={"내 창고"} orange={false} /></div>
+                <div className="menubtn"><MenuBtn onClick={(()=>{navigate('/shopping')})} context={"장바구니"} orange={false} /></div>
+                <div className="menubtn"><MenuBtn onClick={(()=>{navigate('/like_recipe')})} context={"찜한 레시피"} orange={false} /></div>
+            </div>
+        </div>
     )
 }
 
