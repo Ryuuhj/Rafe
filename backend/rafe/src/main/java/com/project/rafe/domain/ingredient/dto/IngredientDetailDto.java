@@ -12,16 +12,16 @@ import java.util.List;
 @NoArgsConstructor
 public class IngredientDetailDto {
 
-    private Long ingredientId;
-    private String ingredientName;
+    private Long igId;
+    private String igName;
     private Integer cart;
 
     private List<SimpleRecipeDto> recipes;
 
     @Builder
     public IngredientDetailDto(Ingredient ingredient, Integer cart, List<SimpleRecipeDto> recipeList) {
-        this.ingredientId = ingredient.getIgId();
-        this.ingredientName = ingredient.getIgName();
+        this.igId = ingredient.getIgId();
+        this.igName = ingredient.getIgName();
         this.cart = cart;
         this.recipes = recipeList;
     }
