@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 public class DetailRequsetDto {
 
     private Long userId;
-    private Long ingredientId;
+    private Long igId;
 
     @Builder
-    public DetailRequsetDto(Long userId, Long ingredientId) {
+    public DetailRequsetDto(Long userId, Long igId) {
         this.userId = userId;
-        this.ingredientId = ingredientId;
+        this.igId = igId;
     }
 }
