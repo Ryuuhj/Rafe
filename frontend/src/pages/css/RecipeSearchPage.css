@@ -1,0 +1,52 @@
+.IgSelectBox{
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    margin-left: 10%;
+    margin-right: 10%;
+    top: 40px;
+}
+
+.IgSelectBox__box{
+    margin-top: 10%;
+}
+
+.SelectBox{
+    position: absolute;
+    top: 50%;
+    width: 100%;
+}
+
+.SelectBox__ig{
+    text-align: left;
+    margin-left: 15%;
+}
+
+.ExceptBox{
+    margin-bottom: 10%;
+    margin-top: 3%;
+    text-align: left;
+    margin-left: 15%;
+}
+
+.SelectBox__sumbit{
+    position: relative;
+    margin-top: 20%;
+    margin-bottom: 5%;
+}
+
+.btn {
+    background-color : #0D3F3D;
+    color : #FF8243;
+    padding : 10px 20px;
+    border : 0;
+    border-radius : 10px;
+}
+
+.btn_active {
+    background-color : #FF8243;
+    color : #0D3F3D;
+    padding : 10px 20px;
+    border : 0;
+    border-radius : 10px;
+}

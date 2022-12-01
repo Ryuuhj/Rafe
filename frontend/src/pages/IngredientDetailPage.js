@@ -40,10 +40,10 @@ function IngredientDetailPage() {
                             
                                 <table id="reName__table">
                                     <tr>
-                                        {val.RecipeName.map((recipe) => {return (<th className="reName__th">{recipe}</th>)})}
+                                        {val.recipeName.map((recipe) => {return (<th className="reName__th">{recipe}</th>)})}
                                     </tr>
                                     <tr>
-                                        {val.RecipeImage.map((image) => {return (<td className="reName__td">
+                                        {val.recipeImage.map((image) => {return (<td className="reName__td">
                                             <img src={ image } alt="이미지가 없습니다." id="reName__img"></img>
                                         </td>)})}
                                     </tr>

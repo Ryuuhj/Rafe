@@ -1,0 +1,68 @@
+.recipe__main{
+    position: relative;
+    top: 200px;
+}
+
+.recipe__title{
+    padding-top: 10px;
+    width: 60%;
+    display: inline-flex;
+}
+
+.recipe__imgBox{
+    object-fit: scale-down;
+    background-color: #0D3F3D;
+    width: 60%;
+    display: inline-block;
+    position: relative;
+
+}
+/* .recipe__imgBox{
+    display: table;
+    width : 60%;
+    text-align: center;
+    background-color: #0D3F3D;
+}
+.recipe__imgBox_box{
+    display: table-cell;
+    vertical-align:middle;
+} */
+
+.recipe__img{
+    width:30%;
+    margin-bottom: -10px;
+    max-width:180px;
+    max-height:180px;
+}
+
+.recipe__like{
+    width: 6%;
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
+}
+
+#recipe__ig_title{
+    display: inline-flex;
+    width: 60%;
+    padding-top : 5%;
+}
+
+.recipe__ig{
+    float: left;
+    display: flex;
+    width: 80%;
+    margin-left: 20%;
+    padding-bottom: 20px;
+}
+
+/* table {
+    width: 30%;
+    border: 1px solid #444444;
+  }
+  th, td {
+    border: 1px solid #444444;
+  } */
+  table{
+    width : 30%;
+  }

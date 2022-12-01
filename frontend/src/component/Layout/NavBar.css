@@ -9,6 +9,7 @@
     width: 100%;
     padding-top: 0;
     top:0px;
+    z-index: 2;
 }
 
 #wrapper {
@@ -101,6 +102,6 @@ a{
     position: fixed;
     top: 15px;
     right: 30px;
-    z-index : 1;
+    z-index : 3;
 }
 

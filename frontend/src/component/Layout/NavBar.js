@@ -20,9 +20,9 @@ function NavBar() {
     return (
         <div>
             <div className="btn-wrapper">
-                <Btn onClick={()=>{
+                <Btn onClick={() => {
                     localStorage.clear()
-                    navigate("../login",  { replace: true}) //방문기록 남기지 않음
+                    navigate("../login", { replace: true }) //방문기록 남기지 않음
                 }} context={"Logout"} orange={false} />
             </div>
             <div className="nav-wrapper">
@@ -33,25 +33,25 @@ function NavBar() {
                         <ul id="menu__list">
                             <Link to="/main" id="menu__menu">Home</Link>
                             <li id="menu__menu">
-                                <Link to="/recipe">
+                                <Link to={`/recipe`} state={{ categoryId: 10 }}>
                                     Recipe
                                 </Link>
                                 <div id="subwrapper">
                                     <nav id="subnav">
                                         <ul id="submenu__list">
-                                            <Link to="/coffee" id="submenu__menu">Coffee</Link>
-                                            <Link to="/latte" id="submenu__menu">Latte</Link>
-                                            <Link to="/smoothie" id="submenu__menu">Smoothie</Link>
-                                            <Link to="/juice" id="submenu__menu">Juice</Link>
-                                            <Link to="/ade" id="submenu__menu">Ade</Link>
-                                            <Link to="/cocktail" id="submenu__menu">Cocktail</Link>
+                                            <Link to={`/recipe`} state={{ categoryId: 0 }} id="submenu__menu">Coffee</Link>
+                                            <Link to={`/recipe`} state={{ categoryId: 1 }} id="submenu__menu">Latte</Link>
+                                            <Link to={`/recipe`} state={{ categoryId: 2 }} id="submenu__menu">Smoothie</Link>
+                                            <Link to={`/recipe`} state={{ categoryId: 3 }} id="submenu__menu">Juice</Link>
+                                            <Link to={`/recipe`} state={{ categoryId: 4 }} id="submenu__menu">Ade</Link>
+                                            <Link to={`/recipe`} state={{ categoryId: 5 }} id="submenu__menu">Cocktail</Link>
                                         </ul>
                                     </nav>
                                 </div>
                             </li>
                             <li id="menu__menu">
                                 <Link to="/mypage">
-                                My Page
+                                    My Page
                                 </Link>
                                 <div id="subwrapper">
                                     <nav id="subnav">
@@ -67,7 +67,7 @@ function NavBar() {
                     </nav>
                 </div>
             </div>
-            
+
         </div>
     );
 }
