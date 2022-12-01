@@ -9,11 +9,10 @@ import { useNavigate } from "react-router-dom";
 function MypagePage() {
     const navigate = useNavigate();
     const [user, setUser] = useState([]);
+    const userId = localStorage.getItem('userId')
 
     useEffect(() => {
-        axios.get("http://localhost:3001/mypage", {
-            params : {userId : localStorage.getItem('userid')}
-        })
+        axios.get(`/user/${userId}`)
         .then(res => {
             console.log(res.data[0]);
             setUser(res.data[0]);

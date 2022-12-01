@@ -13,13 +13,10 @@ function StoragePage() {
     const [searchList, setSearchList] = useState([]);
     const [isVisible, setIsVisible] = useState(false);
     //const[storageExist, setStorageListExist] = useState(false);
+    const userId = localStorage.getItem('userId')
 
     useEffect(() => {
-        axios.get("http://localhost:3001/data", {
-            params: {
-                userId : localStorage.getItem('userid')
-            }
-        })
+        axios.get(`/storage/${userId}`)
         .then(res => {
             getStorage(res);
         })
@@ -27,8 +24,9 @@ function StoragePage() {
 
     const getSearch = async(res) => {  //재료 검색 시 키워드 백엔드로 전송 후 검색결과 반환
         setIsVisible(true)
-        const result = await axios.get("http://localhost:3001/search_result", {
+        const result = await axios.get("/ingredient", {
             params: {
+                userId : userId,
                 keyward: searchtxt
             }
         })
