@@ -15,10 +15,6 @@ function StoragePage() {
     //const[storageExist, setStorageListExist] = useState(false);
 
     useEffect(() => {
-        getSearch()
-    },[])
-
-    useEffect(() => {
         axios.get("http://localhost:3001/data", {
             params: {
                 userId : localStorage.getItem('userid')
@@ -30,6 +26,7 @@ function StoragePage() {
       }, []);
 
     const getSearch = async(res) => {  //재료 검색 시 키워드 백엔드로 전송 후 검색결과 반환
+        setIsVisible(true)
         const result = await axios.get("http://localhost:3001/search_result", {
             params: {
                 keyward: searchtxt
@@ -38,6 +35,7 @@ function StoragePage() {
         console.log(result.data)
         setSearchList(result.data)
     }
+    
 
     const getStorage = async(res) => {  //사용자가 갖고 있는 재료 보여주기
         console.log(res.data)
@@ -83,7 +81,7 @@ function StoragePage() {
                 <input className="SearchInput" type="text" placeholder="재료명을 검색해주세요." value={searchtxt} onChange={(e) => {
                     setSearchtxt(e.target.value);
                 }} />
-                <Btn onClick={() => { setIsVisible(true) }} context={"검색"} orange={false} />
+                <Btn onClick={() => { getSearch() }} context={"검색"} orange={false} />
             </div>
 
             <table id="StorageTable">

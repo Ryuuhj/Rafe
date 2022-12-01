@@ -1,0 +1,18 @@
+.recipe_search_box{
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 10fr 1fr;
+}
+.recipe_search_box__name{
+    text-align: left;
+    margin-left: 10%;
+}
+
+.recipe_search__btn{
+    width: 30px;
+}
+.recipe_search__img{
+    width:25%;
+}

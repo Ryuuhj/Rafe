@@ -7,12 +7,9 @@ import Layout from './component/Layout/Layout';
 import MainPage from './pages/MainPage';
 
 import RecipePage from './pages/RecipePage';
-import CoffeePage from './pages/CoffeePage';
-import LattePage from './pages/LattePage';
-import SmoothiePage from './pages/SmoothiePage';
-import JuicePage from './pages/JuicePage';
-import AdePage from './pages/AdePage';
-import CocktailPage from './pages/CocktailPage';
+import RecipeDetailPage from "./pages/RecipeDetailPage";
+import RecipeSearchPage from "./pages/RecipeSearchPage";
+import RecipeResultPage from "./pages/ResipeResultPage";
 
 import MypagePage from './pages/MypagePage';
 import StoragePage from './pages/StoragePage';
@@ -30,12 +27,10 @@ function App(){
           <Route path="main" element={<MainPage />} />
 
           <Route path='/recipe' element={<RecipePage />} />
-          <Route path='/coffee' element={<CoffeePage />} />
-          <Route path="/latte" element={<LattePage />} />
-          <Route path="smoothie" element={<SmoothiePage />} />
-          <Route path="/Juice" element={<JuicePage />} />
-          <Route path="/ade" element={<AdePage />} />
-          <Route path="/cocktail" element={<CocktailPage />} />
+          <Route path="/recipe/detail" element={<RecipeDetailPage />} />
+          <Route path="/recipe/search" element={<RecipeSearchPage />} />
+          <Route path="/recipe/result" element={<RecipeResultPage />} />
+          
 
           <Route path="/mypage" element={<MypagePage />} />
           <Route path="/storage" element={<StoragePage />} />
