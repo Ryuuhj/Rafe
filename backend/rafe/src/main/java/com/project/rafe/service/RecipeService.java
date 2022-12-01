@@ -1,8 +1,12 @@
 package com.project.rafe.service;
 
 import com.project.rafe.domain.Recipe.Recipe;
+import com.project.rafe.domain.Recipe.RecipeLike;
 import com.project.rafe.domain.ingredient.Ingredient;
+import com.project.rafe.domain.user.Users;
+import com.project.rafe.repository.RecipeLikeRepository;
 import com.project.rafe.repository.RecipeRepository;
+import com.project.rafe.repository.UserRepository;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
@@ -11,17 +15,44 @@ import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.FileReader;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Service
 public class RecipeService {
 
     private final RecipeRepository recipeRepo;
+    private final RecipeLikeRepository recipeLikeRepo;
+    private final UserRepository userRepository;
     public static final Logger logger = LoggerFactory.getLogger(RecipeService.class);
 
+    @Transactional
+    public Map<String,Object> pressLike(Long userId, Long recipeId) {
+        Map<String, Object> result = new HashMap<>();
+        //넘겨받은 userId, recipeId로 각각 조회에 사용할 객체 찾기 + 예외처리
+        Users user = userRepository.findUserByUserId(userId).orElseThrow(RuntimeException::new);
+        Recipe recipe = recipeRepo.findRecipeByRecipeId(recipeId).orElseThrow(RuntimeException::new);
+
+        //recipeLike 객체 조회해서 없으면 save -> 1 반환
+        try {
+            RecipeLike recipeLike = recipeLikeRepo.findRecipeLikeByUserAndRecipe(user, recipe);
+            if (recipeLike == null) {
+                recipeLikeRepo.save(new RecipeLike(user, recipe));
+                result.put("filledHeart", 1);
+            } else {  //recipeLike 객체 조회해서 있으면 delete -> 0 반환
+                recipeLikeRepo.delete(recipeLike);
+                result.put("filledHeart", 0);}
+        } catch (Exception e) {
+            logger.error("recipeLike 에러 >>> "+e.getMessage());
+            result.put("error", "Like 조회 에러");
+        }
+        return result;
+    }
 
 
 
