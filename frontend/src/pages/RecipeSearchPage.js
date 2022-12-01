@@ -36,7 +36,7 @@ function RecipeSearchPage() {
     };
 
     useEffect(() => {
-        axios.get("http://localhost:3001/recipe_search", {
+        axios.get("/recipe/search", {
             params:{
                 userId : localStorage.getItem('userid')
             }

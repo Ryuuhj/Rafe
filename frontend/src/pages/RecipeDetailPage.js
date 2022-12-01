@@ -11,11 +11,7 @@ function RecipeDetailPage(){
     const [recipeList, setRecipeList] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:3001/recipe_detail", {
-            params : {
-                recipeId : recipeId
-            }
-        })
+        axios.get(`/recipe/${recipeId}`)
         .then(res => {
             setRecipeList(res.data);
         })

@@ -13,10 +13,10 @@ function IngredientDetailPage() {
     const [ingreList, setIngreList] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:3001/ingredientDetail", {
+        axios.get("http://localhost:8080/ingredient/detail", {
             params : {
                 ingredientId : ingredient_id,
-                userId : localStorage.getItem('userid')
+                userId : localStorage.getItem('userId')
             }
         })
         .then(res => {

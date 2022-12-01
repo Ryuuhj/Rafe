@@ -36,21 +36,21 @@ function RecipeResultPage() {
     };
 
     useEffect(() => {
-        // axios.post("http://localhost:3001/recipe_result", {
-        //     categoryId: categoryId,
-        //     lactos: lactos,
-        //     caffeine: caffeine,
-        //     ingredientId: igId,
-        //     keyward: keyward
-        // })
-        axios.get("http://localhost:3001/recipe_result", {params:
-        {
+        axios.post("/recipe/result", {
             categoryId: categoryId,
             lactos: lactos,
             caffeine: caffeine,
             ingredientId: igId,
             keyward: keyward
-        }})
+        })
+        // axios.get("http://localhost:3001/recipe_result", {params:
+        // {
+        //     categoryId: categoryId,
+        //     lactos: lactos,
+        //     caffeine: caffeine,
+        //     ingredientId: igId,
+        //     keyward: keyward
+        // }})
         .then(res => {
                 getResult(res);
             })
