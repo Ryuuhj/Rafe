@@ -26,7 +26,7 @@ function RecipePage() {
     };
 
     useEffect(() => {
-        axios.get("/recipe", {
+        axios.get("http://localhost:3001/recipe", {
             params:{
                 categoryId : categoryId
             }

@@ -16,14 +16,9 @@ function PageLayout({ recipe }) {
                 <div key={recipeId} className="recipeBox__box">
                     <Link to={`/recipe/detail`} state={{ recipeId: recipeId }} className="recipeBox__link">
                         <span><img className="recipeBox__image" src={recipeImage} alt="이미지를 찾을 수 없습니다." /></span>
-                        {matchRate
-                            ? (recipeName.length > 7
-                                ? <span className="recipeBox__name">{recipeName.slice(0, 7)}..<p className="recipeBox__rate">매칭률 {matchRate}%</p></span>
-                                : <span className="recipeBox__name">{recipeName}<p className="recipeBox__rate">매칭률 {matchRate}%</p></span>)
-                            : (recipeName.length > 7
-                                ? <span className="recipeBox__name">{recipeName.slice(0, 7)}..<p className="recipeBox__rate"></p></span>
-                                : <span className="recipeBox__name">{recipeName}<p className="recipeBox__rate"></p></span>)
-                        }
+                        {recipeName.length > 7
+                            ? <span className="recipeBox__name">{recipeName.slice(0, 7)}..</span>
+                            : <span className="recipeBox__name">{recipeName}</span>}
                     </Link>
                 </div>
             ))}
