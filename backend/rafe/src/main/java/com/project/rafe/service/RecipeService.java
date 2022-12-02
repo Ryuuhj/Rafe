@@ -2,11 +2,13 @@ package com.project.rafe.service;
 
 import com.project.rafe.domain.Recipe.Recipe;
 import com.project.rafe.domain.Recipe.RecipeLike;
+import com.project.rafe.domain.Recipe.dto.RecipeDetailDto;
+import com.project.rafe.domain.RecipeIngredient.IngredientFullDto;
+import com.project.rafe.domain.RecipeIngredient.RecipeIngredient;
 import com.project.rafe.domain.ingredient.Ingredient;
+import com.project.rafe.domain.storage.Storage;
 import com.project.rafe.domain.user.Users;
-import com.project.rafe.repository.RecipeLikeRepository;
-import com.project.rafe.repository.RecipeRepository;
-import com.project.rafe.repository.UserRepository;
+import com.project.rafe.repository.*;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
@@ -18,17 +20,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class RecipeService {
 
     private final RecipeRepository recipeRepo;
+    private final RecipeIngredientRepository recipeIngredientRepo;
     private final RecipeLikeRepository recipeLikeRepo;
     private final UserRepository userRepository;
+    private final StorageRepository storageRepo;
     public static final Logger logger = LoggerFactory.getLogger(RecipeService.class);
 
     @Transactional
@@ -52,6 +58,51 @@ public class RecipeService {
             result.put("error", "Like 조회 에러");
         }
         return result;
+    }
+
+    @Transactional
+    public RecipeDetailDto showRecipeDetail(Long userId, Long recipeId) {
+        List<IngredientFullDto> r_i_list = new ArrayList<>();
+        Double count = 0.0; //일치하는 재료 개수 카운팅
+        //1. 레포에서 조회용 객체 가져옴
+        Users user = userRepository.findUserByUserId(userId).get();
+        Recipe recipe = recipeRepo.findRecipeByRecipeId(recipeId).get();
+        //2. 좋아요 여부 판별해 int로 저장
+        Integer pressLike = 0;
+        if (recipeLikeRepo.existsByUserAndRecipe(user, recipe)) {
+            pressLike = 1;
+        }
+        //3. user storage list 찾아서 ingredient List로 매핑
+        List<Ingredient> userIgList = storageRepo.findAllByUserId(userId).stream()
+                .map(Storage::getIngredient).collect(Collectors.toList());
+        //4. recipeIngredient Repo에서 recipe 객체로 RecipeIngredientList 가져오기
+        List<RecipeIngredient> rpIgList = recipeIngredientRepo.findAllByRecipe(recipe);
+        //5. 사용자 소지 재료에 포함된 재료면 storage 1로 세팅해 dto 생성
+        try {
+            for (RecipeIngredient ri : rpIgList) {
+                Integer storageCheck = 0;
+                if (userIgList.contains(ri.getIngredient())) {
+                    storageCheck = 1;
+                    count++;
+                }
+                r_i_list.add(IngredientFullDto.builder()
+                        .ingredient(ri.getIngredient())
+                        .igCount(ri.getIgCount())
+                        .storageCheck(storageCheck)
+                        .build());
+            }
+        } catch (RuntimeException e) {
+            logger.error("Error >>> " + e.getMessage());
+        }
+        //매칭률 구하기
+        Double correct = (count / rpIgList.size()) * 100;
+
+        return RecipeDetailDto.builder()
+                .recipe(recipe)
+                .recipeLike(pressLike)
+                .matchingRate(correct)
+                .totalIgList(r_i_list)
+                .build();
     }
 
 
