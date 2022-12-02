@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -18,27 +19,25 @@ public class UserController {
 
     @PostMapping("/login/google")
     public ResponseEntity<Map<String, Object>> loginGoogle(@RequestBody LoginRequestDto loginRequestDto) {
+        Map<String, Object> result = new HashMap<>();
+        Long userId = userService.check_user(loginRequestDto.getEmail());
 
-        ResponseEntity<Map<String, Object>> response = userService.loginGoogle(loginRequestDto);
-
-        //기존 회원인 경우 -> 토큰 발급, userId 와 함께 response
-        if (response.getBody().containsKey("userId")) {
-            return response;
+        //기존 회원이 아닌 경우, signup 진행 후 저장된 userId 반환
+        if (userId == -1L) {
+            userId = userService.signUpGoogle(loginRequestDto);
+            if (userId == -1L) {
+                result.put("error", "회원가입 실패");
+            }
         }
-        //기존 회원이 아닌 경우, signup 진행 후 다시 login 진행
-        userService.signUpGoogle(loginRequestDto);
-        return userService.loginGoogle(loginRequestDto);
+        //기존 회원인 경우 -> userId 와 함께 response
+        result.put("userId", userId);
+        return ResponseEntity.ok().body(result);
     }
 
     @GetMapping("/user/{userId}")
     public UserDto setProfile(@PathVariable Long userId) {
         return userService.findByUserId(userId);
     }
-
-/*
-    @GetMapping("/storage/{userId}")
-    public
-*/
 
 
 }
