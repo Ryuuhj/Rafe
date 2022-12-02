@@ -16,14 +16,20 @@ import Btn from "../Button/Btn.js"
 
 function NavBar() {
     const navigate = useNavigate();
+    const userId = localStorage.getItem('userId')
 
     return (
         <div>
             <div className="btn-wrapper">
-                <Btn onClick={() => {
+                {userId
+                ? <Btn onClick={() => {
                     localStorage.clear()
-                    navigate("../login", { replace: true }) //방문기록 남기지 않음
+                    navigate("../", { replace: true })
                 }} context={"Logout"} orange={false} />
+            
+                : <Btn onClick={() => {
+                    navigate("../login", { replace: true })
+                }} context={"LogIn"} orange={false} />}
             </div>
             <div className="nav-wrapper">
                 <br />

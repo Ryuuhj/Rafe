@@ -14,9 +14,8 @@ pre {
 }
 
 .IngredientSearchBar {
-    position: absolute;
-    top: 30%;
-    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 6%;
 }
 
 button {
@@ -115,4 +114,10 @@ h4{
 #closeBtn{
     position: relative;
     top: 30%;
+    padding-bottom: 10px;
+}
+
+.storage__title{
+    text-align: left;
+    margin-left: 23%;
 }

@@ -13,47 +13,46 @@ function IngredientDetailPage() {
     const [ingreList, setIngreList] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:8080/ingredient/detail", {
-            params : {
-                ingredientId : ingredient_id,
-                userId : localStorage.getItem('userId')
+        axios.get("http://localhost:3001/ingredientDetail", {
+            params: {
+                ingredientId: ingredient_id,
+                userId: localStorage.getItem('userId')
             }
         })
-        .then(res => {
-            console.log(res.data)
-            setIngreList(res.data);
-        })
+            .then(res => {
+                console.log(res.data)
+                setIngreList(res.data);
+            })
     }, [])
 
     return (
         <div>
             {ingreList.map((val) => {
-                        return (
-                            <div>
-                            <div className="inName"><h1 id="inName__name">{val.igName}
-                            <button id="cart_btn" onClick={()=>{console.log('장바구니 추가')}}>
-                                <img id="cart_img" src="../../img/shopping_cart.png" alt="장바구니 추가"/>
-                            </button>
-                            </h1>
-                            </div>
-                            <div className="reName">관련 레시피 {/*Link로 각각 레시피 상세 페이지로 연결 필요 */}
+                return (
+                    <div>
+                        <div className="inName">
+                            <h2 id="inName__name">{val.igName}</h2>
+                                <button id="cart_btn" onClick={() => { console.log('장바구니 추가') }}>
+                                    <img id="cart_img" src="../../img/shopping_cart.png" alt="장바구니 추가" />
+                                </button>
                             
-                                <table id="reName__table">
-                                    <tr>
-                                        {val.recipeName.map((recipe) => {return (<th className="reName__th">{recipe}</th>)})}
-                                    </tr>
-                                    <tr>
-                                        {val.recipeImage.map((image) => {return (<td className="reName__td">
-                                            <img src={ image } alt="이미지가 없습니다." id="reName__img"></img>
-                                        </td>)})}
-                                    </tr>
-                                </table>
-                            </div>
-                            <hr></hr>
-                            <div>최저가 찾기</div>
-                            </div>
-                        );
-                    })}
+                        </div>
+                        <div className="about_recipe">
+                            {val.recipes.map((recipe) => {
+                                return (
+                                    <Link to={`/recipe/detail`} state={{ recipeId: recipe.recipeId }}>
+                                    <div key={recipe.recipeId} className="about_recipe__box">
+                                        <img src={recipe.recipeImg} alt="이미지가 없습니다." className="about_recipe__img" />
+                                        <p>{recipe.recipeTitle}</p>
+                                    </div>
+                                    </Link>
+                                )
+                            })}
+                        </div>
+                        {/* 최저가 찾기 추가 */}
+                    </div>
+                );
+            })}
         </div>
     );
 }

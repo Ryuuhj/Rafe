@@ -12,18 +12,18 @@ function MypagePage() {
     const userId = localStorage.getItem('userId')
 
     useEffect(() => {
-        axios.get(`/user/${userId}`)
+        axios.get(`http://localhost:8080/user/${userId}`)
         .then(res => {
-            console.log(res.data[0]);
-            setUser(res.data[0]);
+            console.log(res.data);
+            setUser(res.data);
         })
     }, [])
 
     return (
         <div>
             <div className="MyPageUserContent">
-                <div><img src={ user.picture } alt="이미지가 없습니다." id="myImg"></img></div>
-                <div>{user.name}</div>
+                <div><img src={ user.userPicture } alt="이미지가 없습니다." id="myImg"></img></div>
+                <div>{user.userName}</div>
             </div>
             <div className="MyPageMenu">
                 <div className="menubtn"><MenuBtn onClick={(()=>{navigate('/storage')})} context={"내 창고"} orange={false} /></div>

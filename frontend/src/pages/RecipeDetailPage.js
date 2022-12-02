@@ -9,16 +9,28 @@ function RecipeDetailPage(){
     const location = useLocation();
     const recipeId = location.state.recipeId
     const [recipeList, setRecipeList] = useState([]);
+    const [recipeLike, setRecipeLike] = useState(null);
+    const data = {
+        userId : localStorage.getItem('userId'),
+        recipeId : recipeId
+    }
+    console.log("recipeId", recipeId)
 
     useEffect(() => {
-        axios.get(`/recipe/${recipeId}`)
+        axios.get("http://localhost:3001/recipe_detail")
+        //axios.get("http://localhost:8080/recipe/detail", data)
         .then(res => {
             setRecipeList(res.data);
+            setRecipeLike(res.data[0].recipeLike)
         })
     }, [])
 
     return(
-        <RecipeDetail recipe={recipeList} />
+        <div>
+            {recipeLike != null
+            ? <RecipeDetail recipe={recipeList} recipeLike={recipeLike} />
+            : <p>Loading..</p>}
+        </div>
     )
 }
 

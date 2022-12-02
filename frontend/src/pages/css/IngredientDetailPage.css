@@ -1,5 +1,6 @@
-#reName__img{
+.about_recipe__img{
     width: 20%;
+    margin-left: 40%;
 }
 
 .reName__th, .reName__td {
@@ -13,7 +14,34 @@
 #cart_img{
     width:100%;
 }
+.inName{
+    position: absolute;
+    top: 37%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-left: 13%;
+}
 
 #inName__name{
-    width: 30%;
+    margin-right: 10px;
+    line-height: 2;
+}
+
+.about_recipe{
+    grid-template-columns: 1fr 1fr;
+    width: 80%;
+    position: absolute;
+    display: grid;
+    margin-left: 10%;
+}
+
+.about_recipe__box{
+    display: grid;
+    grid-template-rows: 4fr 1fr;
+    align-items: center;
+    box-shadow: 2px 2px 20px lightgrey;
+    border-radius: 20px;
+    padding: 2%;
+    margin: 5%;
+    height: 100%;
 }

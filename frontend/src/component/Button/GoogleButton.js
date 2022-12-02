@@ -27,11 +27,10 @@ const GoogleButton = ({onSocial}) => {
     
         
         //mock server로 진행 (post url 변경)
-        axios.post('/', {
+        axios.post('/login/google', {
             name : result.name,
             email : result.email,
-            picture : result.imageUrl,
-            google : result.googleId //googleId 값 보내고 서버로부터 userid 받아서 localStorage에 저장
+            picture : result.imageUrl
          })
          .then(res => {
             console.log(res.data[0].userId)
