@@ -5,6 +5,7 @@ import com.project.rafe.domain.storage.Storage;
 import com.project.rafe.domain.storage.dto.AddStorageReqDto;
 import com.project.rafe.domain.storage.dto.ChangeFastDto;
 import com.project.rafe.domain.storage.dto.GetResponseDto;
+import com.project.rafe.domain.storage.dto.SearchIngredientDto;
 import com.project.rafe.repository.IngredientRepository;
 import com.project.rafe.repository.StorageRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -126,6 +128,21 @@ public class StorageService extends MessageSetting{
         catch (Exception ignored){
             throw new IllegalArgumentException("FAILED_TO_CHANGE_STATE");
         }
+        return result;
+    }
+
+    //5. 레시피 검색 시 내 창고 반영 재료 범위 전송
+    @Transactional
+    public List<SearchIngredientDto> userIgForSearch(Long userId) {
+        List<Storage> storageList = storageRepo.findAllByUserId(userId);
+        List<SearchIngredientDto> result = new ArrayList<>();
+        if (storageList.isEmpty()) {
+            return result;
+        }
+        result = storageList.stream()
+                .map(SearchIngredientDto::new)
+                .collect(Collectors.toList());
+
         return result;
     }
 
