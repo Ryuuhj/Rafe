@@ -27,15 +27,15 @@ const GoogleButton = ({onSocial}) => {
     
         
         //mock server로 진행 (post url 변경)
-        axios.post('/login/google', {
+        axios.post('http://localhost:8080/login/google', {
             name : result.name,
             email : result.email,
             picture : result.imageUrl
          })
          .then(res => {
-            console.log(res.data[0].userId)
+            console.log(res.data.userId)
             window.location.replace('/');
-            localStorage.setItem('userId', res.data[0].userId)  //백엔드로부터 받은 userid 저장
+            localStorage.setItem('userId', res.data.userId)  //백엔드로부터 받은 userid 저장
          })
         // .then( res => {
         //     if(localStorage.getItem('login-token')){

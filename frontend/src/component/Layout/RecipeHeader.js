@@ -1,4 +1,4 @@
-import "../component/Layout/Text.css";
+import "./Text.css";
 import "./css/RecipeHeader.css";
 
 import { useState } from "react";

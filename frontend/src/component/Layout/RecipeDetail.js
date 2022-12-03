@@ -1,10 +1,9 @@
 import "./Text.css";
-import "./RecipeDetail.css";
+import "./css/RecipeDetail.css";
 import TransBtn from "../Button/TransBtn";
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import RecipeDetailPage from "../../pages/RecipeDetailPage";
 import axios from "axios";
 
 function RecipeDetail({ recipe, recipeLike }) {
@@ -13,10 +12,13 @@ function RecipeDetail({ recipe, recipeLike }) {
     const onCllickLike = () => {  //recipeLike 값 변동될 때마다 해당 값 넘겨주기
         setLike(!like)
         const req = {
-            recipeLike : like,
+            recipeId : recipe.recipeId,
             userId : localStorage.getItem('userId')
         }
         axios.post('http://localhost:8080/recipe/like', req)
+        .then(res=> { //filled_Heart 값 넘어옴
+            setLike(res.data.filled_Heart)
+        })
     }
 
     return (

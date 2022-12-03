@@ -11,13 +11,11 @@ function IngredientDetailPage() {
     //console.log(location.state.ingredient_id)
     const ingredient_id = location.state.ingredientId
     const [ingreList, setIngreList] = useState([]);
-
+    
     useEffect(() => {
-        axios.get("http://localhost:3001/ingredientDetail", {
-            params: {
-                ingredientId: ingredient_id,
-                userId: localStorage.getItem('userId')
-            }
+        axios.post("http://localhost:8080/ingredient/detail", {
+            ingredientId: ingredient_id,
+            userId: localStorage.getItem('userId')
         })
             .then(res => {
                 console.log(res.data)

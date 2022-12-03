@@ -1,11 +1,11 @@
-import "../component/Layout/Text.css";
-import "./css/PageLayout.css";
+import "./Text.css";
+import "./css/RecipePageLayout.css";
 import Pagination from "./Pagination";
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function PageLayout({ recipe }) {
+function RecipePageLayout({ recipe }) {
     const [limit, setLimit] = useState(12);
     const [page, setPage] = useState(1);
     const offset = (page - 1) * limit;
@@ -34,4 +34,4 @@ function PageLayout({ recipe }) {
     );
 }
 
-export default PageLayout;
+export default RecipePageLayout;
