@@ -1,6 +1,8 @@
 package com.project.rafe.domain.Recipe;
 
+import com.project.rafe.domain.RecipeIngredient.RecipeIngredient;
 import com.project.rafe.domain.StringListConverter;
+import com.project.rafe.domain.ingredient.Ingredient;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,6 +44,9 @@ public class Recipe {
     @Column(length = 10000)
     @Convert(converter = StringListConverter.class)
     private List<String> recipeStepImg;
+
+    @OneToMany(mappedBy = "recipe", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private List<RecipeIngredient> igList = new ArrayList<>();
 
     @Builder
     public Recipe(String recipeTitle, String recipeMainImg, Long recipeCategory, List<String> recipeStep, List<String> recipeStepImg) {

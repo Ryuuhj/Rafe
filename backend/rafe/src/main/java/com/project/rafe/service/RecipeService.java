@@ -3,13 +3,13 @@ package com.project.rafe.service;
 import com.project.rafe.domain.Recipe.Recipe;
 import com.project.rafe.domain.Recipe.RecipeLike;
 import com.project.rafe.domain.Recipe.dto.RecipeDetailDto;
+import com.project.rafe.domain.Recipe.dto.SimpleRecipeDto;
 import com.project.rafe.domain.RecipeIngredient.IngredientFullDto;
 import com.project.rafe.domain.RecipeIngredient.RecipeIngredient;
 import com.project.rafe.domain.ingredient.Ingredient;
 import com.project.rafe.domain.storage.Storage;
 import com.project.rafe.domain.user.Users;
 import com.project.rafe.repository.*;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -61,6 +61,28 @@ public class RecipeService {
     }
 
     @Transactional
+    public List<SimpleRecipeDto> searchRpByCategory(Long categoryId) {
+        List<Recipe> mid;
+        List<SimpleRecipeDto> result = new ArrayList();
+        //1. categoryId가 null값인지 판단 -> null인 경우 = 전체 조회
+        if (categoryId == 10) {
+            mid = recipeRepo.findAll();
+        }
+        //2. null이 아닌 경우 -> 카테고리 아이디 별 조회 결과 반환
+        else {
+            mid = recipeRepo.findAllByRecipeCategory(categoryId);
+            if (mid.isEmpty()) { //해당 카테고리 없는 경우 빈 리스트 반환
+                return result;
+            }
+        }
+        //3. 출력 형식은 동일하므로 매핑과정은 동일
+        for (Recipe r :mid) {
+            result.add(new SimpleRecipeDto(r));
+        }
+        return result;
+    }
+
+    @Transactional
     public RecipeDetailDto showRecipeDetail(Long userId, Long recipeId) {
         List<IngredientFullDto> r_i_list = new ArrayList<>();
         Double count = 0.0; //일치하는 재료 개수 카운팅
@@ -104,6 +126,8 @@ public class RecipeService {
                 .totalIgList(r_i_list)
                 .build();
     }
+
+
 
 
 

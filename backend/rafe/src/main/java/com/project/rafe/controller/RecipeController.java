@@ -3,18 +3,17 @@ package com.project.rafe.controller;
 import com.project.rafe.domain.Recipe.dto.RecipeDetailDto;
 import com.project.rafe.domain.Recipe.dto.RecipeDetailReqDto;
 import com.project.rafe.domain.Recipe.dto.LikeRequestDto;
+import com.project.rafe.domain.Recipe.dto.SimpleRecipeDto;
 import com.project.rafe.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -40,6 +39,16 @@ public class RecipeController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return ResponseEntity.ok().body(result);
+    }
+
+    //카테고리별 조회 (전체 조회 = 10)
+    @GetMapping("/recipe/{category-id}")
+    public ResponseEntity<?> showRecipeList(@PathVariable("category-id") Long categoryId) {
+        List<SimpleRecipeDto> resultList = recipeService.searchRpByCategory(categoryId);
+        if(resultList.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(resultList);
     }
 
     @GetMapping("/recipe/read")
