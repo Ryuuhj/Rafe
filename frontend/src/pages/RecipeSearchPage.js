@@ -19,6 +19,7 @@ function RecipeSearchPage() {
     const location = useLocation();
     //console.log(location.state.categoryId)
     const categoryId = location.state.categoryId
+    const userId = localStorage.getItem('userId')
 
     const setInit = () => {
         setCaffeine(0)
@@ -36,11 +37,7 @@ function RecipeSearchPage() {
     };
 
     useEffect(() => {
-        axios.get("/recipe/search", {
-            params:{
-                userId : localStorage.getItem('userid')
-            }
-        })
+        axios.get(`http://localhost:8080/recipe/search/${userId}`)
             .then(res => {
                 getIg(res);
             })

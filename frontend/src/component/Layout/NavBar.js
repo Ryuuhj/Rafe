@@ -3,7 +3,7 @@ import {
     Link,
 } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-import "./NavBar.css";
+import "./css/NavBar.css";
 import "./Text.css";
 import Btn from "../Button/Btn.js"
 

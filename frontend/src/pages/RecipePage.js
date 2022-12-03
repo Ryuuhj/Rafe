@@ -1,9 +1,7 @@
 import "../component/Layout/Text.css";
 import "./css/StoragePage.css";
-import Btn from "../component/Button/Btn";
-import TransBtn from "../component/Button/TransBtn";
-import PageLayout from "./PageLayout";
-import RecipeHeader from "./RecipeHeader";
+import RecipePageLayout from "../component/Layout/RecipePageLayout";
+import RecipeHeader from "../component/Layout/RecipeHeader";
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -26,12 +24,14 @@ function RecipePage() {
     };
 
     useEffect(() => {
-        axios.get("http://localhost:3001/recipe", {
-            params:{
-                categoryId : categoryId
-            }
-        })
+        // axios.get("http://localhost:3001/recipe", {
+        //     params:{
+        //         categoryId : categoryId
+        //     }
+        // })
+        axios.get(`http://localhost:8080/recipe/${categoryId}`)
             .then(res => {
+                console.log(res)
                 getRecipe(res);
             })
     }, []);
@@ -39,7 +39,7 @@ function RecipePage() {
     return (
         <div className="Recipe">
             <RecipeHeader category={categoryId}/>
-            <PageLayout recipe={recipeList} />
+            <RecipePageLayout recipe={recipeList} />
         </div>
     )
 }
