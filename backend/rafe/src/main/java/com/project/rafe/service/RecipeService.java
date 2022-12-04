@@ -2,12 +2,16 @@ package com.project.rafe.service;
 
 import com.project.rafe.domain.Recipe.Recipe;
 import com.project.rafe.domain.Recipe.RecipeLike;
+import com.project.rafe.domain.Recipe.dto.RecipeDetailDto;
+import com.project.rafe.domain.Recipe.dto.SimpleRecipeDto;
+import com.project.rafe.domain.Recipe.search.SearchCondDto;
+import com.project.rafe.domain.RecipeIngredient.IngredientFullDto;
+import com.project.rafe.domain.RecipeIngredient.RecipeIngredient;
 import com.project.rafe.domain.ingredient.Ingredient;
+import com.project.rafe.domain.storage.Storage;
 import com.project.rafe.domain.user.Users;
-import com.project.rafe.repository.RecipeLikeRepository;
-import com.project.rafe.repository.RecipeRepository;
-import com.project.rafe.repository.UserRepository;
-import lombok.Builder;
+import com.project.rafe.repository.*;
+import com.project.rafe.repository.query.SearchQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -18,17 +22,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class RecipeService {
 
     private final RecipeRepository recipeRepo;
+    private final RecipeIngredientRepository recipeIngredientRepo;
     private final RecipeLikeRepository recipeLikeRepo;
     private final UserRepository userRepository;
+    private final StorageRepository storageRepo;
+    private final SearchQueryRepository searchQueryRepository;
     public static final Logger logger = LoggerFactory.getLogger(RecipeService.class);
 
     @Transactional
@@ -54,6 +63,78 @@ public class RecipeService {
         return result;
     }
 
+    @Transactional
+    public List<SimpleRecipeDto> searchRpByCategory(Long categoryId) {
+        List<Recipe> mid;
+        List<SimpleRecipeDto> result = new ArrayList();
+        //1. categoryId가 null값인지 판단 -> null인 경우 = 전체 조회
+        if (categoryId == 10) {
+            mid = recipeRepo.findAll();
+        }
+        //2. null이 아닌 경우 -> 카테고리 아이디 별 조회 결과 반환
+        else {
+            mid = recipeRepo.findAllByRecipeCategory(categoryId);
+            if (mid.isEmpty()) { //해당 카테고리 없는 경우 빈 리스트 반환
+                return result;
+            }
+        }
+        //3. 출력 형식은 동일하므로 매핑과정은 동일
+        for (Recipe r :mid) {
+            result.add(new SimpleRecipeDto(r));
+        }
+        return result;
+    }
+
+    @Transactional
+    public RecipeDetailDto showRecipeDetail(Long userId, Long recipeId) {
+        List<IngredientFullDto> r_i_list = new ArrayList<>();
+        Double count = 0.0; //일치하는 재료 개수 카운팅
+        //1. 레포에서 조회용 객체 가져옴
+        Users user = userRepository.findUserByUserId(userId).get();
+        Recipe recipe = recipeRepo.findRecipeByRecipeId(recipeId).get();
+        //2. 좋아요 여부 판별해 int로 저장
+        Integer pressLike = 0;
+        if (recipeLikeRepo.existsByUserAndRecipe(user, recipe)) {
+            pressLike = 1;
+        }
+        //3. user storage list 찾아서 ingredient List로 매핑
+        List<Ingredient> userIgList = storageRepo.findAllByUserId(userId).stream()
+                .map(Storage::getIngredient).collect(Collectors.toList());
+        //4. recipeIngredient Repo에서 recipe 객체로 RecipeIngredientList 가져오기
+        List<RecipeIngredient> rpIgList = recipeIngredientRepo.findAllByRecipe(recipe);
+        //5. 사용자 소지 재료에 포함된 재료면 storage 1로 세팅해 dto 생성
+        try {
+            for (RecipeIngredient ri : rpIgList) {
+                Integer storageCheck = 0;
+                if (userIgList.contains(ri.getIngredient())) {
+                    storageCheck = 1;
+                    count++;
+                }
+                r_i_list.add(IngredientFullDto.builder()
+                        .ingredient(ri.getIngredient())
+                        .igCount(ri.getIgCount())
+                        .storageCheck(storageCheck)
+                        .build());
+            }
+        } catch (RuntimeException e) {
+            logger.error("Error >>> " + e.getMessage());
+        }
+        //매칭률 구하기
+        Double correct = (count / rpIgList.size()) * 100;
+
+        return RecipeDetailDto.builder()
+                .recipe(recipe)
+                .recipeLike(pressLike)
+                .matchingRate(correct)
+                .totalIgList(r_i_list)
+                .build();
+    }
+
+    //레시피 검색
+    @Transactional
+    public List<SimpleRecipeDto> searchByCond (SearchCondDto cond){
+        return searchQueryRepository.searchByCond(cond);
+    }
 
 
 
@@ -88,6 +169,8 @@ public class RecipeService {
                             .recipeTitle((String) result.get("recipe_title"))
                             .recipeMainImg((String) result.get("recipe_main_img"))
                             .recipeCategory((Long) result.get("recipe_category"))
+                            .lactose((Long) result.get("recipe_lactose"))
+                            .caffeine((Long) result.get("recipe_caffenie"))
                             .recipeStep((List<String>) result.get("recipe_step"))
                             .recipeStepImg((List<String>) result.get("recipe_step_img"))
                             .build());

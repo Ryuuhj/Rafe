@@ -29,23 +29,6 @@ public class RecipeIngredientService {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public void read_recipeIngredient(){
         JSONParser parser = new JSONParser();
         try {

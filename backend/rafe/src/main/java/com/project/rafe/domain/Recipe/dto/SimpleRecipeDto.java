@@ -19,4 +19,11 @@ public class SimpleRecipeDto {
         this.recipeTitle = recipe.getRecipeTitle();
         this.recipeImg = recipe.getRecipeMainImg();
     }
+
+    @Builder
+    public SimpleRecipeDto(Long recipeId, String recipeTitle, String recipeImg) {
+        this.recipeId = recipeId;
+        this.recipeTitle = recipeTitle;
+        this.recipeImg = recipeImg;
+    }
 }
