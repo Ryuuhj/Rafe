@@ -57,7 +57,7 @@ function RecipeResultPage() {
     return (
         <div className="Recipe">
             <RecipeHeader category={categoryId} />
-            <RecipePageLayout recipe={recipeList} />
+            <RecipePageLayout recipe={recipeList} length={recipeList.length}/>
         </div>
     )
 }

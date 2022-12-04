@@ -14,6 +14,7 @@ function RecipeSearchPage() {
     const [lactose, setLactose] = useState(0);
     const [caffeine, setCaffeine] = useState(0);
     const [selectIgList, setSelectIgList] = useState([]);
+    const [selectIgName, setSelectIgName] = useState([]);
     const [btnActive, setBtnActive] = useState("");
 
     const location = useLocation();
@@ -54,7 +55,8 @@ function RecipeSearchPage() {
         setBtnActive((prev)=>{
             return e.target.value;
         })
-        setSelectIgList([...selectIgList, val]) //선택한 재료 id값들 저장
+        setSelectIgList([...selectIgList, val.igId]) //선택한 재료 id값들 저장
+        setSelectIgName([...selectIgName, val.igName])
         console.log(selectIgList)
     };
 
@@ -84,7 +86,7 @@ function RecipeSearchPage() {
                     <div className="IgSelectBox__box">
                         <button value={idx}
                         className={"btn"+(idx == btnActive?"_active": "")}
-                        onClick={(e)=>{selectIg(e, val.igId)}}>
+                        onClick={(e)=>{selectIg(e, val)}}>
                             {val.igName}
                         </button>
                         {/* <Btn onClick={()=> {selectIg(val.igId)}} context={val.igName} orange={btnColor? true : false} /> */}
@@ -92,6 +94,14 @@ function RecipeSearchPage() {
                 )
             })}
             </div>
+            <div id="Select__igList">
+                        🧺선택한 재료 목록🧺
+                            {selectIgName.map((name)=>{
+                                return(
+                                    <div>{name}</div>
+                                )
+                            })}
+                            </div>
             <div className="SelectBox__sumbit">
                 <Btn onClick={()=>{setInit()}} context={"초기화"} orange={false} /> &nbsp;&nbsp;&nbsp;
                 <Link to={`/recipe/result`} state={{

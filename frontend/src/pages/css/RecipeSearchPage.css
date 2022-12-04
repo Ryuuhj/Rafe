@@ -2,7 +2,7 @@
     position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    margin-left: 10%;
+    margin-left: 12%;
     margin-right: 10%;
     top: 40px;
 }
@@ -31,7 +31,7 @@
 
 .SelectBox__sumbit{
     position: relative;
-    margin-top: 20%;
+    margin-top: 5%;
     margin-bottom: 5%;
 }
 
@@ -49,4 +49,17 @@
     padding : 10px 20px;
     border : 0;
     border-radius : 10px;
+}
+
+#Select__igList{
+    position: relative;
+    margin-top: 10%;
+    margin-bottom: 5%;
+    margin-left: 37%;
+    /* border: solid; */
+    border-radius: 15px;
+    width: 22%;
+    padding: 2%;
+    background-color: #FFF9E9;
+    box-shadow: 3px 3px 13px lightgrey;
 }
