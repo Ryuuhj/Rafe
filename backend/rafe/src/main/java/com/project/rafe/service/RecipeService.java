@@ -4,12 +4,14 @@ import com.project.rafe.domain.Recipe.Recipe;
 import com.project.rafe.domain.Recipe.RecipeLike;
 import com.project.rafe.domain.Recipe.dto.RecipeDetailDto;
 import com.project.rafe.domain.Recipe.dto.SimpleRecipeDto;
+import com.project.rafe.domain.Recipe.search.SearchCondDto;
 import com.project.rafe.domain.RecipeIngredient.IngredientFullDto;
 import com.project.rafe.domain.RecipeIngredient.RecipeIngredient;
 import com.project.rafe.domain.ingredient.Ingredient;
 import com.project.rafe.domain.storage.Storage;
 import com.project.rafe.domain.user.Users;
 import com.project.rafe.repository.*;
+import com.project.rafe.repository.query.SearchQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -35,6 +37,7 @@ public class RecipeService {
     private final RecipeLikeRepository recipeLikeRepo;
     private final UserRepository userRepository;
     private final StorageRepository storageRepo;
+    private final SearchQueryRepository searchQueryRepository;
     public static final Logger logger = LoggerFactory.getLogger(RecipeService.class);
 
     @Transactional
@@ -127,8 +130,11 @@ public class RecipeService {
                 .build();
     }
 
-
-
+    //레시피 검색
+    @Transactional
+    public List<SimpleRecipeDto> searchByCond (SearchCondDto cond){
+        return searchQueryRepository.searchByCond(cond);
+    }
 
 
 
@@ -163,6 +169,8 @@ public class RecipeService {
                             .recipeTitle((String) result.get("recipe_title"))
                             .recipeMainImg((String) result.get("recipe_main_img"))
                             .recipeCategory((Long) result.get("recipe_category"))
+                            .lactose((Long) result.get("recipe_lactose"))
+                            .caffeine((Long) result.get("recipe_caffenie"))
                             .recipeStep((List<String>) result.get("recipe_step"))
                             .recipeStepImg((List<String>) result.get("recipe_step_img"))
                             .build());

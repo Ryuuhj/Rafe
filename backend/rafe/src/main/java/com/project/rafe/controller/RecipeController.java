@@ -1,9 +1,11 @@
 package com.project.rafe.controller;
 
+import com.project.rafe.domain.Recipe.Recipe;
 import com.project.rafe.domain.Recipe.dto.RecipeDetailDto;
 import com.project.rafe.domain.Recipe.dto.RecipeDetailReqDto;
 import com.project.rafe.domain.Recipe.dto.LikeRequestDto;
 import com.project.rafe.domain.Recipe.dto.SimpleRecipeDto;
+import com.project.rafe.domain.Recipe.search.SearchCondDto;
 import com.project.rafe.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -49,6 +51,16 @@ public class RecipeController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok().body(resultList);
+    }
+
+    //레시피 검색 처리 및 반환
+    /*@PostMapping("/recipe/result")
+    public ResponseEntity<?> searchResult(@RequestBody SearchCondDto searchCondDto) {
+
+    }*/
+    @PostMapping("/recipe/result")
+    public List<SimpleRecipeDto> searchByCond(@RequestBody SearchCondDto condDto){
+        return recipeService.searchByCond(condDto);
     }
 
     @GetMapping("/recipe/read")
