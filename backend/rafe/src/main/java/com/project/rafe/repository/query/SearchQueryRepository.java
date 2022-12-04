@@ -26,6 +26,7 @@ public class SearchQueryRepository {
                         recipeIngredient.recipe.recipeTitle,
                         recipeIngredient.recipe.recipeMainImg.as("recipeImg")
                 ))
+                .distinct()
                 .from(recipeIngredient)
                 .where(
                         eqCategory(cond.getCategoryId()),
@@ -61,10 +62,10 @@ public class SearchQueryRepository {
         return recipeIngredient.recipe.lactose.ne(1L);
     }
 
-    private BooleanExpression includeIg(List<Long> igIdList) {
-        if(igIdList.isEmpty()){
+    private BooleanExpression includeIg(List<Long> ingredientId) {
+        if(ingredientId.isEmpty()){
             return null;
         }
-        return recipeIngredient.ingredient.igId.in(igIdList);
+        return recipeIngredient.ingredient.igId.in(ingredientId);
     }
 }

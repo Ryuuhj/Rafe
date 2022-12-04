@@ -19,11 +19,11 @@ public class SearchCondDto {
         this(10L, keyword, lactose, caffeine, igIdList);
     }*/
     @Builder
-    public SearchCondDto(Long categoryId, String keyword, Long lactose, Long caffeine, List<Long> igIdList) {
+    public SearchCondDto(Long categoryId, String keyword, Long lactose, Long caffeine, List<Long> ingredientId) {
         this.categoryId = categoryId;
         this.keyword = keyword;
         this.lactose = lactose;
         this.caffeine = caffeine;
-        this.ingredientId = igIdList;
+        this.ingredientId = ingredientId;
     }
 }

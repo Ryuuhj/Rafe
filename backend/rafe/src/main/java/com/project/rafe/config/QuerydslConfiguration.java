@@ -1,6 +1,7 @@
 package com.project.rafe.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
