@@ -30,42 +30,31 @@ public class StorageService extends MessageSetting{
 
     //내 창고에 재료 추가 -> DB 업뎃
     @Transactional
-    public ResponseEntity<Map<String,Object>> addItem(AddStorageReqDto addStorageReqDto) {
-        HttpStatus status = null;
-        Map<String, Object> resultMap = new HashMap<>();
-        Integer count = 0;
+    public String addItem(AddStorageReqDto addStorageReqDto) {
         //1. userId 꺼내
         Long userId = addStorageReqDto.getUserId();
         List<Long> idList = addStorageReqDto.getIgIdList();
-        /*if(idList.isEmpty()){
-            resultMap.put(CAUSE, "EMPTY LIST");
-            resultMap.put(MESSAGE, FAIL);
-            status = HttpStatus.NOT_FOUND;*//*
-        } else {*/
+        String result;
         //2. id로 재료 찾고 storage에 매핑해 save
-        List<String> notSave = new ArrayList<>();
-        for (Long id : idList) {
-            Ingredient ingredient = ingredientRepo.findByIgId(id)
-                    .orElseThrow(() -> new IllegalArgumentException("해당 재료가 없습니다 id=" + id));
-            if (storageRepo.existsByUserIdAndIngredient(userId, ingredient)) {
-                notSave.add(ingredient.getIgName());
-                continue;
-            } else {
-                storageRepo.save(new Storage(userId, ingredient));
-                count++;
-                resultMap.put(MESSAGE, SUCCESS);
-                status = HttpStatus.OK;
-            }
-        }
-            if (notSave.size()>=1) {
-                resultMap.put(CAUSE, "ALREADY EXISTS");
-                resultMap.put(MESSAGE, FAIL);
-                status = HttpStatus.valueOf(400);
+        //List<String> notSave = new ArrayList<>();
+        try {
+            for (Long id : idList) {
+                Ingredient ingredient = ingredientRepo.findByIgId(id)
+                        .orElseThrow(() -> new IllegalArgumentException("해당 재료가 없습니다 id=" + id));
+                if (storageRepo.existsByUserIdAndIngredient(userId, ingredient)) {
+                    //notSave.add(ingredient.getIgName());
+                    continue;
+                } else {
+                    storageRepo.save(new Storage(userId, ingredient));
+                    //count++;
                 }
-
-            resultMap.put("save_count", count);
-
-        return new ResponseEntity<>(resultMap, status);
+            }
+            result = "success";
+        } catch (NullPointerException e) {
+            logger.error("save error>>>" + e.getMessage());
+            result = "fail";
+        }
+        return result;
     }
 
     //창고 조회
@@ -94,16 +83,22 @@ public class StorageService extends MessageSetting{
     }
     //3. 재료 삭제
     @Transactional
-    public ResponseEntity<Long> deleteItem(Long userId, Long igId){
+    public String deleteItem(Long userId, Long igId){
+        String delete_result;
         //1. 요청받은 userId, igId를 통해 storage 엔티티 존재하는지 확인
         Ingredient ingredient = ingredientRepo.findByIgId(igId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 재료가 존재하지 않음. id= " + igId));
         Storage storage = storageRepo.findByUserIdAndIngredient(userId, ingredient)
                 .orElseThrow(() -> new IllegalArgumentException("해당 저장 정보가 존재하지 않음. igredient_id= " + igId));
         //2. repo에서 delete 메소드 수행
-        storageRepo.delete(storage);
-
-        return ResponseEntity.ok().body(igId);
+        try {
+            storageRepo.delete(storage);
+            delete_result = "success";
+        } catch (Exception e) {
+            logger.error("error on delete>>> " + e.getMessage());
+            delete_result = "fail";
+        }
+        return delete_result;
     }
 
     //4. 재료 상태 변경
