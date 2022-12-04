@@ -107,7 +107,9 @@ public class IngredientService {
             String fileName = "recipe_ingredient_sample.json";
             // JSON 파일 주소 => 각 Local PC마다 경로 다름
             String fileLoc = "C:\\git\\Rafe\\backend\\rafe\\src\\main\\resources\\json\\" + fileName;
-                    //"C:\\BigData_PJT\\backend\\Project_A204\\src\\main\\resources\\json\\" + fileName;
+            //String fileLoc = "C:\\Users\\82104\\Desktop\\Rafe\\backend\\rafe\\src\\main\\resources\\json\\" + fileName;
+            //String fileLoc = "C:\\project\\git\\Rafe\\backend\\rafe\\src\\main\\resources\\json\\" + fileName;
+
             JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(fileLoc));
 
             // "recipe_ig_s" key 값으로 모든 ingredient 정보 가져옴
