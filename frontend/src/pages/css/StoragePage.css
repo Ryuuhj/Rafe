@@ -82,7 +82,7 @@ background-color: white;
     width: 80%;
     position: absolute;
     top: 60%;
-    margin-left: 15%;
+    margin-left: 12%;
 }
 /* table th,table td {
     border:1px solid #000;
@@ -127,4 +127,26 @@ h4{
 .storage__title{
     text-align: left;
     margin-left: 23%;
+}
+
+#notice{
+    width: 68%;
+    position: relative;
+    margin-left: 12%;
+    /* border: solid; */
+    text-align: left;
+    font-size: smaller;
+    margin-top: -12px;
+    margin-bottom: 4%;
+}
+
+#no_storage_box{
+    width: 20%;
+    position: absolute;
+    margin-left: 40%;
+    padding-bottom: 6%;
+}
+
+#no_storage_img{
+    width: 70%;
 }

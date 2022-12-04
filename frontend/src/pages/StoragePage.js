@@ -15,7 +15,7 @@ function StoragePage() {
     const [isVisible, setIsVisible] = useState(false);
     const [selectIgId, setSelectIgId] = useState([])
     const [selectIgName, setSelectIgName] = useState([]);
-    //const[storageExist, setStorageListExist] = useState(false);
+    const[isEmpty, setIsEmpty] = useState(true);
     const userId = localStorage.getItem('userId')
 
     // 사용자가 가지고 있는 재료 목록 가져오기 + 저장하기
@@ -28,9 +28,16 @@ function StoragePage() {
     }, []);
 
     const getStorage = async (res) => {
-        console.log("getStorage res.data:",res.data)
+        console.log("getStorage res.data:", res.data)
+        if(res.data){
+            setIsEmpty(false)
+        }else{
+            setIsEmpty(true)
+        }
+
         if (res.data.message == "success") {
             setStorageList(res.data.data)
+            console.log("setStorageList 이후", storageList)
         } else {
             <p>Loading ..</p>;
         }
@@ -54,7 +61,7 @@ function StoragePage() {
         const igId = val.igId
         console.log('delete ingredient! id:', val.igId)
         axios.delete(`http://localhost:8080/storage/${userId}/${igId}`)
-            .then(res => { 
+            .then(res => {
                 getStorage(res)
             })
     }
@@ -123,31 +130,40 @@ function StoragePage() {
                 <Btn onClick={() => { getSearch() }} context={"검색"} orange={false} />
             </div>
 
-            <table id="StorageTable">
-                <thead>
-                    <tr>
-                        <th className="name">재료명</th>
-                        <th></th>
-                        <th id="fast">빨리 소진하기</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {storageList.map((val) => {
-                        return (
-                            <tr key={val.igId}>
-                                <td className="name">
-                                    <Link to={`/ingredient/detail`} state={{ igId: val.igId }}>
-                                        {val.igName}
-                                    </Link>
-                                </td>
-                                <td></td>
-                                <td><input className="checkbox" type={"checkbox"} checked={val.fastUse} onChange={() => { checkFast(val); }} />
-                                    <TransBtn onClick={() => { submitDel(val); }} context={"❌"} /></td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
+            {isEmpty == false
+                ? <table id="StorageTable">
+                    <thead>
+                        <tr>
+                            <th className="name">재료명</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <p id="notice">📢 빠르게 사용하고 싶은 재료는 체크 박스로 표시해주세요!</p>
+                    </thead>
+                    <tbody>
+                        {storageList.map((val) => {
+                            return (
+                                <tr key={val.igId}>
+                                    <td className="name">
+                                        <Link to={`/ingredient/detail`} state={{ igId: val.igId }}>
+                                            {val.igName}
+                                        </Link>
+                                    </td>
+                                    <td></td>
+                                    <td><input className="checkbox" type={"checkbox"} checked={val.fastUse} onChange={() => { checkFast(val); }} />
+                                        <TransBtn onClick={() => { submitDel(val); }} context={"❌"} /></td>
+                                </tr>
+                            );
+                        })}
+                        <br /><br />
+                    </tbody>
+                </table>
+                :
+                <div id="no_storage_box">
+                    <img id="no_storage_img" src="../../img/no_storage.png" alt="이미지를 불러올 수 없습니다."></img>
+                    <p>창고에 저장된 재료가 없습니다.</p>
+                </div>
+            }
 
             {/*재료 검색 버튼 클릭 시 보여주는 화면*/}
             <div>
@@ -171,16 +187,16 @@ function StoragePage() {
                             })}
                         </table>
                         <div id="Modal__igList">
-                        🧺추가할 재료 목록🧺
-                            {selectIgName.map((name)=>{
-                                return(
+                            🧺추가할 재료 목록🧺
+                            {selectIgName.map((name) => {
+                                return (
                                     <div>{name}</div>
                                 )
                             })}
-                            </div>
+                        </div>
                         <div id="closeBtn">
-                            <Btn onClick={() => { submitAdd() }} context={"추가"} orange={false} />&nbsp;&nbsp;
-                            <Btn onClick={() => { setInit() }} context={"초기화"} orange={false} />
+                            <Btn onClick={() => { setInit() }} context={"초기화"} orange={false} />&nbsp;&nbsp;
+                            <Btn onClick={() => { submitAdd() }} context={"추가"} orange={false} />
                         </div>
                     </div>) : null}
             </div>

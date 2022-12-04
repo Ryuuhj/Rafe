@@ -24,11 +24,6 @@ function RecipePage() {
     
 
     useEffect(() => {
-        // axios.get("http://localhost:3001/recipe", {
-        //     params:{
-        //         categoryId : categoryId
-        //     }
-        // })
         axios.get(`http://localhost:8080/recipe/${categoryId}`)
             .then(res => {
                 getRecipe(res);
