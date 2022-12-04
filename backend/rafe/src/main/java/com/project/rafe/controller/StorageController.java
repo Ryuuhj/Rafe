@@ -2,7 +2,6 @@ package com.project.rafe.controller;
 
 import com.project.rafe.domain.storage.dto.AddStorageReqDto;
 import com.project.rafe.domain.storage.dto.ChangeFastDto;
-import com.project.rafe.domain.storage.dto.SearchIngredientDto;
 import com.project.rafe.service.IngredientService;
 import com.project.rafe.service.StorageService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -26,7 +24,11 @@ public class StorageController {
     //1. 내 창고에 재료 추가
     @PostMapping("/storage/insert")
     public ResponseEntity<?> addStorageItem(@RequestBody @Valid AddStorageReqDto addStorageReqDto) {
-        return storageService.addItem(addStorageReqDto);
+        String result = storageService.addItem(addStorageReqDto);
+        if(result == "success"){
+            return storageService.showStorage(addStorageReqDto.getUserId());
+        }
+        return ResponseEntity.badRequest().body("result");
     }
 
     //2. 창고 조회
@@ -37,8 +39,12 @@ public class StorageController {
 
     //3. 재료 삭제
     @DeleteMapping("/storage/{user-id}/{ig-id}")
-    public ResponseEntity<Long> deleteStorageItem(@PathVariable("user-id") Long userId, @PathVariable("ig-id") Long igId) {
-        return storageService.deleteItem(userId, igId);
+    public ResponseEntity<?> deleteStorageItem(@PathVariable("user-id") Long userId, @PathVariable("ig-id") Long igId) {
+        String delete_result = storageService.deleteItem(userId, igId);
+        if (delete_result == "success") {
+            return storageService.showStorage(userId);
+        }
+        return ResponseEntity.badRequest().body(delete_result);
     }
 
     @PatchMapping("/storage/fast")
