@@ -14,21 +14,21 @@ function RecipeDetailPage(){
         userId : localStorage.getItem('userId'),
         recipeId : recipeId
     }
-    console.log("recipeId", recipeId)
 
     useEffect(() => {
         //axios.get("http://localhost:3001/recipe_detail")
         axios.post("http://localhost:8080/recipe/detail", data)
         .then(res => {
             setRecipeList(res.data);
-            setRecipeLike(res.data[0].recipeLike)
+            //console.log('recipeDetail res.data', res.data)
+            setRecipeLike(res.data.recipeLike)
         })
     }, [])
 
     return(
         <div>
             {recipeLike != null
-            ? <RecipeDetail recipe={recipeList} recipeLike={recipeLike} />
+            ? <RecipeDetail val={recipeList} recipeLike={recipeLike} />
             : <p>Loading..</p>}
         </div>
     )

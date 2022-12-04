@@ -6,25 +6,25 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-function RecipeDetail({ recipe, recipeLike }) {
+function RecipeDetail({ val, recipeLike }) {
     const [like, setLike] = useState(recipeLike)
-    
+    console.log('recipeDetail, val',val)
+
     const onCllickLike = () => {  //recipeLike 값 변동될 때마다 해당 값 넘겨주기
         setLike(!like)
         const req = {
-            recipeId : recipe.recipeId,
+            recipeId : val.recipeId,
             userId : localStorage.getItem('userId')
         }
         axios.post('http://localhost:8080/recipe/like', req)
         .then(res=> { //filled_Heart 값 넘어옴
-            setLike(res.data.filled_Heart)
+            console.log('recipe/like res', res.data.filledHeart)
+            setLike(res.data.filledHeart)
         })
     }
 
     return (
         <div className="recipe">
-            {recipe.map((val) => {
-                return (
                     <div className="recipe__main">
                         <div className="recipe__imgBox">
                             <img className="recipe__img" src={val.recipeMainImg} alt="이미지가 없습니다." />
@@ -65,8 +65,8 @@ function RecipeDetail({ recipe, recipeLike }) {
                                 })}
                             </table>
                     </div>
-                )
-            })}
+                
+            
         </div >
     )
 }

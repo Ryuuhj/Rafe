@@ -9,9 +9,8 @@ import { useLocation } from "react-router-dom"
 
 function RecipePage() {
     const [recipeList, setRecipeList] = useState([]);
-
     const location = useLocation();
-    console.log(location.state.categoryId)
+    //console.log(location.state.categoryId)
     const categoryId = location.state.categoryId
 
     const getRecipe = (res) => {
@@ -22,6 +21,7 @@ function RecipePage() {
             alert(res.data.message);
         }
     };
+    
 
     useEffect(() => {
         // axios.get("http://localhost:3001/recipe", {
@@ -31,15 +31,14 @@ function RecipePage() {
         // })
         axios.get(`http://localhost:8080/recipe/${categoryId}`)
             .then(res => {
-                console.log(res)
                 getRecipe(res);
             })
-    }, []);
+    }, [categoryId]);
 
     return (
         <div className="Recipe">
             <RecipeHeader category={categoryId}/>
-            <RecipePageLayout recipe={recipeList} />
+            <RecipePageLayout recipe={recipeList} length={recipeList.length} />
         </div>
     )
 }

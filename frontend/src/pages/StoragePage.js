@@ -28,11 +28,11 @@ function StoragePage() {
     }, []);
 
     const getStorage = async (res) => {
-        console.log(res.data)
+        console.log("getStorage res.data:",res.data)
         if (res.data.message == "success") {
             setStorageList(res.data.data)
         } else {
-            alert("아직 추가된 재료가 없습니다.");
+            <p>Loading ..</p>;
         }
     }
     // 재료 검색 후 검색 결과 저장
@@ -53,8 +53,10 @@ function StoragePage() {
     const submitDel = async (val) => {  //재료 삭제 (삭제하려는 재료 id 보내주기)
         const igId = val.igId
         console.log('delete ingredient! id:', val.igId)
-        axios.delete(`http://localhost:8080/${userId}/${igId}`)
-            .then(res => { getStorage(res) })
+        axios.delete(`http://localhost:8080/storage/${userId}/${igId}`)
+            .then(res => { 
+                getStorage(res)
+            })
     }
 
     // 빨리 소진하고 싶은 재료 선택 (response : 사용자 재료 목록)
@@ -70,7 +72,7 @@ function StoragePage() {
             })
     }
 
-    // 재료 추가 (response : 사용자 재료 목록)
+    // 재료 선택
     const selectIg = (val) => {
         // const addData = {
         //     userId: userId,
@@ -99,7 +101,7 @@ function StoragePage() {
     const submitAdd = () => {
         const addData = {
             userId: userId,
-            igList: selectIgId
+            igIdList: selectIgId
         }
         axios.post('http://localhost:8080/storage/insert', addData)
             .then(res => {
