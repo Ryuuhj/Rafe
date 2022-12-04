@@ -89,7 +89,6 @@ function RecipeSearchPage() {
                         onClick={(e)=>{selectIg(e, val)}}>
                             {val.igName}
                         </button>
-                        {/* <Btn onClick={()=> {selectIg(val.igId)}} context={val.igName} orange={btnColor? true : false} /> */}
                     </div>
                 )
             })}
