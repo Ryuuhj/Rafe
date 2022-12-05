@@ -16,12 +16,12 @@ function RecipeResultPage() {
     const lactos = location.state.lactos
     const caffeine = location.state.caffeine
     const igId = location.state.ingredientId
-    const keyward = location.state.keyward
+    const keyword = location.state.keyward
     console.log("categoryId:", categoryId)
     console.log("lactos:", lactos)
     console.log("caffeine:", caffeine)
     console.log("igId:", igId)
-    console.log("keyward:", keyward)
+    console.log("keyword:", keyword)
 
 
     const getResult = (res) => {
@@ -36,10 +36,10 @@ function RecipeResultPage() {
     useEffect(() => {
         axios.post("http://localhost:8080/recipe/result", {
             categoryId: categoryId,
+            keyword: keyword,
             lactos: lactos,
             caffeine: caffeine,
-            ingredientId: igId,
-            keyword: keyward
+            ingredientId: igId
         })
         .then(res => {
                 getResult(res);

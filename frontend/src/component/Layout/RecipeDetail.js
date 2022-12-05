@@ -34,6 +34,8 @@ function RecipeDetail({ val, recipeLike }) {
                             }
                         </div>
                         <h3 className="recipe__title">{val.recipeTitle}</h3>
+                        
+                    <p className="recipe__title">매칭률 : {val.matchingRate}%</p>
                         <h4 className="recipe__ig_title">🥗재료🥗</h4>
                         <p id="recipe__ig__yes_title">보유 중인 재료 표시 : <span id="highlight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
                         <table className="recipe__ig">
