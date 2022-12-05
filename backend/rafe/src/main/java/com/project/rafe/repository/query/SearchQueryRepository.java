@@ -2,7 +2,6 @@ package com.project.rafe.repository.query;
 
 import com.project.rafe.domain.Recipe.dto.SimpleRecipeDto;
 import com.project.rafe.domain.Recipe.search.SearchCondDto;
-import com.project.rafe.domain.RecipeIngredient.RecipeIngredient;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -20,6 +19,8 @@ public class SearchQueryRepository {
     private final JPAQueryFactory queryFactory;
     List<String> lacto = Arrays.asList("우유", "요거트");
     public List<SimpleRecipeDto> searchByCond(SearchCondDto cond) {
+        //System.out.println("Eerrrrrr>>>>>>"+cond.getLactos());
+
         return queryFactory
                 .select(Projections.constructor(SimpleRecipeDto.class,
                         recipeIngredient.recipe.recipeId,
@@ -31,7 +32,7 @@ public class SearchQueryRepository {
                 .where(
                         eqCategory(cond.getCategoryId()),
                         eqCaffeine(cond.getCaffeine()),
-                        eqLactose(cond.getLactose()),
+                        eqLactose(cond.getLactos()),
                         includeIg(cond.getIngredientId()),
                         includeKeyword(cond.getKeyword())
                 )

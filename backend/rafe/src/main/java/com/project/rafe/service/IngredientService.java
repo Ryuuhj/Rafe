@@ -1,6 +1,5 @@
 package com.project.rafe.service;
 
-import com.project.rafe.domain.Recipe.Recipe;
 import com.project.rafe.domain.Recipe.dto.SimpleRecipeDto;
 import com.project.rafe.domain.RecipeIngredient.RecipeIngredient;
 import com.project.rafe.domain.ingredient.Ingredient;
@@ -106,9 +105,10 @@ public class IngredientService {
             // JSON 파일 이름
             String fileName = "recipe_ingredient_sample.json";
             // JSON 파일 주소 => 각 Local PC마다 경로 다름
-            String fileLoc = "C:\\git\\Rafe\\backend\\rafe\\src\\main\\resources\\json\\" + fileName;
+            //String fileLoc = "C:\\git\\Rafe\\backend\\rafe\\src\\main\\resources\\json\\" + fileName;
             //String fileLoc = "C:\\Users\\82104\\Desktop\\Rafe\\backend\\rafe\\src\\main\\resources\\json\\" + fileName;
-            //String fileLoc = "C:\\project\\git\\Rafe\\backend\\rafe\\src\\main\\resources\\json\\" + fileName;
+            String fileLoc = "C:\\projects\\git\\Rafe\\backend\\rafe\\src\\main\\resources\\json\\" + fileName;
+
 
             JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(fileLoc));
 

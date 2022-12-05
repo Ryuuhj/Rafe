@@ -41,10 +41,20 @@ public class RecipeDetailDto {
         List<RecipeStep> result = new ArrayList();
         List<String> recipeSteps = recipe.getRecipeStep();
         List<String> recipeStepImgs = recipe.getRecipeStepImg();
+        System.out.println(recipeStepImgs.size()+"error???"+recipeSteps.size());
 
-        for (int i = 0; i < recipeSteps.size(); i++) {
-            result.add(new RecipeStep(recipeSteps.get(i), recipeStepImgs.get(i)));
+
+        if(recipeStepImgs.size()<recipeSteps.size()){
+            for (int i = 0; i < recipeSteps.size(); i++) {
+                result.add(new RecipeStep(recipeSteps.get(i)));
+            }
         }
+        else {
+            for (int i = 0; i < recipeSteps.size(); i++) {
+                result.add(new RecipeStep(recipeSteps.get(i), recipeStepImgs.get(i)));
+            }
+        }
+
 
         return result;
     }

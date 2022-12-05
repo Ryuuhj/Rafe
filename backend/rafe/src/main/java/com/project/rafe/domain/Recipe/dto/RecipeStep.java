@@ -4,9 +4,12 @@ import lombok.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 public class RecipeStep {
     private String text;
     private String img;
+
+    public RecipeStep(String text) {
+        this(text, null);
+    }
 }
