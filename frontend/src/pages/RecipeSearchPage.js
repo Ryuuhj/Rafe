@@ -26,7 +26,7 @@ function RecipeSearchPage() {
         setCaffeine(0)
         setLactose(0)
         setSelectIgList([])
-        console.log(selectIgList)
+        setSelectIgName([])
     }
     const getIg = (res) => {
         if (res.data.success === undefined) {

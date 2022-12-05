@@ -45,3 +45,11 @@
     margin: 5%;
     height: 100%;
 }
+
+#about_recipe_title{
+    width: 80%;
+    /* border: solid; */
+    margin-left: 13%;
+    text-align: left;
+    margin-top: 10%;
+}
