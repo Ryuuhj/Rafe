@@ -32,7 +32,7 @@ public class SearchQueryRepository {
                 .where(
                         eqCategory(cond.getCategoryId()),
                         eqCaffeine(cond.getCaffeine()),
-                        eqLactose(cond.getLactos()),
+                        eqLactose(cond.getLactose()),
                         includeIg(cond.getIngredientId()),
                         includeKeyword(cond.getKeyword())
                 )
