@@ -1,5 +1,5 @@
 import "../component/Layout/Text.css";
-import "./css/StoragePage.css";
+import "./css/UserStoragePage.css";
 import RecipePageLayout from "../component/Layout/RecipePageLayout";
 import RecipeHeader from "../component/Layout/RecipeHeader";
 

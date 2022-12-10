@@ -1,5 +1,5 @@
 import "../component/Layout/Text.css";
-import "./css/StoragePage.css";
+import "./css/UserStoragePage.css";
 import RecipePageLayout from "../component/Layout/RecipePageLayout";
 import RecipeHeader from "../component/Layout/RecipeHeader";
 
@@ -13,14 +13,12 @@ function RecipeResultPage() {
     const location = useLocation();
     console.log(location.state)
     const categoryId = location.state.categoryId
-    const lactos = location.state.lactos
-    const caffeine = location.state.caffeine
     const igId = location.state.ingredientId
     const keyword = location.state.keyward
+    const exceptId = location.state.exceptIgId
     console.log("categoryId:", categoryId)
-    console.log("lactos:", lactos)
-    console.log("caffeine:", caffeine)
     console.log("igId:", igId)
+    console.log("exceptId", exceptId)
     console.log("keyword:", keyword)
 
 
@@ -37,9 +35,8 @@ function RecipeResultPage() {
         axios.post("http://localhost:8080/recipe/result", {
             categoryId: categoryId,
             keyword: keyword,
-            lactos: lactos,
-            caffeine: caffeine,
-            ingredientId: igId
+            ingredientId: igId,
+            exceptId : exceptId
         })
         .then(res => {
                 getResult(res);
