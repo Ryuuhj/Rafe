@@ -139,8 +139,6 @@ public class IngredientService {
         ResponseEntity<String> result = restTemplate.exchange(req, String.class);
         //받아온 json 형식의 string을 object array 형태로 변환
         List<ItemSearchResDto> itemSearchList = fromJSONtoItemSearch(result.getBody());
-
-
         logger.info("result ={}", itemSearchList);
         return itemSearchList;
     }
@@ -154,13 +152,17 @@ public class IngredientService {
         //System.out.println(rjson);
         // JSONObject에서 items 배열 꺼내기
         // JSON 배열이기 때문에 보통 배열이랑 다르게 활용해야한다.
-        JSONArray naverProducts = (JSONArray) rjson.get("items");
-        //System.out.println(naverProducts);
         List<ItemSearchResDto> itemSearchList = new ArrayList<>();
-        for (int i = 0; i < naverProducts.size(); i++) {
-            JSONObject naverProductsJson = (JSONObject) naverProducts.get(i);
-            ItemSearchResDto itemDto = new ItemSearchResDto(naverProductsJson);
-            itemSearchList.add(itemDto);
+        try {
+            JSONArray naverProducts = (JSONArray) rjson.get("items");
+            //System.out.println(naverProducts);
+            for (int i = 0; i < naverProducts.size(); i++) {
+                JSONObject naverProductsJson = (JSONObject) naverProducts.get(i);
+                ItemSearchResDto itemDto = new ItemSearchResDto(naverProductsJson);
+                itemSearchList.add(itemDto);
+            }
+        }catch (Exception e){
+            logger.error("검색 결과 없음. " + e.getMessage());
         }
         return itemSearchList;
     }
