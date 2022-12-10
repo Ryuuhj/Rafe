@@ -8,7 +8,7 @@
     width: 60%;
     display: inline-flex;
     /* background-color: beige; */
-    padding-bottom: 7%;
+    /* padding-bottom: 7%; */
 }
 
 .recipe__imgBox {
@@ -43,18 +43,28 @@
 }
 
 .recipe__like {
-    width: 6%;
+    width: 13%;
     position: absolute;
     bottom: 2%;
     right: 2%;
 }
-
 .recipe__ig_title {
-    display: inline-flex;
-    width: 60%;
+    text-align: left;
+    margin-left: 20%;
+    /* margin-top: 43px; */
+    padding-top: 10%;
+}
+
+.recipe__step__title {
+    /* display: inline-flex; */
+    /* width: 60%; */
     /* padding-top: 5%; */
     /* background-color: beige; */
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
+    text-align: left;
+    margin-left: 10%;
+    /* margin-top: 43px; */
+    padding-top: 10%;
 }
 
 .recipe__ig {
@@ -77,11 +87,11 @@
     background-color: #CBE1E0;
 }
 #recipe__ig__yes_title{
-    width: 20%;
     font-size: smaller;
     margin-left: 20%;
     text-align: left;
     margin-bottom: 30px;
+    padding-top: 10px;
 }
 #highlight{
     background-color: #CBE1E0;
@@ -89,11 +99,12 @@
 
 
 .recipe__step {
-    width: 60%;
-    margin-left: 20%;
+    width: 100%;
+    /* margin-left: 20%; */
     padding-top: 10px;
     padding-bottom: 5%;
     text-align: left;
+    border-spacing: 20px;
 }
 
 .recipe__step__img {
@@ -114,3 +125,7 @@
   table{
     width : 30%;
   } */
+
+  .recipe__ig__name{
+    width: 48%;
+  }

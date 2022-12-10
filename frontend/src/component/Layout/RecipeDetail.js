@@ -35,17 +35,17 @@ function RecipeDetail({ val, recipeLike }) {
                         </div>
                         <h3 className="recipe__title">{val.recipeTitle}</h3>
                         
-                    <p className="recipe__title">매칭률 : {val.matchingRate}%</p>
+                    <p className="recipe__title">매칭률 : {Math.floor(val.matchingRate)}%</p>
                         <h4 className="recipe__ig_title">🥗재료🥗</h4>
                         <p id="recipe__ig__yes_title">보유 중인 재료 표시 : <span id="highlight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
                         <table className="recipe__ig">
                             {val.totalIgList.map((ig) => {
                                 return (
                                     <tr className={ig.storage? "recipe__ig__yes" : null}>
-                                        <td><Link to={`/ingredient/detail`} state={{igId : val.igId}}>
+                                        <td className="recipe__ig__name"><Link to={`/ingredient/detail`} state={{igId : ig.igId}}>
                                         {ig.igName}
                                         </Link></td>
-                                        <td>··· &nbsp;&nbsp;{ig.igCount}</td>
+                                        <td>·· &nbsp;&nbsp;{ig.igCount}</td>
                                         <td>
                                             <img id="recipe__ig__cart" src="../../img/shopping_cart.png" alt="장바구니 추가" onClick={() => { alert(`장바구니에 ${ig.igName} 추가!`) }}/>
                                         </td>
@@ -53,7 +53,7 @@ function RecipeDetail({ val, recipeLike }) {
                                 )
                             })}
                         </table>
-                        <h4 className="recipe__ig_title">🍴레시피🍴</h4>
+                        <h4 className="recipe__step__title">🍴레시피🍴</h4>
                             <table className="recipe__step">
                                 {val.recipeStep.map((recipe) => {
                                     return (
