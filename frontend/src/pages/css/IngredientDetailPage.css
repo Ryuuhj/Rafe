@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    margin-top: -10%;
+    margin-top: -120px;
 }
 
 .about_recipe__img{
@@ -105,4 +105,16 @@
     text-align: left;
     margin-left: 12%;
     margin-bottom: 20px;
+}
+
+.MinPrice__img{
+    width: 20%;
+}
+
+.MinPrice__table{
+    margin-bottom: 50px;
+}
+
+.MinPrice__price{
+    font-size : small;
 }
