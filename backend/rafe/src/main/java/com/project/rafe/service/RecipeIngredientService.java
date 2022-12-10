@@ -36,9 +36,9 @@ public class RecipeIngredientService {
             String fileName = "recipe_sample.json";
 
             // JSON 파일 주소 => 각 Local PC마다 경로 다름
-            //String fileLoc = "C:\\git\\Rafe\\backend\\rafe\\src\\main\\resources\\json\\" + fileName;
+            String fileLoc = "C:\\git\\Rafe\\backend\\rafe\\src\\main\\resources\\json\\" + fileName;
             //String fileLoc = "C:\\Users\\82104\\Desktop\\Rafe\\backend\\rafe\\src\\main\\resources\\json\\" + fileName;
-            String fileLoc = "C:\\projects\\git\\Rafe\\backend\\rafe\\src\\main\\resources\\json\\" + fileName;
+            //String fileLoc = "C:\\projects\\git\\Rafe\\backend\\rafe\\src\\main\\resources\\json\\" + fileName;
 
             //json 파일 읽어와 저장
             JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(fileLoc));
