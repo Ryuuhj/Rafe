@@ -33,6 +33,7 @@ function RecipeResultPage() {
 
     useEffect(() => {
         axios.post("http://localhost:8080/recipe/result", {
+            userId : localStorage.getItem('userId'),
             categoryId: categoryId,
             keyword: keyword,
             ingredientId: igId,
