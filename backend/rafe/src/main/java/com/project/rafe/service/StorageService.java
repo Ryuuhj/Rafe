@@ -65,9 +65,10 @@ public class StorageService extends MessageSetting{
         //1. id로 Storage에서 igredient 배열 가져오기
         List<Storage> storageList = storageRepo.findAllByUserId(userId);
         if (storageList.isEmpty()) {
-            resultMap.put("data", null);
+            //빈리스트 전송
+            resultMap.put("data", storageList);
             resultMap.put(MESSAGE, "NO DATA");
-            status = HttpStatus.valueOf(204);
+            status = HttpStatus.OK;
 
         } else {
             List<GetResponseDto> result = new ArrayList<>();

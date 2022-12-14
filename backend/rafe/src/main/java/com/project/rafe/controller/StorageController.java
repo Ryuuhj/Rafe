@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -47,6 +46,7 @@ public class StorageController {
         return ResponseEntity.badRequest().body(delete_result);
     }
 
+    //빠르게 사용 전환
     @PatchMapping("/storage/fast")
     public ResponseEntity<?> changeIngredientStatus(@RequestBody @Valid ChangeFastDto changeFastDto) {
         String result = storageService.changeStatus(changeFastDto);

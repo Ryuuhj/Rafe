@@ -1,6 +1,5 @@
 package com.project.rafe.domain.storage.dto;
 
-import com.project.rafe.domain.ingredient.Ingredient;
 import com.project.rafe.domain.storage.Storage;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,5 +21,6 @@ public class GetResponseDto {
         this.igName = storage.getIngredient().getIgName();
         this.fastUse = storage.getFastUse();
     }
+
 
 }
