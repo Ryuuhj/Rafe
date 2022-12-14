@@ -1,0 +1,105 @@
+.bean_title {
+    margin: 10px;
+}
+
+.bean {
+    text-align: left;
+    margin-left: 10%;
+    margin-bottom: 10%;
+}
+
+.bean_date {
+    position: absolute;
+    margin-left: 10px;
+}
+
+.beanInput {
+    border: 0;
+    border-radius: 15px;
+    box-shadow: 1px 1px 5px -1px grey;
+    margin-right: 10px;
+    padding-inline-end: 20px;
+    padding-inline-start: 20px;
+    outline: 0;
+    height: 30px;
+    width: 50%;
+}
+
+.loasting_box {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    /* margin-left: 1%; */
+    /* margin-right: 20px; */
+    width: 85%;
+}
+
+.beanAmountInput {
+    border: 0;
+    border-radius: 15px;
+    box-shadow: 1px 1px 5px -1px grey;
+    margin-right: 10px;
+    padding-inline-end: 20px;
+    padding-inline-start: 20px;
+    outline: 0;
+    height: 30px;
+    width: 10%;
+}
+
+.grind_box {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.grindbtn {
+    background-color: #0D3F3D;
+    color: #FF8243;
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 10px;
+}
+
+.grindbtn_active {
+    background-color: #FF8243;
+    color: #0D3F3D;
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 10px;
+}
+
+.bean_text {
+    width: 75%;
+    border: 0;
+    box-shadow: 1px 1px 1px 1px lightgrey;
+    border-radius: 10px;
+    padding-inline-end: 20px;
+    padding-inline-start: 20px;
+    padding-top: 10px;
+    outline: 0;
+    height: 35px;
+}
+
+.bean_g {
+    font-size: smaller;
+}
+
+.bean_sumbit {
+    margin-bottom: 5%;
+}
+
+svg {
+    color: #eeeeee;
+    width: 7%;
+    cursor: pointer;
+}
+
+.black {
+    color: #ffc107;
+}
+
+.bean_star{
+    text-align: left;
+    margin-left: 2%;
+    margin-bottom: 10px;
+}

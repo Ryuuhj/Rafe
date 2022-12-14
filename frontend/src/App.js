@@ -16,6 +16,8 @@ import StoragePage from './pages/StoragePage';
 import IngredientDetailPage from './pages/IngredientDetailPage';
 import ShoppingPage from './pages/ShoppingPage';
 import LikeRecipePage from './pages/LikeRecipePage';
+import BeanPage from "./pages/BeanPage";
+import BeanCreatePage from "./pages/BeanCreatePage";
 
 function App(){
     return(
@@ -37,6 +39,8 @@ function App(){
           <Route path="/ingredient/detail" element={<IngredientDetailPage />} />
           <Route path="/shopping" element={<ShoppingPage />} />
           <Route path="/like_recipe" element={<LikeRecipePage />} />
+          <Route path="/bean_diary" element={<BeanPage />} />
+          <Route path="/bean_diary/create" element={<BeanCreatePage />} />
         </Route>
       </Routes>
       </div>

@@ -1,0 +1,13 @@
+.bean_pre_header{
+    text-align: left;
+    margin-left: 10%;
+    display: flex;
+    position: absolute;
+    margin-left: 10%;
+    margin-top: -10%;
+
+}
+
+.bean_pre_header_title{
+    line-height: 38px;
+}
