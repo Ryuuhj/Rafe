@@ -39,7 +39,7 @@ public class SearchQueryRepository {
                         recipeIngredient.recipe.recipeId.notIn(JPAExpressions
                                 .select(riSub.recipe.recipeId)
                                 .from(riSub)
-                                .where(riSub.ingredient.igId.in(cond.getExceptIgId())))
+                                .where(riSub.ingredient.igId.in(cond.getExceptId())))
                 )
                 .fetch();
     }

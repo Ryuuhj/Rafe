@@ -6,6 +6,7 @@ import com.project.rafe.domain.ingredient.Ingredient;
 import com.project.rafe.domain.ingredient.dto.IngredientDetailDto;
 import com.project.rafe.domain.ingredient.dto.SearchResponseDto;
 import com.project.rafe.domain.ingredient.dto.naver.ItemSearchResDto;
+import com.project.rafe.repository.CartRepository;
 import com.project.rafe.repository.IngredientRepository;
 import com.project.rafe.repository.RecipeIngredientRepository;
 import com.project.rafe.repository.StorageRepository;
@@ -37,7 +38,7 @@ import java.util.Map;
 public class IngredientService {
     private final IngredientRepository ingredientRepo;
     private final RecipeIngredientRepository recipeIngredientRepo;
-
+    private final CartRepository cartRepository;
     private final StorageRepository storageRepo;
 
     public static final Logger logger = LoggerFactory.getLogger(IngredientService.class);
@@ -54,19 +55,19 @@ public class IngredientService {
 
         //1. Ingredient에서 keyword로 검색 -> List<Ingredient>로 반환
         List<Ingredient> ingredientList = ingredientRepo.searchByNameLike(keyword);
-        if(!ingredientList.isEmpty()){
+        if (!ingredientList.isEmpty()) {
             //2. list 돌면서 igid, igName으로 객체 생성 +
             // Store에 userid, igid로 exists 확인 -> 있으면 true 입력
             List<SearchResponseDto> resultList = new ArrayList<>();
-            for (Ingredient i:ingredientList) {
+            for (Ingredient i : ingredientList) {
                 Boolean is_exist = storageRepo.existsByUserIdAndIngredient(userId, i);
                 resultList.add(new SearchResponseDto(i, is_exist));
-                }
+            }
             resultMap.put(MESSAGE, SUCCESS);
             resultMap.put("search_result", resultList);
             status = HttpStatus.OK;
 
-        }else {//반환 값 없을 경우
+        } else {//반환 값 없을 경우
             resultMap.put(MESSAGE, FAIL);
             resultMap.put(CAUSE, "NO RESULT");
             status = HttpStatus.NOT_FOUND;
@@ -84,8 +85,15 @@ public class IngredientService {
         List<RecipeIngredient> recipeList = recipeIngredientRepo.findAllByIngredient(ingredient);
         //뽑아서 Dto에 매핑시켜 저장할 리스트 생성(최종 반환본)
         List<SimpleRecipeDto> simpelList = new ArrayList<>();
-        Integer i=0;
-        //recipeList.stream().forEach(recipe -> simpelList.add(new SimpleRecipeDto(recipe)));
+        //카트 여부 조회
+        Integer cart;
+        if (cartRepository.findByUserIdAndIngredient(userId, ingredient).isPresent()) {
+            cart = 1;
+        } else {
+            cart = 0;
+        }
+        Integer i = 0;
+
         try {
             for (RecipeIngredient r : recipeList) {
                 if (i >= 2) {
@@ -108,7 +116,7 @@ public class IngredientService {
 
         return IngredientDetailDto.builder()
                 .ingredient(ingredient)
-                .cart(0)
+                .cart(cart)
                 .recipeList(simpelList)
                 .items(searchList)
                 .build();
@@ -132,8 +140,8 @@ public class IngredientService {
 
         RequestEntity<Void> req = RequestEntity
                 .get(uri)
-                .header("X-Naver-Client-Id","_Vb4pLNYbpuZ3PuPRaPB")
-                .header("X-Naver-Client-Secret","_8gfF5IPxJ")
+                .header("X-Naver-Client-Id", "_Vb4pLNYbpuZ3PuPRaPB")
+                .header("X-Naver-Client-Secret", "_8gfF5IPxJ")
                 .build();
         //requestEntity + header 세팅해서 requestentity를 exchange에 보내기 (string으로 json 결과 받아옴)
         ResponseEntity<String> result = restTemplate.exchange(req, String.class);
@@ -161,7 +169,7 @@ public class IngredientService {
                 ItemSearchResDto itemDto = new ItemSearchResDto(naverProductsJson);
                 itemSearchList.add(itemDto);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error("검색 결과 없음. " + e.getMessage());
         }
         return itemSearchList;

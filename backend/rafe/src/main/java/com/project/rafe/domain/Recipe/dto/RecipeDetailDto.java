@@ -41,7 +41,7 @@ public class RecipeDetailDto {
         List<RecipeStep> result = new ArrayList();
         List<String> recipeSteps = recipe.getRecipeStep();
         List<String> recipeStepImgs = recipe.getRecipeStepImg();
-        System.out.println(recipeStepImgs.size()+"error???"+recipeSteps.size());
+        //System.out.println(recipeStepImgs.size()+"error???"+recipeSteps.size());
 
 
         if(recipeStepImgs.size()<recipeSteps.size()){

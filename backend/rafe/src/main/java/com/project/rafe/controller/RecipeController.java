@@ -28,7 +28,7 @@ public class RecipeController {
     //레시피 좋아요 버튼
     @PostMapping("/recipe/like")
     public ResponseEntity<Map<String ,Object>> press_like(@Valid @RequestBody LikeRequestDto likeRequestDto) {
-        Map<String, Object> result;
+        //Map<String, Object> result;
         //request로 유효성 검사 했으니 바로 검사
         Long userId = likeRequestDto.getUserId();
         Long recipeId = likeRequestDto.getRecipeId();

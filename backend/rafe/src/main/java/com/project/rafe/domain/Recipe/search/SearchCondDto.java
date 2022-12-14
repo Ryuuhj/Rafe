@@ -17,27 +17,27 @@ public class SearchCondDto {
     private Long caffeine;*/
     private List<Long> ingredientId;
 
-    private List<Long> exceptIgId;
+    private List<Long> exceptId;
 
     /*public SearchCondDto(String keyword, Integer lactose, Integer caffeine, List<Long> igIdList) {
         this(10L, keyword, lactose, caffeine, igIdList);
     }*/
     @Builder
-    public SearchCondDto(Long userId, Long categoryId, String keyword, List<Long> ingredientId, List<Long> exceptIgId) {
+    public SearchCondDto(Long userId, Long categoryId, String keyword, List<Long> ingredientId, List<Long> exceptId) {
         this.userId = userId;
         this.categoryId = categoryId;
         this.keyword = keyword;
         this.ingredientId = ingredientId;
-        this.exceptIgId = exceptIgId;
+        this.exceptId = exceptId;
     }
     //알러지 재료 + 제외재료 중복 제거 세팅
     public void updateAllergyList(List<Long> allergyList){
-        if (this.exceptIgId.isEmpty()) {
-            this.exceptIgId.addAll(allergyList);
+        if (this.exceptId.isEmpty()) {
+            this.exceptId.addAll(allergyList);
         } else{
-            Set<Long> set = new HashSet<>(this.exceptIgId);
+            Set<Long> set = new HashSet<>(this.exceptId);
             set.addAll(allergyList);
-            this.exceptIgId = new ArrayList<>(set);
+            this.exceptId = new ArrayList<>(set);
         }
     }
 }

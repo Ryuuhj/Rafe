@@ -38,12 +38,13 @@ public class RecipeService {
     private final UserRepository userRepo;
     private final StorageRepository storageRepo;
     private final AllergyRepository allergyRepo;
+    private final CartRepository cartRepo;
     private final SearchQueryRepository searchQueryRepository;
     public static final Logger logger = LoggerFactory.getLogger(RecipeService.class);
 
     //레시피 좋아요 처리
     @Transactional
-    public Map<String,Object> pressLike(Long userId, Long recipeId) {
+    public Map<String, Object> pressLike(Long userId, Long recipeId) {
         Map<String, Object> result = new HashMap<>();
         //넘겨받은 userId, recipeId로 각각 조회에 사용할 객체 찾기 + 예외처리
         Users user = userRepo.findUserByUserId(userId).orElseThrow(RuntimeException::new);
@@ -57,9 +58,10 @@ public class RecipeService {
                 result.put("filledHeart", 1);
             } else {  //recipeLike 객체 조회해서 있으면 delete -> 0 반환
                 recipeLikeRepo.delete(recipeLike);
-                result.put("filledHeart", 0);}
+                result.put("filledHeart", 0);
+            }
         } catch (Exception e) {
-            logger.error("recipeLike 에러 >>> "+e.getMessage());
+            logger.error("recipeLike 에러 >>> " + e.getMessage());
             result.put("error", "Like 조회 에러");
         }
         return result;
@@ -74,8 +76,8 @@ public class RecipeService {
         if (!(likes.isEmpty())) {
             for (RecipeLike rl : likes) {
                 likeList.add(SimpleRecipeDto.builder()
-                                .recipe(rl.getRecipe())
-                                .build());
+                        .recipe(rl.getRecipe())
+                        .build());
             }
         }
         return likeList;
@@ -98,7 +100,7 @@ public class RecipeService {
             }
         }
         //3. 출력 형식은 동일하므로 매핑과정은 동일
-        for (Recipe r :mid) {
+        for (Recipe r : mid) {
             result.add(new SimpleRecipeDto(r));
         }
         return result;
@@ -122,18 +124,23 @@ public class RecipeService {
                 .map(Storage::getIngredient).collect(Collectors.toList());
         //4. recipeIngredient Repo에서 recipe 객체로 RecipeIngredientList 가져오기
         List<RecipeIngredient> rpIgList = recipeIngredientRepo.findAllByRecipe(recipe);
-        //5. 사용자 소지 재료에 포함된 재료면 storage 1로 세팅해 dto 생성
+        //5. 사용자 소지 재료에 포함된 재료면 storage 1로 세팅해 dto 생성 + 카트 담기 여부도 추가
         try {
             for (RecipeIngredient ri : rpIgList) {
                 Integer storageCheck = 0;
+                Integer cartCheck = 0;
                 if (userIgList.contains(ri.getIngredient())) {
                     storageCheck = 1;
                     count++;
+                }
+                if (cartRepo.findByUserIdAndIngredient(userId, ri.getIngredient()).isPresent()) {
+                    cartCheck = 1;
                 }
                 r_i_list.add(IngredientFullDto.builder()
                         .ingredient(ri.getIngredient())
                         .igCount(ri.getIgCount())
                         .storageCheck(storageCheck)
+                        .cartCheck(cartCheck)
                         .build());
             }
         } catch (RuntimeException e) {
@@ -152,7 +159,7 @@ public class RecipeService {
 
     //레시피 검색
     @Transactional
-    public List<SimpleRecipeDto> searchByCond (SearchCondDto cond) {
+    public List<SimpleRecipeDto> searchByCond(SearchCondDto cond) {
 
         //List<Allergy> allergys = allergyRepo.findAllByUserId(cond.getUserId());
 
@@ -177,7 +184,7 @@ public class RecipeService {
 
 
     //Json 레시피 저장
-    public void read_recipe(){
+    public void read_recipe() {
         JSONParser parser = new JSONParser();
         try {
             // JSON 파일 이름
@@ -198,7 +205,7 @@ public class RecipeService {
                 JSONObject result = (JSONObject) recipeList.get(i);
                 Recipe isSkip = recipeRepo.findRecipeByRecipeTitle((String) result.get("recipe_title"));
                 //중복인 경우 (!null) -> 처리 X
-                if ((isSkip == null)||(result.get("recipe_title").equals(null))) {
+                if ((isSkip == null) || (result.get("recipe_title").equals(null))) {
                     //System.out.println("ho");
                     recipeRepo.save(Recipe.builder()
                             .recipeTitle((String) result.get("recipe_title"))

@@ -29,5 +29,9 @@ public class IngredientDetailDto {
         this.items = items;
     }
 
+    public void updateCart(Integer cart){
+        this.cart = cart;
+    }
+
 
 }
