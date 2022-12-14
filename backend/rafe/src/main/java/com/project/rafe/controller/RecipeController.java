@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,9 +36,7 @@ public class RecipeController {
     //좋아요 목록 조회
     @GetMapping("/recipe/like/{user-id}")
     public ResponseEntity<?> showRecipeLike(@PathVariable("user-id") Long userId) {
-        Map<String, Object> result = new HashMap<>();
-        result.put("likeRecipe", recipeService.showRecipeLike(userId));
-        return ResponseEntity.ok().body(result);
+        return ResponseEntity.ok().body(recipeService.showRecipeLike(userId));
     }
 
     @PostMapping("/recipe/detail")
