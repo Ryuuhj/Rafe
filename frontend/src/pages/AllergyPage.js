@@ -21,14 +21,14 @@ function AllergyPage() {
     // 사용자가 알레르기 목록 가져오기 + 저장하기
     useEffect(() => {
         //axios.get("http://localhost:3001/data")
-        axios.get(`http://localhost:8080/storage/${userId}`)
+        axios.get(`http://localhost:8080/allergy/${userId}`)
             .then(res => {
                 getStorage(res);
             })
     }, []);
 
     const getStorage = async (res) => {
-        console.log("getStorage res.data:", res.data)
+        //console.log("allergy res.data:", res.data)
         if (res.data) {
             setIsEmpty(false)
         } else {
@@ -37,7 +37,7 @@ function AllergyPage() {
 
         if (res.data.message == "success") {
             setStorageList(res.data.data)
-            console.log("setStorageList 이후", storageList)
+            //console.log("setStorageList 이후", storageList)
         } else {
             <p>Loading ..</p>;
         }
@@ -60,7 +60,7 @@ function AllergyPage() {
     const submitDel = async (val) => {  //재료 삭제 (삭제하려는 재료 id 보내주기)
         const igId = val.igId
         console.log('delete ingredient! id:', val.igId)
-        axios.delete(`http://localhost:8080/storage/${userId}/${igId}`)
+        axios.delete(`http://localhost:8080/allergy/${userId}/${igId}`)
             .then(res => {
                 getStorage(res)
             })
@@ -72,10 +72,6 @@ function AllergyPage() {
         //     userId: userId,
         //     igId: val.igId
         // }
-
-        if (val.exists == true) {
-            alert(`${val.igName} 은(는) 이미 내 창고에 있는 재료입니다.`)
-        } else {
             setSelectIgId([...selectIgId, val.igId])
             setSelectIgName([...selectIgName, val.igName])
 
@@ -83,7 +79,6 @@ function AllergyPage() {
             //     .then(res => {
             //         getStorage(res)
             //     })
-        }
     }
     // 추가하기 위해 선택한 재료 리스트 초기화
     const setInit = () => {
@@ -97,7 +92,7 @@ function AllergyPage() {
             userId: userId,
             igIdList: selectIgId
         }
-        axios.post('http://localhost:8080/storage/insert', addData)
+        axios.post('http://localhost:8080/allergy/insert', addData)
             .then(res => {
                 getStorage(res)
                 setIsVisible(false)
