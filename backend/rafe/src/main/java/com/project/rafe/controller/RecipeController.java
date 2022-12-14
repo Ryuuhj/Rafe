@@ -1,9 +1,8 @@
 package com.project.rafe.controller;
 
-import com.project.rafe.domain.Recipe.Recipe;
+import com.project.rafe.domain.Recipe.dto.LikeRequestDto;
 import com.project.rafe.domain.Recipe.dto.RecipeDetailDto;
 import com.project.rafe.domain.Recipe.dto.RecipeDetailReqDto;
-import com.project.rafe.domain.Recipe.dto.LikeRequestDto;
 import com.project.rafe.domain.Recipe.dto.SimpleRecipeDto;
 import com.project.rafe.domain.Recipe.search.SearchCondDto;
 import com.project.rafe.service.RecipeService;
@@ -15,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +25,7 @@ public class RecipeController {
     private final RecipeService recipeService;
     private static final Logger logger = LoggerFactory.getLogger(RecipeController.class);
 
+    //레시피 좋아요 버튼
     @PostMapping("/recipe/like")
     public ResponseEntity<Map<String ,Object>> press_like(@Valid @RequestBody LikeRequestDto likeRequestDto) {
         Map<String, Object> result;
@@ -32,6 +33,13 @@ public class RecipeController {
         Long userId = likeRequestDto.getUserId();
         Long recipeId = likeRequestDto.getRecipeId();
         return ResponseEntity.ok().body(recipeService.pressLike(userId, recipeId));
+    }
+    //좋아요 목록 조회
+    @GetMapping("/recipe/like/{user-id}")
+    public ResponseEntity<?> showRecipeLike(@PathVariable("user-id") Long userId) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("likeRecipe", recipeService.showRecipeLike(userId));
+        return ResponseEntity.ok().body(result);
     }
 
     @PostMapping("/recipe/detail")

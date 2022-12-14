@@ -41,6 +41,7 @@ public class RecipeService {
     private final SearchQueryRepository searchQueryRepository;
     public static final Logger logger = LoggerFactory.getLogger(RecipeService.class);
 
+    //레시피 좋아요 처리
     @Transactional
     public Map<String,Object> pressLike(Long userId, Long recipeId) {
         Map<String, Object> result = new HashMap<>();
@@ -62,6 +63,22 @@ public class RecipeService {
             result.put("error", "Like 조회 에러");
         }
         return result;
+    }
+
+    //좋아요 누른 레시피 보여주기
+    public List<SimpleRecipeDto> showRecipeLike(Long userId) {
+        Users user = userRepo.findUserByUserId(userId)
+                .orElseThrow(IllegalArgumentException::new);
+        List<RecipeLike> likes = recipeLikeRepo.findAllByUser(user);
+        List<SimpleRecipeDto> likeList = new ArrayList<>();
+        if (!(likes.isEmpty())) {
+            for (RecipeLike rl : likes) {
+                likeList.add(SimpleRecipeDto.builder()
+                                .recipe(rl.getRecipe())
+                                .build());
+            }
+        }
+        return likeList;
     }
 
     //레시피 카테고리 별 검색
@@ -135,7 +152,7 @@ public class RecipeService {
 
     //레시피 검색
     @Transactional
-    public List<SimpleRecipeDto> searchByCond (SearchCondDto cond){
+    public List<SimpleRecipeDto> searchByCond (SearchCondDto cond) {
 
         //List<Allergy> allergys = allergyRepo.findAllByUserId(cond.getUserId());
 
