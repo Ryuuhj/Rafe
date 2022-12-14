@@ -15,12 +15,14 @@ public class IngredientFullDto {
     private String igName;
     private String igCount;
     private Integer storage;
+    private Integer cart;
 
     @Builder
-    public IngredientFullDto(Ingredient ingredient, String igCount, Integer storageCheck) {
+    public IngredientFullDto(Ingredient ingredient, String igCount, Integer storageCheck,Integer cartCheck) {
         this.igId = ingredient.getIgId();
         this.igName = ingredient.getIgName();
         this.igCount = igCount;
         this.storage = storageCheck;
+        this.cart = cartCheck;
     }
 }
