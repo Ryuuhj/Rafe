@@ -21,7 +21,7 @@ public class SearchQueryRepository {
     //List<String> lacto = Arrays.asList("우유", "요거트");
     QRecipeIngredient riSub = new QRecipeIngredient("riSub");
     public List<SimpleRecipeDto> searchByCond(SearchCondDto cond) {
-        System.out.println("Eerrrrrr>>>>>>"+cond.getExceptId());
+        //System.out.println("Eerrrrrr>>>>>>"+cond.getExceptIgId());
 
         return queryFactory
                 .select(Projections.constructor(SimpleRecipeDto.class,
@@ -35,11 +35,12 @@ public class SearchQueryRepository {
                         eqCategory(cond.getCategoryId()),
                         includeIg(cond.getIngredientId()),
                         includeKeyword(cond.getKeyword()),
+                        //excludeIg(cond.getExceptId())
                         recipeIngredient.recipe.recipeId.notIn(JPAExpressions
                                 .select(riSub.recipe.recipeId)
                                 .from(riSub)
-                                .where(riSub.ingredient.igId.in(cond.getExceptId()))
-                ))
+                                .where(riSub.ingredient.igId.in(cond.getExceptIgId())))
+                )
                 .fetch();
     }
 
@@ -62,13 +63,16 @@ public class SearchQueryRepository {
         return recipeIngredient.ingredient.igId.in(ingredientId);
     }
 
-    private BooleanExpression excludeIg(List<Long> exceptId) {
-        if (exceptId.isEmpty()) {
+/*    private BooleanExpression excludeIg(List<Long> exceptId) {
+        if (exceptId.equals(null)) {
             return null;
         }
-        return recipeIngredient.ingredient.igId.notIn(exceptId);
-    }
-    private BooleanExpression eqCaffeine (Long yn){
+        return recipeIngredient.recipe.recipeId.notIn(JPAExpressions
+                .select(riSub.recipe.recipeId)
+                .from(riSub)
+                .where(riSub.ingredient.igId.in(exceptId)));
+    }*/
+/*    private BooleanExpression eqCaffeine (Long yn){
         if (yn == null || yn == 0){
             return null;
         }
@@ -80,6 +84,6 @@ public class SearchQueryRepository {
         }
         return recipeIngredient.recipe.lactose.ne(1L);
     }
-
+*/
 
 }

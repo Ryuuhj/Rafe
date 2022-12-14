@@ -35,8 +35,9 @@ public class RecipeService {
     private final RecipeRepository recipeRepo;
     private final RecipeIngredientRepository recipeIngredientRepo;
     private final RecipeLikeRepository recipeLikeRepo;
-    private final UserRepository userRepository;
+    private final UserRepository userRepo;
     private final StorageRepository storageRepo;
+    private final AllergyRepository allergyRepo;
     private final SearchQueryRepository searchQueryRepository;
     public static final Logger logger = LoggerFactory.getLogger(RecipeService.class);
 
@@ -44,7 +45,7 @@ public class RecipeService {
     public Map<String,Object> pressLike(Long userId, Long recipeId) {
         Map<String, Object> result = new HashMap<>();
         //넘겨받은 userId, recipeId로 각각 조회에 사용할 객체 찾기 + 예외처리
-        Users user = userRepository.findUserByUserId(userId).orElseThrow(RuntimeException::new);
+        Users user = userRepo.findUserByUserId(userId).orElseThrow(RuntimeException::new);
         Recipe recipe = recipeRepo.findRecipeByRecipeId(recipeId).orElseThrow(RuntimeException::new);
 
         //recipeLike 객체 조회해서 없으면 save -> 1 반환
@@ -63,6 +64,7 @@ public class RecipeService {
         return result;
     }
 
+    //레시피 카테고리 별 검색
     @Transactional
     public List<SimpleRecipeDto> searchRpByCategory(Long categoryId) {
         List<Recipe> mid;
@@ -85,12 +87,13 @@ public class RecipeService {
         return result;
     }
 
+    //레시피 상세보기
     @Transactional
     public RecipeDetailDto showRecipeDetail(Long userId, Long recipeId) {
         List<IngredientFullDto> r_i_list = new ArrayList<>();
         Double count = 0.0; //일치하는 재료 개수 카운팅
         //1. 레포에서 조회용 객체 가져옴
-        Users user = userRepository.findUserByUserId(userId).get();
+        Users user = userRepo.findUserByUserId(userId).get();
         Recipe recipe = recipeRepo.findRecipeByRecipeId(recipeId).get();
         //2. 좋아요 여부 판별해 int로 저장
         Integer pressLike = 0;
@@ -133,6 +136,25 @@ public class RecipeService {
     //레시피 검색
     @Transactional
     public List<SimpleRecipeDto> searchByCond (SearchCondDto cond){
+
+        //List<Allergy> allergys = allergyRepo.findAllByUserId(cond.getUserId());
+
+        List<Long> allergyList = allergyRepo.findIgIdByUserId(cond.getUserId());
+        //System.out.println("allergyList 가져온거>>>>>>>"+allergyList);
+        if (!(allergyList.isEmpty())) {
+            cond.updateAllergyList(allergyList);
+            //System.out.println("잘 추가됐니? >>>>>>>"+cond.getExceptIgId());
+        }
+
+        /*if(!(allergys.isEmpty())){
+            List<Long> allergyList = new ArrayList<>();
+            for (Allergy a : allergys) {
+                allergyList.add(a.getIngredient().getIgId());
+            }
+            System.out.println("allergyList 가져온거>>>>>>>"+allergyList);
+            cond.updateAllergyList(allergyList);
+            System.out.println("잘 추가됐니? >>>>>>>"+cond.getExceptIgId());
+        }*/
         return searchQueryRepository.searchByCond(cond);
     }
 
