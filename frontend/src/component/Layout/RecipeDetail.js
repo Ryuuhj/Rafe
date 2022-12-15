@@ -22,6 +22,23 @@ function RecipeDetail({ val, recipeLike }) {
             setLike(res.data.filledHeart)
         })
     }
+    
+    const submitCart = (val) => {
+        if(val.cart == 1){
+            alert("이미 장바구니에 추가된 재료입니다.")
+        }else{
+            axios.post("http://localhost:8080/cart", {
+                userId: localStorage.getItem('userId'),
+                igId: val.igId
+            }).then((res)=>{
+                console.log("장바구니 추가 후 res", res)
+                console.log("장바구니 추가 후 res.data", res.data)
+                if(res.data.saveResult == "fail"){
+                    alert("이미 장바구니에 추가된 재료입니다.")
+                }
+            })
+        }
+    }
 
     return (
         <div className="recipe">
@@ -47,7 +64,7 @@ function RecipeDetail({ val, recipeLike }) {
                                         </Link></td>
                                         <td>·· &nbsp;&nbsp;{ig.igCount}</td>
                                         <td>
-                                            <img id="recipe__ig__cart" src="../../img/shopping_cart.png" alt="장바구니 추가" onClick={() => { alert(`장바구니에 ${ig.igName} 추가!`) }}/>
+                                            <img id="recipe__ig__cart" src="../../img/shopping_cart.png" alt="장바구니 추가" onClick={() => { submitCart(ig) }}/>
                                         </td>
                                     </tr>
                                 )
