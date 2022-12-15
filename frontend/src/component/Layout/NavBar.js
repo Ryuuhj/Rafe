@@ -63,7 +63,7 @@ function NavBar() {
                                     <nav id="subnav">
                                         <ul id="submenu__list">
                                             <Link to="/storage" id="submenu__menu">내 창고</Link>
-                                            <Link to="/bean_diary" id="submenu__menu">원두 일기장</Link>
+                                            <Link to="/bean" id="submenu__menu">원두 일기장</Link>
                                             <Link to="/shopping" id="submenu__menu">장바구니</Link>
                                             <Link to="/like_recipe" id="submenu__menu">찜한 레시피</Link>
                                         </ul>

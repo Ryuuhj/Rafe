@@ -1,0 +1,38 @@
+.bean_detail_box{
+    padding: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: 20px;
+    background-color: rgb(245, 245, 245);
+    margin-top: 10%;
+    margin-bottom: 40px;
+}
+
+.bean_detail_text{
+    background-color: white;
+    margin-bottom: 30px;
+    padding: 10px;
+    text-align: left;
+    padding-left: 20px;
+    border-radius: 30px;
+}
+
+.bean_detail_title{
+    margin-top: 45%;
+    font-weight: bolder;
+    font-size: large;
+    background-color: #fef5e7;
+    padding: 20px;
+    border-radius: 15px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.bean_detail_comment{
+    background-color: #fef5e7;
+    margin-bottom: 30px;
+    padding: 10px;
+    text-align: left;
+    padding-left: 20px;
+    border-radius: 30px;
+}
