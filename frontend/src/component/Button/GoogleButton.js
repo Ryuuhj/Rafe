@@ -34,7 +34,7 @@ const GoogleButton = ({onSocial}) => {
          })
          .then(res => {
             console.log(res.data.userId)
-            window.location.replace('/');
+            window.location.replace('/main');
             localStorage.setItem('userId', res.data.userId)  //백엔드로부터 받은 userid 저장
          })
         // .then( res => {
