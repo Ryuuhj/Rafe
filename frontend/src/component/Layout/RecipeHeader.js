@@ -25,6 +25,9 @@ function RecipeHeader({ category }) {
         case 5:
             name = "Cocktail"
             break;
+        case 6:
+            name = "인기순 레시피"
+            break;
         default:
             name = "전체 레시피"
             break;

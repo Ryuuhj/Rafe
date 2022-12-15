@@ -1,0 +1,23 @@
+.main_box{
+    margin-top: 46%;
+}
+
+.main_title{
+    text-align: left;
+    margin-left: 15%;
+    margin-bottom: -7%;
+    /* margin-top: 15%; */
+}
+
+.main_box_box{
+    margin-top: 17%;
+}
+
+.main_link{
+    width: 20%;
+}
+
+.main_title_box{
+    display: flex;
+    gap: 10px;
+}

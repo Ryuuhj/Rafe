@@ -18,6 +18,7 @@ import ShoppingPage from './pages/ShoppingPage';
 import LikeRecipePage from './pages/LikeRecipePage';
 import BeanPage from "./pages/BeanPage";
 import BeanCreatePage from "./pages/BeanCreatePage";
+import PopularRecipePage from "./pages/PopularRecipePage";
 
 function App(){
     return(
@@ -29,6 +30,7 @@ function App(){
           <Route path="main" element={<MainPage />} />
 
           <Route path='/recipe' element={<RecipePage />} />
+          <Route path="/recipe/popular" element={<PopularRecipePage />} />
           <Route path="/recipe/detail" element={<RecipeDetailPage />} />
           <Route path="/recipe/search" element={<RecipeSearchPage />} />
           <Route path="/recipe/result" element={<RecipeResultPage />} />
