@@ -25,13 +25,31 @@ function IngredientDetailPage() {
             })
     }, [])
 
+    // 장바구니 추가
+    const submitCart = (val) => {
+        if(val == 1){
+            alert("이미 장바구니에 추가된 재료입니다.")
+        }else{
+            axios.post("http://localhost:8080/cart", {
+                userId: localStorage.getItem('userId'),
+                igId: ingredient_id
+            }).then((res)=>{
+                console.log("장바구니 추가 후 res", res)
+                console.log("장바구니 추가 후 res.data", res.data)
+                if(res.data.saveResult == "fail"){
+                    alert("이미 장바구니에 추가된 재료입니다.")
+                }
+            })
+        }
+    }
+
     return (
         <div>
             <div className="igDetail__tot">
                 <div className="inName">
                     {console.log(ingreList)}
                     <h2 id="inName__name">{ingreList.igName}
-                        <button id="cart_btn" onClick={() => { console.log('장바구니 추가') }}>
+                        <button id="cart_btn" onClick={() => { submitCart(ingreList.cart) }}>
                             <img id="cart_img" src="../../img/shopping_cart.png" alt="장바구니 추가" />
                         </button>
                     </h2>
