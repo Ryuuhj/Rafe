@@ -16,8 +16,8 @@ export default function BeanDetailPage() {
     console.log('beanid', beanId)
 
     useEffect(() => {
-        axios.get("http://localhost:3001/data")
-            //axios.get(`http://localhost:8080/bean/detail/${beanId}`)
+        //axios.get("http://localhost:3001/data")
+            axios.get(`http://localhost:8080/bean/detail/${beanId}`)
             .then(res => {
                 setBeanDetail(res.data);
                 console.log(res.data)
@@ -59,11 +59,12 @@ export default function BeanDetailPage() {
                             {val.exId === 0 && <img className="been_ex_img" src="../../img/hand_drip.png" alt="핸드드립"/>}
                             {val.exId === 1 && <img className="been_ex_img" src="../../img/mokaport.png" alt="모카포트"/>}
                             {val.exId === 2 && <img className="been_ex_img" src="../../img/exmachine.png" alt="에스프레소 머신"/>}
+                            <div className="bean_pre_ex">{exIdtoString(val.exId)} 사용</div>
                             <div className="bean_pre_star"><ImStarFull className={'black'} size="30" />
                             <p className="bean_pre_star_text">{val.star}.0</p>
                             </div>
                             <div className="bean_detail_comment">{val.comment}</div>
-                            <div className="bean_detail_text">원두 종류 : {exIdtoString(val.exId)}</div>
+                            <div className="bean_detail_text">원두 종류 : {val.bean}</div>
                             <div className="bean_detail_text">로스팅 : {val.loasting}</div>
                             <div className="bean_detail_text">원두량 : {val.exAmount}g</div>
                             <div className="bean_detail_text">분쇄도 : {val.exG}</div>

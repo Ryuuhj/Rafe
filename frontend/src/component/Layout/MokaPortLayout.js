@@ -33,6 +33,10 @@ export default function MokaPortLayout({ editList }) {
     const [pickDate, setPickDate] = useState(new Date())
     const [pickDateString, setPickDateString] = useState("")
     const [star, setStar] = useState(0)
+    var beanId
+    if(editList != null){
+        beanId = editList.beanId
+    }
     useEffect(()=>{
         if(editList != null){
             var tempLoasting = 0
@@ -156,23 +160,29 @@ export default function MokaPortLayout({ editList }) {
             comment: comment,
             star: star
         }).then(() => {
-            navigate('/bean_diary')
+            navigate('/bean')
         })
     }
     
     const submitEdit = () => {
-        console.log("pickDate:", pickDateString)
-        console.log("bean:", bean)
-        console.log("loasting:", loasting)
-        console.log("exA",exAmount)
-        console.log("exG", exG)
-        console.log('wTemp', wTemp)
-        console.log('wAmont', wAmount)
-        console.log('exM', exMin)
-        console.log('exS', exSec)
-        console.log('filter', filter)
-        console.log('comment', comment)
-        console.log('star', star);
+        //console.log('beanId',beanId)
+        axios.patch(`http://localhost:8080/bean/${beanId}`, {
+            exId: exId,
+            pickDate: pickDateString,
+            bean: bean,
+            loasting: loasting,
+            exAmount: exAmount,
+            exG: exG,
+            wTemp: wTemp,
+            wAmount: wAmount,
+            exMin: exMin,
+            exSec: exSec,
+            filter: filter,
+            comment: comment,
+            star: star
+        }).then(()=> {
+            navigate('/bean/detail', {state:{beanId : beanId}} )
+        })
     }
 
     return (
@@ -269,7 +279,7 @@ export default function MokaPortLayout({ editList }) {
                             size="35"
                         />))}
                 </div>
-                <textarea className="bean_text" type="text" placeholder={editList ? editList.comment : "커피 맛 한줄평을 작성해주세요!"} value={comment} onChange={(e) => {
+                <textarea className="bean_text" type="text" placeholder="커피 맛 한줄평을 작성해주세요!" value={comment} onChange={(e) => {
                     setComment(e.target.value);
                 }} />
 
@@ -277,7 +287,7 @@ export default function MokaPortLayout({ editList }) {
 
             <div className="bean_sumbit">
                 {editList
-                    ? <Btn context={"수정하기"} orange={false} onClick={() => { submitEdit() }} />
+                    ? <Btn context={"저장하기"} orange={false} onClick={() => { submitEdit() }} />
                     : <Btn context={"작성하기"} orange={false} onClick={() => { submit() }} />}
             </div>
         </div>

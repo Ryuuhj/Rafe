@@ -28,8 +28,8 @@ function BeanPage() {
         }
     };
     useEffect(() => {
-        //axios.get(`http://localhost:8080/bean/${userId}`)
-        axios.get('http://localhost:3001/data')
+        axios.get(`http://localhost:8080/bean/${userId}`)
+        //axios.get('http://localhost:3001/data')
             .then(res => {
                 getBean(res);
             })
