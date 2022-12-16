@@ -34,13 +34,13 @@ export default function BeanDetailPage() {
         }
     }
 
-    const submitEdit = () => {
-        navigate('/bean/edit')
+    const submitEdit = (val) => {
+        navigate('/bean/edit', {state:{beanId : beanId, exId : val.exId}})
     }
 
     //삭제 후 미리보기 페이지로 이동
     const submitDelete = () => {
-        axios.delete(`http://localhost:8080/bean/${beanId}`)
+        axios.delete(`http://localhost:8080/bean/delete/${beanId}`)
         .then(()=> {
             navigate("/bean");
         })
@@ -73,7 +73,7 @@ export default function BeanDetailPage() {
                             {val.filter && <div className="bean_detail_text">필터 종류 : {val.filter}</div>}
 
                             <div className="bean_detail_btn">
-                                <Btn context={"수정하기"} orange={false} onClick={()=>{ submitEdit() }} />
+                                <Btn context={"수정하기"} orange={false} onClick={()=>{ submitEdit(val) }} />
                                 &nbsp;&nbsp;
                                 <Btn context={"삭제하기"} orange={false} onClick={()=>{ submitDelete() }} />
                             </div>
