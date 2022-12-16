@@ -1,9 +1,6 @@
 package com.project.rafe.controller;
 
-import com.project.rafe.domain.Recipe.dto.LikeRequestDto;
-import com.project.rafe.domain.Recipe.dto.RecipeDetailDto;
-import com.project.rafe.domain.Recipe.dto.RecipeDetailReqDto;
-import com.project.rafe.domain.Recipe.dto.SimpleRecipeDto;
+import com.project.rafe.domain.Recipe.dto.*;
 import com.project.rafe.domain.Recipe.search.SearchCondDto;
 import com.project.rafe.service.RecipeService;
 import lombok.RequiredArgsConstructor;
@@ -67,6 +64,14 @@ public class RecipeController {
     public List<SimpleRecipeDto> searchByCond(@RequestBody SearchCondDto condDto){
         return recipeService.searchByCond(condDto);
     }
+    //메인화면 레시피 인기순 출력
+    @GetMapping("/main/like")
+    public List<HotRecipeDto> showHotList(){
+        return recipeService.showHotList();
+    }
+
+    //인기순 더미 데이터 생성
+
 
     @GetMapping("/recipe/read")
     public void readRecipeJson (){
