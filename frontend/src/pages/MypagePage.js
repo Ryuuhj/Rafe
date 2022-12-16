@@ -27,7 +27,7 @@ function MypagePage() {
             </div>
             <div className="MyPageMenu">
                 <div className="menubtn"><MenuBtn onClick={(()=>{navigate('/storage')})} context={"내 창고"} orange={false} /></div>
-                <div className="menubtn"><MenuBtn onClick={(()=>{navigate('/bean_diary')})} context={"원두 일기장"} orange={false} /></div>
+                <div className="menubtn"><MenuBtn onClick={(()=>{navigate('/bean')})} context={"원두 일기장"} orange={false} /></div>
                 <div className="menubtn"><MenuBtn onClick={(()=>{navigate('/shopping')})} context={"장바구니"} orange={false} /></div>
                 <div className="menubtn"><MenuBtn onClick={(()=>{navigate('/like_recipe')})} context={"찜한 레시피"} orange={false} /></div>
             </div>

@@ -2,12 +2,49 @@
     text-align: left;
     margin-left: 10%;
     display: flex;
-    position: absolute;
+    /* position: absolute; */
     margin-left: 10%;
-    margin-top: -10%;
+    margin-top: 43%;
 
 }
 
 .bean_pre_header_title{
     line-height: 38px;
+}
+
+.bean_tot{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6%;
+    margin-left: 7%;
+    margin-right: 7%;
+    margin-bottom: 25%;
+    margin-top: 10%;
+}
+.bean_pre_box{
+    /* border: solid; */
+    padding: 14%;
+    /* border-style: outset; */
+    background-color: rgb(245, 245, 245);
+    border-radius: 20px;
+}
+.bean_pre_star{
+    display: flex;
+    gap: 5px;
+}
+.bean_pre_star_text{
+    line-height: 39px;
+}
+.bean_pre_ex{
+    font-weight: bold;
+    text-align: left;
+}
+.bean_pre_bean{
+    text-align: left;
+    margin-top: 10px;
+}
+.bean_pre_date{
+    font-size: smaller;
+    margin-top: 10px;
+    text-align: left;
 }

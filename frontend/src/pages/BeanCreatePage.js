@@ -5,7 +5,6 @@ import MokaPortLayout from "../component/Layout/MokaPortLayout";
 import ExMachineLayout from "../component/Layout/ExMachineLayout";
 
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 function BeanCreatePage() {
     const [exId, setExId] = useState(0)

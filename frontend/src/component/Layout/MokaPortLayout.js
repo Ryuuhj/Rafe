@@ -10,35 +10,110 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 import { ImStarFull } from "react-icons/im";
 
-export default function MokaPortLayout() {
+export default function MokaPortLayout({ editList }) {
     const [clicked, setClicked] = useState([false, false, false, false, false]);
     const array = [0, 1, 2, 3, 4]
-
     const navigate = useNavigate();
     const exId = 0;
     const loasting_type = ["최약배전", "약배전", "중약배전", "중배전", "강중배전", "약강배전", "강배전", "최강배전"]
     const exG_type = ["very fine", "fine", "medium", "coarse"]
-    const [btnActive, setBtnActive] = useState("");
-    const [GbtnActive, setGBtnActive] = useState("");
+
+    const [btnActive, setBtnActive] = useState(0);
+    const [GbtnActive, setGBtnActive] = useState(0);
     const [bean, setBean] = useState("")
     const [loasting, setLoasting] = useState("")
-    const [exAmount, setExAmount] = useState(0)
+    const [exAmount, setExAmount] = useState(null)
     const [exG, setExG] = useState("")
-    const [wTemp, setWTemp] = useState(0)
-    const [wAmount, setWAmount] = useState(0)
-    const [exMin, setExMin] = useState("")
-    const [exSec, setExSec] = useState("")
-    const [filter, setFilter] = useState("")
+    const [wTemp, setWTemp] = useState(null)
+    const [wAmount, setWAmount] = useState(null)
+    const [exMin, setExMin] = useState(null)
+    const [exSec, setExSec] = useState(null)
+    const [filter, setFilter] = useState(null)
     const [comment, setComment] = useState("")
     const [pickDate, setPickDate] = useState(new Date())
     const [pickDateString, setPickDateString] = useState("")
+    const [star, setStar] = useState(0)
+    var beanId
+    if(editList != null){
+        beanId = editList.beanId
+    }
+    useEffect(()=>{
+        if(editList != null){
+            var tempLoasting = 0
+            switch (editList.loasting) {
+                case "약배전":
+                    tempLoasting = 1
+                    break;
+                case "중약배전":
+                    tempLoasting = 2
+                    break;
+                case "중배전":
+                    tempLoasting = 3
+                    break;
+                case "강중배전":
+                    tempLoasting = 4
+                    break;
+                case "약강배전":
+                    tempLoasting = 5
+                    break;
+                case "강배전":
+                    tempLoasting = 6
+                    break;
+                case "최강배전":
+                    tempLoasting = 7
+                    break;
+                default:
+                    tempLoasting = 0
+                    break;
+            }
+            setBtnActive(tempLoasting)
+        }
+    }, [editList])
+
+    useEffect(()=>{
+        if(editList != null){
+            var tempgrind = 0
+            switch (editList.exG) {
+                case "fine":
+                    tempgrind = 1
+                    break;
+                case "medium":
+                    tempgrind = 2
+                    break;
+                case "coarse":
+                    tempgrind = 3
+                    break;
+                default: //very fine
+                    tempgrind = 0
+                    break;
+            }
+            setGBtnActive(tempgrind)
+        }
+    }, [editList])
+
+    useEffect(()=>{
+        if(editList != null){
+            setBean(editList.bean)
+            setPickDate(new Date(editList.pickDate))
+            setLoasting(editList.loasting)
+            setExAmount(editList.exAmount)
+            setExG(editList.exG)
+            setWTemp(editList.wTemp)
+            setWAmount(editList.wAmount)
+            setExMin(editList.exMin)
+            setExSec(editList.exSec)
+            setFilter(editList.filter)
+            setComment(editList.comment)
+            setStar(editList.star)
+        }
+    }, [editList])
 
     const selectLoasting = (e, val) => {
         setBtnActive((prev) => {
             return e.target.value;
         })
         setLoasting(val);
-        console.log(val)
+        //console.log(val)
     };
 
     const selectGrind = (e, val) => {
@@ -46,8 +121,8 @@ export default function MokaPortLayout() {
             return e.target.value;
         })
         setExG(val);
-        console.log(val)
     };
+
     const dateToString = (date) => { //날짜 변환
         return date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0')
     }
@@ -55,6 +130,7 @@ export default function MokaPortLayout() {
         setPickDateString(dateToString(pickDate))
     }, [pickDate])
 
+    //별점 기능
     const handleStarClick = index => {
         let clickStates = [...clicked];
         for (let i = 0; i < 5; i++) {
@@ -63,6 +139,9 @@ export default function MokaPortLayout() {
         setClicked(clickStates);
     };
     let score = clicked.filter(Boolean).length;
+    useEffect(()=>{
+        setStar(score)
+    }, [score])
 
     const submit = () => {
         axios.post("http://localhost:8080/bean/create", {
@@ -79,12 +158,33 @@ export default function MokaPortLayout() {
             exSec: exSec,
             filter: filter,
             comment: comment,
-            star : score
+            star: star
         }).then(() => {
-            navigate('/bean_diary')
+            navigate('/bean')
         })
     }
     
+    const submitEdit = () => {
+        //console.log('beanId',beanId)
+        axios.patch(`http://localhost:8080/bean/${beanId}`, {
+            exId: exId,
+            pickDate: pickDateString,
+            bean: bean,
+            loasting: loasting,
+            exAmount: exAmount,
+            exG: exG,
+            wTemp: wTemp,
+            wAmount: wAmount,
+            exMin: exMin,
+            exSec: exSec,
+            filter: filter,
+            comment: comment,
+            star: star
+        }).then(()=> {
+            navigate('/bean/detail', {state:{beanId : beanId}} )
+        })
+    }
+
     return (
         <div>
             <div className="bean">
@@ -103,9 +203,10 @@ export default function MokaPortLayout() {
             </div>
             <div className="bean">
                 <p className="bean_title">원두 종류</p>
-                <input className="beanInput" type="text" placeholder="원두명을 입력해주세요." value={bean} onChange={(e) => {
-                    setBean(e.target.value);
-                }} />
+                <input className="beanInput" type="text" placeholder="원두명을 입력해주세요."
+                    value={bean} onChange={(e) => {
+                        setBean(e.target.value);
+                    }} />
             </div>
             <div className="bean">
                 <p className="bean_title">로스팅</p>
@@ -169,6 +270,7 @@ export default function MokaPortLayout() {
             <div className="bean">
                 <p className="bean_title">🌟 맛 한줄평</p>
                 <div className="bean_star">
+                    {editList && <p className="bean_edit_star_text">기존 별점 {editList.star}.0</p>}
                     {array.map((el) => (
                         <ImStarFull
                             key={el}
@@ -184,7 +286,9 @@ export default function MokaPortLayout() {
             </div>
 
             <div className="bean_sumbit">
-                <Btn context={"작성하기"} orange={false} onClick={() => { submit() }} />
+                {editList
+                    ? <Btn context={"저장하기"} orange={false} onClick={() => { submitEdit() }} />
+                    : <Btn context={"작성하기"} orange={false} onClick={() => { submit() }} />}
             </div>
         </div>
     )

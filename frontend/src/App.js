@@ -5,6 +5,7 @@ import GoogleButton from './component/Button/GoogleButton';
 import Layout from './component/Layout/Layout';
 
 import MainPage from './pages/MainPage';
+import PopularRecipePage from "./pages/PopularRecipePage";
 
 import RecipePage from './pages/RecipePage';
 import RecipeDetailPage from "./pages/RecipeDetailPage";
@@ -16,9 +17,11 @@ import StoragePage from './pages/StoragePage';
 import IngredientDetailPage from './pages/IngredientDetailPage';
 import ShoppingPage from './pages/ShoppingPage';
 import LikeRecipePage from './pages/LikeRecipePage';
+
 import BeanPage from "./pages/BeanPage";
 import BeanCreatePage from "./pages/BeanCreatePage";
-import PopularRecipePage from "./pages/PopularRecipePage";
+import BeanDetailPage from "./pages/BeanDetailPage";
+import BeanEditPage from "./pages/BeanEditPage";
 
 function App(){
     return(
@@ -41,8 +44,10 @@ function App(){
           <Route path="/ingredient/detail" element={<IngredientDetailPage />} />
           <Route path="/shopping" element={<ShoppingPage />} />
           <Route path="/like_recipe" element={<LikeRecipePage />} />
-          <Route path="/bean_diary" element={<BeanPage />} />
-          <Route path="/bean_diary/create" element={<BeanCreatePage />} />
+          <Route path="/bean" element={<BeanPage />} />
+          <Route path="/bean/detail" element={<BeanDetailPage />} />
+          <Route path="/bean/create" element={<BeanCreatePage />} />
+          <Route path="/bean/edit" element={<BeanEditPage />} />
         </Route>
       </Routes>
       </div>
