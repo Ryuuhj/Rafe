@@ -18,6 +18,7 @@ export default function ImageSlider(data) {
     return (
       <div className="main_slider">
         <Slider {...settings}>
+          {console.log("data:",data)}
           {data && data.map((val)=>{ //오류 시, 넘어오는 값 console.log(data)로 확인
             return(
                 <div className="slider_img_box">
