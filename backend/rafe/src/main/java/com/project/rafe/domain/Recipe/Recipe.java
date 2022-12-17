@@ -2,14 +2,12 @@ package com.project.rafe.domain.Recipe;
 
 import com.project.rafe.domain.RecipeIngredient.RecipeIngredient;
 import com.project.rafe.domain.StringListConverter;
-import com.project.rafe.domain.ingredient.Ingredient;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -34,10 +32,10 @@ public class Recipe {
     private Long recipeCategory;
     //recipe name
     //recipe count --> recipe_ingredient table에 매핑
-    @Column(name = "lactose")
+    //@Column(name = "lactose")
     private Long lactose;
 
-    @Column(name = "caffeine")
+    //@Column(name = "caffeine")
     private Long caffeine;
 
     @Lob
@@ -53,9 +51,13 @@ public class Recipe {
     @OneToMany(mappedBy = "recipe", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<RecipeIngredient> igList = new ArrayList<>();
 
+    @Column(name = "likes")
+    private Long likeCount;
+
     @Builder
     public Recipe(String recipeTitle, String recipeMainImg, Long recipeCategory,
                   Long lactose, Long caffeine, List<String> recipeStep, List<String> recipeStepImg) {
+
         this.recipeTitle = recipeTitle;
         this.recipeMainImg = recipeMainImg;
         this.recipeCategory = recipeCategory;
@@ -63,6 +65,17 @@ public class Recipe {
         this.caffeine = caffeine;
         this.recipeStep = recipeStep;
         this.recipeStepImg = recipeStepImg;
+        this.likeCount = 0L;
     }
+
+    public Long updateLike(Boolean plus){
+        if (plus) { //좋아요 +1인 경우
+            this.likeCount += 1;
+        } else { //좋아요 -1인 경우
+            this.likeCount -= 1;
+        }
+        return likeCount;
+    }
+
 
 }

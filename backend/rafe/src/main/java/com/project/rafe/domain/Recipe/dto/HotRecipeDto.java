@@ -19,6 +19,7 @@ public class HotRecipeDto {
         this.recipeId = recipe.getRecipeId();
         this.recipeTitle = recipe.getRecipeTitle();
         this.recipeImg = recipe.getRecipeMainImg();
+        this.likeCount = recipe.getLikeCount();
     }
 
     @Builder

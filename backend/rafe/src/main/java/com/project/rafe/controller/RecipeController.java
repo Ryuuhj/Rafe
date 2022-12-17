@@ -70,8 +70,6 @@ public class RecipeController {
         return recipeService.showHotList();
     }
 
-    //인기순 더미 데이터 생성
-
 
     @GetMapping("/recipe/read")
     public void readRecipeJson (){
