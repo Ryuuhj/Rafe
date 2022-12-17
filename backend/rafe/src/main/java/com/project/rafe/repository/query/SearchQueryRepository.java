@@ -1,11 +1,14 @@
 package com.project.rafe.repository.query;
 
+import com.project.rafe.domain.Recipe.dto.FastUseRecipeDto;
 import com.project.rafe.domain.Recipe.dto.HotRecipeDto;
 import com.project.rafe.domain.Recipe.dto.SimpleRecipeDto;
 import com.project.rafe.domain.Recipe.search.SearchCondDto;
 import com.project.rafe.domain.RecipeIngredient.QRecipeIngredient;
+import com.project.rafe.domain.storage.QStorage;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +24,7 @@ import static com.project.rafe.domain.RecipeIngredient.QRecipeIngredient.recipeI
 public class SearchQueryRepository {
     private final JPAQueryFactory queryFactory;
     QRecipeIngredient riSub = new QRecipeIngredient("riSub");
+    QStorage storage = new QStorage("storage");
 
     public List<HotRecipeDto> getHotRecipe(){
         return queryFactory
@@ -29,6 +33,23 @@ public class SearchQueryRepository {
                 .orderBy(recipe.likeCount.desc())
                 .fetch();
         //인기순 조회
+    }
+    //우선 소비 조회
+    public List<FastUseRecipeDto> getFastUseRecipe(Long userId){
+        return queryFactory
+                .select(Projections.constructor(FastUseRecipeDto.class,
+                        recipeIngredient.recipe.recipeId,
+                        recipeIngredient.recipe.recipeTitle,
+                        recipeIngredient.recipe.recipeMainImg.as("recipeImg"),
+                        recipeIngredient.recipe.count().as("match"))
+                )
+                .from(recipeIngredient, storage)
+                .where(recipeIngredient.ingredient.igId.eq(storage.ingredient.igId)
+                        .and(storage.userId.eq(userId))
+                        .and(storage.fastUse.eq(1)))
+                .groupBy(recipeIngredient.recipe.recipeId)
+                .orderBy(Expressions.stringPath("match").desc())
+                .fetch();
     }
 
 
