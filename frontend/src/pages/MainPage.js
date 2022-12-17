@@ -14,7 +14,9 @@ function MainPage() {
     //인기순 레시피 받아오기
     const getLikeList = (res) =>{
         if (res.data.success === undefined) {
-            setLikeList(res.data.slice(0,4));
+            setLikeList(res.data);
+            console.log('getLikeList res', res)
+            console.log('getLikeList res.data', res.data)
         }
         else {
             alert(res.data.message);
@@ -32,7 +34,7 @@ function MainPage() {
     //빨리 소진해야 하는 재료 레시피 받아오기
     const getFastList = (res) =>{
         if (res.data.success === undefined) {
-            setFastList(res.data.slice(0,4));
+            setFastList(res.data);
         }
         else {
             alert(res.data.message);
