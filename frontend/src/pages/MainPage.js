@@ -11,42 +11,18 @@ function MainPage() {
     const [fastList, setFastList] = useState([]);
     const userId = localStorage.getItem('userId');
 
-    //인기순 레시피 받아오기
-    const getLikeList = (res) =>{
-        if (res.data.success === undefined) {
-            setLikeList(res.data);
-            console.log('getLikeList res', res)
-        }
-        else {
-            alert(res.data.message);
-        }
-    }
-
     useEffect(() => {
-        axios.get("http://localhost:8080/main/like")
-        //axios.get("http://localhost:3001/data")
-        .then(res => {
-                getLikeList(res);
-            })
-    }, []);
-
-    //빨리 소진해야 하는 재료 레시피 받아오기
-    const getFastList = (res) =>{
-        if (res.data.success === undefined) {
-            setFastList(res.data);
-        }
-        else {
-            alert(res.data.message);
-        }
-    }
-
-    useEffect(() => {
-        axios.get(`http://localhost:8080/main/fastuse/${userId}`)
-        //axios.get("http://localhost:3001/data1")
-        .then(res => {
-                getFastList(res);
-            })
-    }, []);
+        axios.all(
+            [axios.get("http://localhost:8080/main/like"), 
+            axios.get(`http://localhost:8080/main/fastuse/${userId}`)])
+            .then(
+              axios.spread((res1, res2) => {
+                  setLikeList(res1.data);
+                  setFastList(res2.data);
+              })
+            )
+          .catch((err) => console.log(err));
+      }, []);
 
     return (
         <div className="main_box">
@@ -56,9 +32,7 @@ function MainPage() {
             <p className="main_title">인기 많은 레시피</p>
             <p className="main_link"><Link to={`/recipe/popular`} state={{ categoryId: 10 }}>&gt;&gt; 더보기</Link></p>
             </div>
-        {likeList != null
-        ?<ImageSlider data={likeList} />
-        : <p>인기 많은 레시피를 찾을 수 없습니다.</p>}
+        {likeList && <ImageSlider data={likeList} />}
         </div>
 
         <div className="main_box_box">
@@ -66,9 +40,7 @@ function MainPage() {
             <p className="main_title">빨리 도전해보세요!</p>
             <p className="main_link"><Link to={`/recipe`} state={{ categoryId: 10 }}>&gt;&gt; 더보기</Link></p>
             </div>
-            {fastList != null
-        ?<ImageSlider data={fastList} />
-        : <p>빨리 도전해야 하는 레시피를 찾을 수 없습니다.</p>}
+        {fastList && <ImageSlider data={fastList} />}
         </div>
         </div>
     )

@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 
 export default function ImageSlider(data) {
 
-  console.log("data:", data)
   const settings = {
     dots: true,
     infinite: true,
@@ -19,11 +18,13 @@ export default function ImageSlider(data) {
   return (
     <div className="main_slider">
       <Slider {...settings}>
-        {data && data.slice(0,4).map((val) => { //오류 시, 넘어오는 값 console.log(data)로 확인
+        {data.data.slice(0,4).map((val) => {
           return (
             <div className="slider_img_box">
               <Link to={`/recipe/detail`} state={{ recipeId: val.recipeId }}>
-                <p className="slider_title">{val.recipeTitle}</p>
+                {val.recipeTitle.length > 8
+                ? <p className="slider_title">{val.recipeTitle.slice(0,8)}..</p>
+                : <p className="slider_title">{val.recipeTitle}</p>}
                 <img className="slider_img" src={val.recipeImg} alt={val.recipeTitle} style={{ width: '40%' }} />
               </Link>
             </div>
