@@ -2,6 +2,7 @@ package com.project.rafe.service;
 
 import com.project.rafe.domain.Recipe.Recipe;
 import com.project.rafe.domain.Recipe.RecipeLike;
+import com.project.rafe.domain.Recipe.dto.FastUseRecipeDto;
 import com.project.rafe.domain.Recipe.dto.HotRecipeDto;
 import com.project.rafe.domain.Recipe.dto.RecipeDetailDto;
 import com.project.rafe.domain.Recipe.dto.SimpleRecipeDto;
@@ -180,7 +181,18 @@ public class RecipeService {
         return searchQueryRepository.getHotRecipe();
     }
 
-    //레시피 인기순 세팅
+    //레시피 소비 우선 중심 추천
+    @Transactional
+    public List<FastUseRecipeDto> showFastUseList(Long userId) {
+        List<FastUseRecipeDto> result = new ArrayList<>();
+        try {
+            result = searchQueryRepository.getFastUseRecipe(userId);
+
+        } catch (Exception e) {
+            logger.error("메인 fastuse 쿼리 에러>>>" + e.getMessage());
+        }
+        return result;
+    }
 
     //Json 레시피 저장
     public void read_recipe() {
