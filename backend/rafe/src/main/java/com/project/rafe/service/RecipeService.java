@@ -56,9 +56,11 @@ public class RecipeService {
             RecipeLike recipeLike = recipeLikeRepo.findRecipeLikeByUserAndRecipe(user, recipe);
             if (recipeLike == null) {
                 recipeLikeRepo.save(new RecipeLike(user, recipe));
+                recipe.updateLike(true); //전체 좋아요 +1 -> 전체 좋아요 개수도 추가 가능
                 result.put("filledHeart", 1);
             } else {  //recipeLike 객체 조회해서 있으면 delete -> 0 반환
                 recipeLikeRepo.delete(recipeLike);
+                recipe.updateLike(false); //전체 개수 -1
                 result.put("filledHeart", 0);
             }
         } catch (Exception e) {
