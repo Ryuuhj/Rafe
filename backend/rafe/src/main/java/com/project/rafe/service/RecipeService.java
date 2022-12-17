@@ -2,6 +2,8 @@ package com.project.rafe.service;
 
 import com.project.rafe.domain.Recipe.Recipe;
 import com.project.rafe.domain.Recipe.RecipeLike;
+import com.project.rafe.domain.Recipe.dto.FastUseRecipeDto;
+import com.project.rafe.domain.Recipe.dto.HotRecipeDto;
 import com.project.rafe.domain.Recipe.dto.RecipeDetailDto;
 import com.project.rafe.domain.Recipe.dto.SimpleRecipeDto;
 import com.project.rafe.domain.Recipe.search.SearchCondDto;
@@ -55,9 +57,11 @@ public class RecipeService {
             RecipeLike recipeLike = recipeLikeRepo.findRecipeLikeByUserAndRecipe(user, recipe);
             if (recipeLike == null) {
                 recipeLikeRepo.save(new RecipeLike(user, recipe));
+                recipe.updateLike(true); //전체 좋아요 +1 -> 전체 좋아요 개수도 추가 가능
                 result.put("filledHeart", 1);
             } else {  //recipeLike 객체 조회해서 있으면 delete -> 0 반환
                 recipeLikeRepo.delete(recipeLike);
+                recipe.updateLike(false); //전체 개수 -1
                 result.put("filledHeart", 0);
             }
         } catch (Exception e) {
@@ -161,8 +165,6 @@ public class RecipeService {
     @Transactional
     public List<SimpleRecipeDto> searchByCond(SearchCondDto cond) {
 
-        //List<Allergy> allergys = allergyRepo.findAllByUserId(cond.getUserId());
-
         List<Long> allergyList = allergyRepo.findIgIdByUserId(cond.getUserId());
         //System.out.println("allergyList 가져온거>>>>>>>"+allergyList);
         if (!(allergyList.isEmpty())) {
@@ -170,18 +172,27 @@ public class RecipeService {
             //System.out.println("잘 추가됐니? >>>>>>>"+cond.getExceptIgId());
         }
 
-        /*if(!(allergys.isEmpty())){
-            List<Long> allergyList = new ArrayList<>();
-            for (Allergy a : allergys) {
-                allergyList.add(a.getIngredient().getIgId());
-            }
-            System.out.println("allergyList 가져온거>>>>>>>"+allergyList);
-            cond.updateAllergyList(allergyList);
-            System.out.println("잘 추가됐니? >>>>>>>"+cond.getExceptIgId());
-        }*/
         return searchQueryRepository.searchByCond(cond);
     }
 
+    //레시피 인기순 출력
+    @Transactional
+    public List<HotRecipeDto> showHotList(){
+        return searchQueryRepository.getHotRecipe();
+    }
+
+    //레시피 소비 우선 중심 추천
+    @Transactional
+    public List<FastUseRecipeDto> showFastUseList(Long userId) {
+        List<FastUseRecipeDto> result = new ArrayList<>();
+        try {
+            result = searchQueryRepository.getFastUseRecipe(userId);
+
+        } catch (Exception e) {
+            logger.error("메인 fastuse 쿼리 에러>>>" + e.getMessage());
+        }
+        return result;
+    }
 
     //Json 레시피 저장
     public void read_recipe() {

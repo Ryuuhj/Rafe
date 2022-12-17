@@ -1,9 +1,6 @@
 package com.project.rafe.controller;
 
-import com.project.rafe.domain.Recipe.dto.LikeRequestDto;
-import com.project.rafe.domain.Recipe.dto.RecipeDetailDto;
-import com.project.rafe.domain.Recipe.dto.RecipeDetailReqDto;
-import com.project.rafe.domain.Recipe.dto.SimpleRecipeDto;
+import com.project.rafe.domain.Recipe.dto.*;
 import com.project.rafe.domain.Recipe.search.SearchCondDto;
 import com.project.rafe.service.RecipeService;
 import lombok.RequiredArgsConstructor;
@@ -33,12 +30,13 @@ public class RecipeController {
         Long recipeId = likeRequestDto.getRecipeId();
         return ResponseEntity.ok().body(recipeService.pressLike(userId, recipeId));
     }
-    //좋아요 목록 조회
+    //유저가 누른 좋아요 목록 조회
     @GetMapping("/recipe/like/{user-id}")
     public ResponseEntity<?> showRecipeLike(@PathVariable("user-id") Long userId) {
         return ResponseEntity.ok().body(recipeService.showRecipeLike(userId));
     }
 
+    //레시피 세부사항
     @PostMapping("/recipe/detail")
     public ResponseEntity<?> showRecipeDetail(@RequestBody RecipeDetailReqDto request) {
         RecipeDetailDto result = recipeService.showRecipeDetail(request.getUserId(), request.getRecipeId());
@@ -59,15 +57,24 @@ public class RecipeController {
     }
 
     //레시피 검색 처리 및 반환
-    /*@PostMapping("/recipe/result")
-    public ResponseEntity<?> searchResult(@RequestBody SearchCondDto searchCondDto) {
-
-    }*/
     @PostMapping("/recipe/result")
     public List<SimpleRecipeDto> searchByCond(@RequestBody SearchCondDto condDto){
         return recipeService.searchByCond(condDto);
     }
+    //메인화면 레시피 인기순 출력
+    @GetMapping("/main/like")
+    public List<HotRecipeDto> showHotList(){
+        return recipeService.showHotList();
+    }
 
+    //메인화면: 소비 우선 중심 추천
+    @GetMapping("/main/fastuse/{user-id}")
+    public List<FastUseRecipeDto> showFastUseList(@PathVariable("user-id") Long userId) {
+        return recipeService.showFastUseList(userId);
+    }
+
+
+    //레시피 json파일 저장
     @GetMapping("/recipe/read")
     public void readRecipeJson (){
         recipeService.read_recipe();
