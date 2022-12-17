@@ -16,7 +16,6 @@ function MainPage() {
         if (res.data.success === undefined) {
             setLikeList(res.data);
             console.log('getLikeList res', res)
-            console.log('getLikeList res.data', res.data)
         }
         else {
             alert(res.data.message);
