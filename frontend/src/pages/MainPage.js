@@ -16,7 +16,6 @@ function MainPage() {
         if (res.data.success === undefined) {
             setLikeList(res.data);
             console.log('getLikeList res', res)
-            console.log('getLikeList res.data', res.data)
         }
         else {
             alert(res.data.message);
@@ -57,7 +56,9 @@ function MainPage() {
             <p className="main_title">인기 많은 레시피</p>
             <p className="main_link"><Link to={`/recipe/popular`} state={{ categoryId: 10 }}>&gt;&gt; 더보기</Link></p>
             </div>
-        <ImageSlider data={likeList} />
+        {likeList != null
+        ?<ImageSlider data={likeList} />
+        : <p>인기 많은 레시피를 찾을 수 없습니다.</p>}
         </div>
 
         <div className="main_box_box">
@@ -65,7 +66,9 @@ function MainPage() {
             <p className="main_title">빨리 도전해보세요!</p>
             <p className="main_link"><Link to={`/recipe`} state={{ categoryId: 10 }}>&gt;&gt; 더보기</Link></p>
             </div>
-        <ImageSlider data={fastList} />
+            {fastList != null
+        ?<ImageSlider data={fastList} />
+        : <p>빨리 도전해야 하는 레시피를 찾을 수 없습니다.</p>}
         </div>
         </div>
     )
