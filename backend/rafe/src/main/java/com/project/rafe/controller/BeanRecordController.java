@@ -1,7 +1,7 @@
 package com.project.rafe.controller;
 
-import com.project.rafe.domain.beanRecord.BeanRecord;
 import com.project.rafe.domain.beanRecord.dto.BeanRequestDto;
+import com.project.rafe.domain.beanRecord.dto.BeanResponseDto;
 import com.project.rafe.domain.beanRecord.dto.RecordPreviewDto;
 import com.project.rafe.service.BeanRecordService;
 import lombok.RequiredArgsConstructor;
@@ -36,9 +36,10 @@ public class BeanRecordController {
 
     //3.일기 상세보기
     @GetMapping("/bean/detail/{beanId}")
-    public List<BeanRecord> detail(@PathVariable("beanId") Long id) {
-        List<BeanRecord> result = new ArrayList<>();
-        result.add(beanRecordService.getRecord(id));
+    public List<BeanResponseDto> detail(@PathVariable("beanId") Long id) {
+        List<BeanResponseDto> result = new ArrayList<>();
+        BeanResponseDto response = new BeanResponseDto(beanRecordService.getRecord(id));
+        result.add(response);
         return result;
     }
 
