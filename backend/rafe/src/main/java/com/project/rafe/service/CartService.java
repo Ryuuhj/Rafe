@@ -9,7 +9,6 @@ import com.project.rafe.repository.IngredientRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,7 +30,7 @@ public class CartService {
         return cartRepository.findByUserIdAndIngredient(userId, ingredient);
     }
     //1. 카트 목록 조회
-    public ResponseEntity<List<CartResponseDto>> getCartList(Long userId) {
+    public List<CartResponseDto> getCartList(Long userId) {
         //카트 리스트 조회
         List<Cart> carts = cartRepository.findAllByUserId(userId);
         List<CartResponseDto> cartList = new ArrayList<>();
@@ -41,7 +40,7 @@ public class CartService {
                         .cart(c).build());
             }
         }
-        return ResponseEntity.ok().body(cartList);
+        return cartList;
     }
 
     //2. 카트 담기

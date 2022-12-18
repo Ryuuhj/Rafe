@@ -1,14 +1,12 @@
 package com.project.rafe.controller;
 
 import com.project.rafe.domain.cart.dto.CartRequestDto;
-import com.project.rafe.domain.cart.dto.CartResponseDto;
 import com.project.rafe.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -19,8 +17,11 @@ public class CartController {
 
     //1. 카트 조회
     @GetMapping("/cart/{user-id}")
-    public ResponseEntity<List<CartResponseDto>> showCart(@PathVariable("user-id") Long userId) {
-        return cartService.getCartList(userId);
+    public ResponseEntity<?> showCart(@PathVariable("user-id") Long userId) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("data", cartService.getCartList(userId));
+        response.put("message", "success");
+        return ResponseEntity.ok().body(response);
     }
 
     //2. 카트 담기
@@ -44,9 +45,12 @@ public class CartController {
     @DeleteMapping("/cart/{user-id}/{ig-id}")
     public ResponseEntity<?> deleteCart(@PathVariable("user-id") Long userId,
                                         @PathVariable("ig-id") Long igId) {
+        Map<String, Object> response = new HashMap<>();
         //해당 카트 삭제
         cartService.deleteCart(userId, igId);
         //갱신 목록 반환
-        return cartService.getCartList(userId);
+        response.put("data", cartService.getCartList(userId));
+        response.put("message", "success");
+        return ResponseEntity.ok().body(response);
     }
 }
