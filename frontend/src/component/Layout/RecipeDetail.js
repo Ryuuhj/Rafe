@@ -31,9 +31,8 @@ function RecipeDetail({ val, recipeLike }) {
                 userId: localStorage.getItem('userId'),
                 igId: val.igId
             }).then((res)=>{
-                console.log("장바구니 추가 후 res", res)
                 console.log("장바구니 추가 후 res.data", res.data)
-                if(res.data.saveResult == "fail"){
+                if(res.data.cart === 0){
                     alert("이미 장바구니에 추가된 재료입니다.")
                 }
             })
