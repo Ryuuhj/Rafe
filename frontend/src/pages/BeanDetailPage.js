@@ -68,8 +68,8 @@ export default function BeanDetailPage() {
                             <div className="bean_detail_text">로스팅 : {val.loasting}</div>
                             <div className="bean_detail_text">원두량 : {val.exAmount}g</div>
                             <div className="bean_detail_text">분쇄도 : {val.exG}</div>
-                            {val.wTemp && <div className="bean_detail_text">물 온도 : {val.wtTemp}℃</div>}
-                            {val.wAmount && <div className="bean_detail_text">주유량(물 양) : {val.wtAmount}ml</div>}
+                            {val.wtTemp && <div className="bean_detail_text">물 온도 : {val.wtTemp}℃</div>}
+                            {val.wtAmount && <div className="bean_detail_text">주유량(물 양) : {val.wtAmount}ml</div>}
                             <div className="bean_detail_text">총 주유 시간 : {val.exMin}분 {val.exSec}초</div>
                             {val.filter && <div className="bean_detail_text">필터 종류 : {val.filter}</div>}
 
