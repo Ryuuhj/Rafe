@@ -14,7 +14,7 @@ export default function ExMachineLayout({ editList }) {
     const [clicked, setClicked] = useState([false, false, false, false, false]);
     const array = [0, 1, 2, 3, 4]
     const navigate = useNavigate();
-    const exId = 0;
+    const exId = 2;
     const loasting_type = ["최약배전", "약배전", "중약배전", "중배전", "강중배전", "약강배전", "강배전", "최강배전"]
     const exG_type = ["very fine", "fine", "medium", "coarse"]
 
