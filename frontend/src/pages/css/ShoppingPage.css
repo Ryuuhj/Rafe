@@ -5,3 +5,16 @@
     position: absolute;
     top: 30%;
 }
+
+#CartTable{
+    border-collapse: collapse;
+    width: 96%;
+    /* position: absolute; */
+    /* top: 40%; */
+    margin-left: 3%;
+    margin-top: 10%;
+}
+
+#no_cart_img{
+    width: 30%;
+}

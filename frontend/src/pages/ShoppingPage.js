@@ -5,7 +5,7 @@ import TransBtn from "../component/Button/TransBtn";
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function ShoppingPage() {
     const [cartList, setCartList] = useState([]);
@@ -14,8 +14,8 @@ function ShoppingPage() {
 
     // 사용자가 장바구니 목록 가져오기 + 저장하기
     useEffect(() => {
-        //axios.get("http://localhost:3001/data")
-        axios.get(`http://localhost:8080/cart/${userId}`)
+        axios.get("https://fd518520-055a-436e-a971-8a98dcc065fe.mock.pstmn.io/cart")
+            //axios.get(`http://localhost:8080/cart/${userId}`)
             .then(res => {
                 getCart(res);
             })
@@ -35,8 +35,8 @@ function ShoppingPage() {
         }
     }
 
-     //장바구니 목록 삭제 (삭제하려는 재료 id 보내주기)
-    const submitDel = async (val) => { 
+    //장바구니 목록 삭제 (삭제하려는 재료 id 보내주기)
+    const submitDel = async (val) => {
         const igId = val.igId
         axios.delete(`http://localhost:8080/cart/${userId}/${igId}`)
             .then(res => {
@@ -48,41 +48,41 @@ function ShoppingPage() {
     return (
         <div>
             <h2 className="cart__title">장바구니</h2>
-                {isEmpty == false
-                    ? <table id="StorageTable">
-                        <thead>
-                            <tr>
-                                <th className="name">재료명</th>
-                                <th></th>
-                                <th></th>
+            <table id="CartTable">
+                <thead>
+                    <tr>
+                        <th className="name">재료명</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <p id="notice">&nbsp;📢 장바구니 목록</p>
+                </thead>
+                <tbody>
+                    {cartList.length !== 0 && cartList.map((val) => {
+                        return (
+                            <tr key={val.igId}>
+                                <td className="name">
+                                    <Link to={`/ingredient/detail`} state={{ igId: val.igId }}>
+                                        {val.igName}
+                                    </Link>
+                                </td>
+                                <td className="select">
+                                    <TransBtn onClick={() => { submitDel(val); }} context={"❌"} />
+                                </td>
                             </tr>
-                            <p id="notice">📢 장바구니 목록</p>
-                        </thead>
-                        <tbody>
-                            {cartList.map((val) => {
-                                return (
-                                    <tr key={val.igId}>
-                                        <td className="name">
-                                            <Link to={`/ingredient/detail`} state={{ igId: val.igId }}>
-                                                {val.igName}
-                                            </Link>
-                                        </td>
-                                        <td className="select">
-                                            <TransBtn onClick={() => { submitDel(val); }} context={"❌"} />
-                                        </td>
-                                    </tr>
-                                );
-                            })}
-                            <br /><br />
-                        </tbody>
-                    </table>
-                    :
-                    <div id="no_storage_box">
-                        <img id="no_storage_img" src="../../img/no_storage.png" alt="이미지를 불러올 수 없습니다."></img>
-                        <p>장바구니에 넣은 재료가 없습니다.</p>
-                    </div>
-                }
-            </div>
+                        );
+                    })}
+                    <br /><br />
+                </tbody>
+            </table>
+            {cartList.length === 0 &&
+                <div id="no_storage_box">
+                    <img id="no_cart_img" src="../../img/no_storage.png" alt="이미지를 불러올 수 없습니다."></img>
+                    <p>장바구니에 넣은 재료가 없습니다.</p>
+                </div>
+            }
+
+        </div>
     )
 }
 
