@@ -45,15 +45,20 @@ function UserStoragePage() {
     // 재료 검색 후 검색 결과 저장
     const getSearch = async (res) => {
         setIsVisible(true)
-        const result = await axios.get("http://localhost:8080/ingredient", {
+        try{const result = await axios.get("http://localhost:8080/ingredient", {
             params: {
                 id: userId,
                 keyword: searchtxt
             }
         })
-        //const result = await axios.get('http://localhost:3001/search_result')
-        console.log(result.data)
         setSearchList(result.data.search_result)
+    }
+        catch(error){
+            if (error.response.status === 404){
+                setSearchList([{'igName' : '검색 결과를 찾을 수 없습니다.',
+            'error':'404'}])
+            }
+        }
     }
 
     // 재료 삭제(response : 사용자 재료 목록)
@@ -181,7 +186,7 @@ function UserStoragePage() {
                                 return (
                                     <tr key={val.igId} className="searchBox">
                                         <td className="name">{val.igName}</td>
-                                        <td><TransBtn context={"➕"} orange={false} onClick={() => { selectIg(val); }} /></td>
+                                        {val.error !== '404' && <td><TransBtn context={"➕"} orange={false} onClick={() => { selectIg(val); }} /></td>}
                                     </tr>
                                 );
                             })}

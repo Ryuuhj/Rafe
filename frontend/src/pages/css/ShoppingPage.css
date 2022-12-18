@@ -9,10 +9,10 @@
 #CartTable{
     border-collapse: collapse;
     width: 96%;
-    /* position: absolute; */
-    /* top: 40%; */
+    position: absolute;
+    top: 40%;
     margin-left: 3%;
-    margin-top: 10%;
+    /* margin-top: -16%; */
 }
 
 #no_cart_img{

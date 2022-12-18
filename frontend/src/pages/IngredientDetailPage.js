@@ -8,7 +8,6 @@ import "./css/IngredientDetailPage.css";
 
 function IngredientDetailPage() {
     const location = useLocation();
-    //console.log('location',location.state.igId)
     const ingredient_id = location.state.igId
     const [ingreList, setIngreList] = useState([]);
 
@@ -20,23 +19,21 @@ function IngredientDetailPage() {
             igId: ingredient_id
         })
             .then(res => {
-                //console.log(res.data)
                 setIngreList(res.data);
             })
     }, [])
 
     // 장바구니 추가
     const submitCart = (val) => {
-        if(val == 1){
+        if(val === 1){
             alert("이미 장바구니에 추가된 재료입니다.")
         }else{
             axios.post("http://localhost:8080/cart", {
                 userId: localStorage.getItem('userId'),
                 igId: ingredient_id
             }).then((res)=>{
-                console.log("장바구니 추가 후 res", res)
                 console.log("장바구니 추가 후 res.data", res.data)
-                if(res.data.saveResult == "fail"){
+                if(res.data.cart === 0){
                     alert("이미 장바구니에 추가된 재료입니다.")
                 }
             })
@@ -66,12 +63,14 @@ function IngredientDetailPage() {
                                             <div className="about_recipe__img_box">
                                                 <img src={val.recipeImg} alt="이미지가 없습니다." className="about_recipe__img" />
                                             </div>
-                                            <p>{val.recipeTitle}</p>
+                                            {val.recipeTitle.length > 8
+                                                ? <p>{val.recipeTitle.slice(0, 8)}..</p>
+                                                : <p>{val.recipeTitle}</p>}
                                         </div>
                                     </Link>
                                 )
                             }))
-                            : <p className="no_result">⚠️ 관련 레시피가 존재하지 않습니다.</p>
+                            : <p className="no_result">Loading ..</p>
                         }
                     </div>
                 </div>
@@ -88,9 +87,9 @@ function IngredientDetailPage() {
                                     <td className="MinPrice__img">
                                         <img src={val.image} alt={"상품 이미지가 없습니다."} style={{ width: '60%' }} />
                                     </td>
-                                    <td className="MinPrice__name">
-                                        {val.title}
-                                    </td>
+                                    {val.title.length > 8
+                                        ? <td className="MinPrice__name"> {val.title.slice(0, 8)}.. </td>
+                                        : <td className="MinPrice__name"> {val.title} </td>}
                                     <td className="MinPrice__price">
                                         {val.lprice} 원
                                     </td>
