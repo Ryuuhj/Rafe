@@ -14,8 +14,8 @@ function ShoppingPage() {
 
     // 사용자가 장바구니 목록 가져오기 + 저장하기
     useEffect(() => {
-        axios.get("https://fd518520-055a-436e-a971-8a98dcc065fe.mock.pstmn.io/cart")
-            //axios.get(`http://localhost:8080/cart/${userId}`)
+        //axios.get("https://fd518520-055a-436e-a971-8a98dcc065fe.mock.pstmn.io/cart")
+            axios.get(`http://localhost:8080/cart/${userId}`)
             .then(res => {
                 getCart(res);
             })
