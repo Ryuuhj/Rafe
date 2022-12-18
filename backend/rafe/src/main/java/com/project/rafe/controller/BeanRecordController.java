@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,9 +36,10 @@ public class BeanRecordController {
 
     //3.일기 상세보기
     @GetMapping("/bean/detail/{beanId}")
-    public ResponseEntity<BeanRecord> detail(@PathVariable("beanId") Long id) {
-        BeanRecord record = beanRecordService.getRecord(id);
-        return ResponseEntity.ok().body(record);
+    public List<BeanRecord> detail(@PathVariable("beanId") Long id) {
+        List<BeanRecord> result = new ArrayList<>();
+        result.add(beanRecordService.getRecord(id));
+        return result;
     }
 
     //4. 일기 삭제
