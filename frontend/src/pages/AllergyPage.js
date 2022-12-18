@@ -28,18 +28,13 @@ function AllergyPage() {
     }, []);
 
     const getStorage = async (res) => {
-        //console.log("allergy res.data:", res.data)
-        if (res.data) {
+        console.log("getStorage res.data:", res.data)
+        if(res.data){
             setIsEmpty(false)
-        } else {
-            setIsEmpty(true)
-        }
-
-        if (res.data.message == "success") {
             setStorageList(res.data.data)
-            //console.log("setStorageList 이후", storageList)
-        } else {
+        }else{
             <p>Loading ..</p>;
+            setIsEmpty(true)
         }
     }
     // 재료 검색 후 검색 결과 저장
