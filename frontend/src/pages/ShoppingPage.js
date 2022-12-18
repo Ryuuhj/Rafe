@@ -22,16 +22,13 @@ function ShoppingPage() {
     }, []);
 
     const getCart = async (res) => {
-        if (res.data) {
+        console.log("getStorage res.data:", res.data)
+        if(res.data){
             setIsEmpty(false)
-        } else {
-            setIsEmpty(true)
-        }
-
-        if (res.data.message == "success") {
             setCartList(res.data.data)
-        } else {
+        }else{
             <p>Loading ..</p>;
+            setIsEmpty(true)
         }
     }
 

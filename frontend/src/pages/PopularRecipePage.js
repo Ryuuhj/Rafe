@@ -21,7 +21,7 @@ export default function PopularRecipePage() {
     }
 
     useEffect(() => {
-        axios.get("http://localhost:3001/data")
+        axios.get("http://localhost:8080/main/like")
         .then(res => {
                 getLikeList(res);
             })

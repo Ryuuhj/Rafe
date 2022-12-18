@@ -31,15 +31,10 @@ function UserStoragePage() {
         console.log("getStorage res.data:", res.data)
         if(res.data){
             setIsEmpty(false)
-        }else{
-            setIsEmpty(true)
-        }
-
-        if (res.data.message == "success") {
             setStorageList(res.data.data)
-            console.log("setStorageList 이후", storageList)
-        } else {
+        }else{
             <p>Loading ..</p>;
+            setIsEmpty(true)
         }
     }
     // 재료 검색 후 검색 결과 저장
@@ -68,6 +63,7 @@ function UserStoragePage() {
         axios.delete(`http://localhost:8080/storage/${userId}/${igId}`)
             .then(res => {
                 getStorage(res)
+                console.log(res)
             })
     }
 
@@ -135,7 +131,7 @@ function UserStoragePage() {
                 <Btn onClick={() => { getSearch() }} context={"검색"} orange={false} />
             </div>
             <div>
-            {isEmpty == false
+            {isEmpty === false
                 ? <table id="StorageTable">
                     <thead>
                         <tr>
