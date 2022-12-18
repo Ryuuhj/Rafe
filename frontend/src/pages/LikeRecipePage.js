@@ -39,7 +39,8 @@ function LikeRecipePage() {
                 : <div className="like_no">
                     <p className="like_no_notice">아직 찜한 레시피가 없습니다.</p>
                     <div className="like_no_btn">
-                        <Btn context={"레시피 보러가기"} orange={false} onClick={(()=>{navigate('/recipe')})} />
+                        <Btn context={"레시피 보러가기"} orange={false}
+                        onClick={(()=>{navigate('/recipe', {state:{categoryId: 10}})})} />
                         </div>
                 </div>
             }
