@@ -21,9 +21,9 @@ export default function HandDripLayout({ editList }) {
     const [btnActive, setBtnActive] = useState("");
     const [GbtnActive, setGBtnActive] = useState("");
     const [bean, setBean] = useState("")
-    const [loasting, setLoasting] = useState("")
+    const [loasting, setLoasting] = useState("최약배전")
     const [exAmount, setExAmount] = useState(0)
-    const [exG, setExG] = useState("")
+    const [exG, setExG] = useState("very fine")
     const [wTemp, setWTemp] = useState(0)
     const [wAmount, setWAmount] = useState(0)
     const [exMin, setExMin] = useState("")

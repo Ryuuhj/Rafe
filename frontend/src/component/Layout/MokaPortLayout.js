@@ -21,9 +21,9 @@ export default function MokaPortLayout({ editList }) {
     const [btnActive, setBtnActive] = useState(0);
     const [GbtnActive, setGBtnActive] = useState(0);
     const [bean, setBean] = useState("")
-    const [loasting, setLoasting] = useState("")
+    const [loasting, setLoasting] = useState("최약배전")
     const [exAmount, setExAmount] = useState(null)
-    const [exG, setExG] = useState("")
+    const [exG, setExG] = useState("very fine")
     const [wTemp, setWTemp] = useState(null)
     const [wAmount, setWAmount] = useState(null)
     const [exMin, setExMin] = useState(null)
