@@ -153,8 +153,8 @@ export default function ExMachineLayout({ editList }) {
             loasting: loasting,
             exAmount: exAmount,
             exG: exG,
-            wTemp: wTemp,
-            wAmount: wAmount,
+            wtTemp: wTemp,
+            wtAmount: wAmount,
             exMin: exMin,
             exSec: exSec,
             filter: filter,
@@ -173,22 +173,27 @@ export default function ExMachineLayout({ editList }) {
     
     const submitEdit = () => {
         //console.log('beanId',beanId)
-        axios.patch(`http://localhost:8080/bean/${beanId}`, {
+        axios.post(`http://localhost:8080/bean/${beanId}`, {
             exId: exId,
             pickDate: pickDateString,
             bean: bean,
             loasting: loasting,
             exAmount: exAmount,
             exG: exG,
-            wTemp: wTemp,
-            wAmount: wAmount,
+            wtTemp: wTemp,
+            wtAmount: wAmount,
             exMin: exMin,
             exSec: exSec,
             filter: filter,
             comment: comment,
             star: star
-        }).then(()=> {
-            navigate('/bean/detail', {state:{beanId : beanId}} )
+        }).then(res => {
+            if(res.data.message === "success"){
+            navigate('/bean/detail', { state: { beanId: beanId } })
+            }
+            if(res.data.message === "fail"){
+                alert('원두 일기 수정에 실패했습니다.')
+            }
         })
     }
 
