@@ -21,3 +21,13 @@
     display: flex;
     gap: 10px;
 }
+
+.main_no_fast{
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+.main_no_fast_text{
+    font-size: smaller;
+    margin-bottom: 5%;
+}

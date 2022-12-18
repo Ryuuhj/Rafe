@@ -159,8 +159,14 @@ export default function HandDripLayout({ editList }) {
             filter: filter,
             comment: comment,
             star: score
-        }).then(() => {
-            navigate('/bean')
+        })
+        .then(res => {
+            if(res.data.message === "success"){
+                navigate('/bean')
+            }
+            if(res.data.message === 'fail'){
+                alert('원두 일기 저장에 실패했습니다.')
+            }
         })
     }
     const submitEdit = () => {

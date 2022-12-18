@@ -144,6 +144,7 @@ export default function ExMachineLayout({ editList }) {
     }, [score])
 
     const submit = () => {
+        //axios.post('https://fd518520-055a-436e-a971-8a98dcc065fe.mock.pstmn.io/bean/create')
         axios.post("http://localhost:8080/bean/create", {
             userId: localStorage.getItem('userId'),
             exId: exId,
@@ -159,8 +160,14 @@ export default function ExMachineLayout({ editList }) {
             filter: filter,
             comment: comment,
             star: star
-        }).then(() => {
-            navigate('/bean')
+        })
+        .then(res => {
+            if(res.data.message === "success"){
+                navigate('/bean')
+            }
+            if(res.data.message === 'fail'){
+                alert('원두 일기 저장에 실패했습니다.')
+            }
         })
     }
     
