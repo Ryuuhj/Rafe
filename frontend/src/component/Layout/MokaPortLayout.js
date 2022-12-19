@@ -173,6 +173,7 @@ export default function MokaPortLayout({ editList }) {
     const submitEdit = () => {
         //console.log('beanId',beanId)
         axios.post(`http://localhost:8080/bean/${beanId}`, {
+            userId : localStorage.getItem('userId'),
             exId: exId,
             pickDate: pickDateString,
             bean: bean,
