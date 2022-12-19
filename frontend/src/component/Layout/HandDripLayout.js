@@ -171,6 +171,7 @@ export default function HandDripLayout({ editList }) {
     }
     const submitEdit = () => {
         axios.post(`http://localhost:8080/bean/${beanId}`, {
+            userId : localStorage.getItem('userId'),
             exId: exId,
             pickDate: pickDateString,
             bean: bean,
