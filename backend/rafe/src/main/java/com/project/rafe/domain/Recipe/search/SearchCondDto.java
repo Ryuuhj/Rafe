@@ -13,8 +13,7 @@ public class SearchCondDto {
     private Long userId;
     private Long categoryId;
     private String keyword;
-    /*private Long lactose;
-    private Long caffeine;*/
+
     private List<Long> ingredientId;
 
     private List<Long> exceptId;
@@ -26,7 +25,12 @@ public class SearchCondDto {
     public SearchCondDto(Long userId, Long categoryId, String keyword, List<Long> ingredientId, List<Long> exceptId) {
         this.userId = userId;
         this.categoryId = categoryId;
-        this.keyword = keyword;
+        if (keyword.equals(null)||keyword.equals(" ")) {
+            this.keyword = "";
+        }else {
+            this.keyword = keyword;
+        }
+
         this.ingredientId = ingredientId;
         this.exceptId = exceptId;
     }

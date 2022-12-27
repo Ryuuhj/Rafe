@@ -26,7 +26,7 @@ public class SearchQueryRepository {
     QRecipeIngredient riSub = new QRecipeIngredient("riSub");
     QStorage storage = new QStorage("storage");
 
-    public List<HotRecipeDto> getHotRecipe(){
+    public List<HotRecipeDto> getHotRecipe() {
         return queryFactory
                 .select(Projections.constructor(HotRecipeDto.class, recipe))
                 .from(recipe)
@@ -34,8 +34,9 @@ public class SearchQueryRepository {
                 .fetch();
         //인기순 조회
     }
+
     //우선 소비 조회
-    public List<FastUseRecipeDto> getFastUseRecipe(Long userId){
+    public List<FastUseRecipeDto> getFastUseRecipe(Long userId) {
         return queryFactory
                 .select(Projections.constructor(FastUseRecipeDto.class,
                         recipeIngredient.recipe.recipeId,
@@ -54,7 +55,7 @@ public class SearchQueryRepository {
 
 
     public List<SimpleRecipeDto> searchByCond(SearchCondDto cond) {
-        //System.out.println("Eerrrrrr>>>>>>"+cond.getExceptIgId());
+        //System.out.println("keyword??"+cond.getKeyword());
 
         return queryFactory
                 .select(Projections.constructor(SimpleRecipeDto.class,
@@ -67,8 +68,8 @@ public class SearchQueryRepository {
                 .where(
                         eqCategory(cond.getCategoryId()),
                         includeIg(cond.getIngredientId()),
-                        includeKeyword(cond.getKeyword()),
-                        //excludeIg(cond.getExceptId())
+                        includeKeyword(cond.getKeyword())
+                                .or(includeKeywordTag(cond.getKeyword())),
                         recipeIngredient.recipe.recipeId.notIn(JPAExpressions
                                 .select(riSub.recipe.recipeId)
                                 .from(riSub)
@@ -77,46 +78,33 @@ public class SearchQueryRepository {
                 .fetch();
     }
 
-    private BooleanExpression eqCategory(Long cg){
-        if((cg == null)||(cg == 10)){ //카테고리 설정 없을 시 모든 레시피 출력 (where 조건 생략)
+    private BooleanExpression eqCategory(Long cg) {
+        if ((cg == null) || (cg == 10)) { //카테고리 설정 없을 시 모든 레시피 출력 (where 조건 생략)
             return null;
         }
         return recipeIngredient.recipe.recipeCategory.eq(cg);
     }
-    private BooleanExpression includeKeyword(String keyword){
-        if (keyword == null) {
+
+    private BooleanExpression includeKeyword(String keyword) {
+        if (keyword.equals("")) {
             return null;
         }
-        return recipeIngredient.recipe.recipeTitle.like("%"+keyword+"%");
+        return recipeIngredient.recipe.recipeTitle.like("%" + keyword + "%");
     }
+
+    private BooleanExpression includeKeywordTag(String keyword) {
+        if (keyword.equals("")) {
+            return null;
+        }
+        return recipeIngredient.recipe.recipeTag.like("%" + keyword + "%");
+    }
+
     private BooleanExpression includeIg(List<Long> ingredientId) {
-        if(ingredientId.isEmpty()){
+        if (ingredientId.isEmpty()) {
             return null;
         }
         return recipeIngredient.ingredient.igId.in(ingredientId);
     }
 
-/*    private BooleanExpression excludeIg(List<Long> exceptId) {
-        if (exceptId.equals(null)) {
-            return null;
-        }
-        return recipeIngredient.recipe.recipeId.notIn(JPAExpressions
-                .select(riSub.recipe.recipeId)
-                .from(riSub)
-                .where(riSub.ingredient.igId.in(exceptId)));
-    }*/
-/*    private BooleanExpression eqCaffeine (Long yn){
-        if (yn == null || yn == 0){
-            return null;
-        }
-        return recipeIngredient.recipe.caffeine.ne(1L);
-    }
-    private BooleanExpression eqLactose (Long yn){
-        if (yn == null || yn == 0){
-            return null;
-        }
-        return recipeIngredient.recipe.lactose.ne(1L);
-    }
-*/
 
 }
