@@ -177,7 +177,7 @@ public class RecipeService {
 
     //레시피 인기순 출력
     @Transactional
-    public List<HotRecipeDto> showHotList(){
+    public List<HotRecipeDto> showHotList() {
         return searchQueryRepository.getHotRecipe();
     }
 
@@ -222,10 +222,9 @@ public class RecipeService {
                             .recipeTitle((String) result.get("recipe_title"))
                             .recipeMainImg((String) result.get("recipe_main_img"))
                             .recipeCategory((Long) result.get("recipe_category"))
-                            .lactose((Long) result.get("recipe_lactose"))
-                            .caffeine((Long) result.get("recipe_caffenie"))
                             .recipeStep((List<String>) result.get("recipe_step"))
                             .recipeStepImg((List<String>) result.get("recipe_step_img"))
+                            .recipeTag((List<String>)result.get("recipe_tag"))
                             .build());
                 }
             }

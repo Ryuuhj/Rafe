@@ -5,6 +5,7 @@ import com.project.rafe.domain.StringListConverter;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.apache.tomcat.util.buf.StringUtils;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -30,13 +31,6 @@ public class Recipe {
 
     @Column(name = "recipe_category", nullable = false)
     private Long recipeCategory;
-    //recipe name
-    //recipe count --> recipe_ingredient table에 매핑
-    //@Column(name = "lactose")
-    private Long lactose;
-
-    //@Column(name = "caffeine")
-    private Long caffeine;
 
     @Lob
     @Column(length = 10000)
@@ -48,6 +42,8 @@ public class Recipe {
     @Convert(converter = StringListConverter.class)
     private List<String> recipeStepImg;
 
+    private String recipeTag;
+
     @OneToMany(mappedBy = "recipe", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<RecipeIngredient> igList = new ArrayList<>();
 
@@ -56,15 +52,14 @@ public class Recipe {
 
     @Builder
     public Recipe(String recipeTitle, String recipeMainImg, Long recipeCategory,
-                  Long lactose, Long caffeine, List<String> recipeStep, List<String> recipeStepImg) {
+                  List<String> recipeStep, List<String> recipeStepImg, List<String> recipeTag) {
 
         this.recipeTitle = recipeTitle;
         this.recipeMainImg = recipeMainImg;
         this.recipeCategory = recipeCategory;
-        this.lactose = lactose;
-        this.caffeine = caffeine;
         this.recipeStep = recipeStep;
         this.recipeStepImg = recipeStepImg;
+        this.recipeTag = StringUtils.join(recipeTag, ',');
         this.likeCount = 0L;
     }
 
