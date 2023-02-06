@@ -1,0 +1,36 @@
+.bean_tot{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* gap: 6%; */
+    margin-left: 7%;
+    margin-right: 7%;
+    margin-bottom: 25%;
+    margin-top: 10%;
+}
+.bean_pre_box{
+    padding: 10%;
+    /* border-style: outset; */
+    background-color: rgb(245, 245, 245);
+    border-radius: 20px;
+    width: 34%;
+}
+.bean_pre_star{
+    display: flex;
+    gap: 5px;
+}
+.bean_pre_star_text{
+    line-height: 39px;
+}
+.bean_pre_ex{
+    font-weight: bold;
+    text-align: left;
+}
+.bean_pre_bean{
+    text-align: left;
+    margin-top: 10px;
+}
+.bean_pre_date{
+    font-size: smaller;
+    margin-top: 10px;
+    text-align: left;
+}

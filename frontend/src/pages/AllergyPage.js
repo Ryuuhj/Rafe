@@ -29,10 +29,10 @@ function AllergyPage() {
 
     const getStorage = async (res) => {
         console.log("getStorage res.data:", res.data)
-        if(res.data){
+        if (res.data) {
             setIsEmpty(false)
             setStorageList(res.data.data)
-        }else{
+        } else {
             <p>Loading ..</p>;
             setIsEmpty(true)
         }
@@ -49,6 +49,7 @@ function AllergyPage() {
         //const result = await axios.get('http://localhost:3001/search_result')
         console.log(result.data)
         setSearchList(result.data.search_result)
+        setSearchtxt("")
     }
 
     // 재료 삭제(response : 사용자 재료 목록)
@@ -67,6 +68,10 @@ function AllergyPage() {
         //     userId: userId,
         //     igId: val.igId
         // }
+
+        if (selectIgId.includes(val.igId) === true) {
+            alert(`${val.igName} 은(는) 이미 알러지 추가 목록에 담겨있습니다.`)
+        } else {
             setSelectIgId([...selectIgId, val.igId])
             setSelectIgName([...selectIgName, val.igName])
 
@@ -74,6 +79,7 @@ function AllergyPage() {
             //     .then(res => {
             //         getStorage(res)
             //     })
+        }
     }
     // 추가하기 위해 선택한 재료 리스트 초기화
     const setInit = () => {
@@ -115,7 +121,7 @@ function AllergyPage() {
                                 <th></th>
                                 <th></th>
                             </tr>
-                            <p id="notice">📢 못 먹는 재료를 설정해주세요!<br/>&emsp;&ensp;레시피 검색 시 자동으로 반영됩니다.</p>
+                            <p id="notice">📢 못 먹는 재료를 설정해주세요!<br />&emsp;&ensp;레시피 검색 시 자동으로 반영됩니다.</p>
                         </thead>
                         <tbody>
                             {storageList.map((val) => {
@@ -146,13 +152,14 @@ function AllergyPage() {
             {/*재료 검색 버튼 클릭 시 보여주는 화면*/}
             <div>
                 {isVisible ? (
-                    <div className="BackStyle" onClick={() => { setIsVisible(false) }}></div>
+                    <div className="BackStyle" ></div>
                 ) : null}
             </div>
 
             <div>
                 {isVisible ? (
                     <div className="Modal">
+                        <div id="close" onClick={() => { setIsVisible(false) }}>❌</div>
                         <h4>검색 결과</h4>
                         <table id="SearchTable">
                             {searchList.map((val) => {

@@ -87,7 +87,7 @@ background-color: white;
 
 #StorageTable {
     border-collapse: collapse;
-    width: 96%;
+    width: 80%;
     position: absolute;
     top: 60%;
     margin-left: 3%;
@@ -164,4 +164,11 @@ h4{
 
 .select{
     width: 31%;
+}
+
+#close{
+    position: relative;
+    top: 2%;
+    text-align: right;
+    margin-right: 10px;
 }
