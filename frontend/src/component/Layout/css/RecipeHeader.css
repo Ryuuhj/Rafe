@@ -16,3 +16,24 @@
 .recipe_search__img{
     width: 54%;
 }
+
+.recipe_search_condition_txt{
+    position: absolute;
+    top: 20%;
+    margin-left: 7%;
+}
+
+.recipe_search_condition_ig{
+    position: absolute;
+    top: 25%;
+    margin-left: 27%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.recipe_search_condition_title{
+    position: absolute;
+    top: 25%;
+    margin-left: 7%;
+}
