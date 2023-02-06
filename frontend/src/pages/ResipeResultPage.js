@@ -16,10 +16,12 @@ function RecipeResultPage() {
     const igId = location.state.ingredientId
     const keyword = location.state.keyward
     const exceptId = location.state.exceptIgId
+    const exceptName = location.state.exceptIgName
     console.log("categoryId:", categoryId)
     console.log("igId:", igId)
     console.log("exceptId", exceptId)
     console.log("keyword:", keyword)
+    console.log("exceptName:", exceptName)
 
 
     const getResult = (res) => {
@@ -46,7 +48,7 @@ function RecipeResultPage() {
 
     return (
         <div className="Recipe">
-            <RecipeHeader category={categoryId} />
+            <RecipeHeader category={categoryId} exceptName = {exceptName} searchTxt = {keyword} />
             <RecipePageLayout recipe={recipeList} length={recipeList.length}/>
         </div>
     )

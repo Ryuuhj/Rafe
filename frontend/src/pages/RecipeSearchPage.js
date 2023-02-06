@@ -64,6 +64,7 @@ function RecipeSearchPage() {
     const getSearch = async (res) => {
         setIsVisible(true)
         const result = await axios.get("http://localhost:8080/ingredient", {
+        //const result = await axios.get("https://fd518520-055a-436e-a971-8a98dcc065fe.mock.pstmn.io/ingredient", {
             params: {
                 id: userId,
                 keyword: exceptTxt
@@ -219,7 +220,8 @@ function RecipeSearchPage() {
                     categoryId : category,
                     keyward : searchTxt,
                     ingredientId : selectIgList,
-                    exceptIgId : exceptIgList
+                    exceptIgId : exceptIgList,
+                    exceptIgName : exceptIgName
                 }}>
                 <Btn context={"검색"} orange={false} />  
                 </Link>              
