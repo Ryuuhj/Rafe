@@ -16,7 +16,7 @@ export default function BeanDetailPage() {
     console.log('beanid', beanId)
 
     useEffect(() => {
-        //axios.get("http://localhost:3001/data")
+        //axios.get("https://fd518520-055a-436e-a971-8a98dcc065fe.mock.pstmn.io/bean/detail")
             axios.get(`http://localhost:8080/bean/detail/${beanId}`)
             .then(res => {
                 setBeanDetail(res.data);
@@ -52,6 +52,7 @@ export default function BeanDetailPage() {
                 return (
                     <div>
                         {dateString = val.pickDate.split('-')}
+                        <div id="backBtn" onClick={(()=>{navigate('/bean')})}><p>«</p></div>
                         <div className="bean_detail_title">
                             {dateString[0]}년 {dateString[1]}월 {dateString[2]}일의 원두 일기
                             </div>

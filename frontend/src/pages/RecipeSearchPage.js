@@ -28,7 +28,7 @@ function RecipeSearchPage() {
     const [exceptIgList, setExceptIgList] = useState([]); //선택한 제외 재료 id
     const [exceptIgName, setExceptIgName] = useState([]); //선택한 제외 재료 이름
     const [searchList, setSearchList] = useState([]);
-    const [btnActive, setBtnActive] = useState("");
+    const [btnActive, setBtnActive] = useState(-1);
     const [catActive, setCatActive] = useState(10);
     const [isVisible, setIsVisible] = useState(false);
 
@@ -55,6 +55,7 @@ function RecipeSearchPage() {
 
     useEffect(() => {
         axios.get(`http://localhost:8080/recipe/search/${userId}`)
+        //axios.get('https://fd518520-055a-436e-a971-8a98dcc065fe.mock.pstmn.io/recipe/search')
             .then(res => {
                 getIg(res);
             })
@@ -70,15 +71,23 @@ function RecipeSearchPage() {
         })
         console.log(result.data)
         setSearchList(result.data.search_result)
+        setExceptTxt("")
+        
     }
 
     const selectIg = (e, val) => {
         setBtnActive((prev)=>{
             return e.target.value;
         })
-        setSelectIgList([...selectIgList, val.igId]) //선택한 재료 id값들 저장
-        setSelectIgName([...selectIgName, val.igName])
-        console.log(selectIgList)
+        if(selectIgList.includes(val.igId) === true){
+            alert(`${val.igName} 은(는) 이미 선택 재료 목록에 포함되어 있습니다.`)
+        } else{
+            setSelectIgList([...selectIgList, val.igId]) //선택한 재료 id값들 저장
+            setSelectIgName([...selectIgName, val.igName])
+        }
+        // setSelectIgList([...selectIgList, val.igId]) //선택한 재료 id값들 저장
+        // setSelectIgName([...selectIgName, val.igName])
+        // console.log(selectIgList)
     };
 
     const selectCategory = (e, val) => {
@@ -89,8 +98,12 @@ function RecipeSearchPage() {
     };
 
     const addExcept = (val) => {
-        setExceptIgList([...exceptIgList, val.igId])
-        setExceptIgName([...exceptIgName, val.igName])
+        if(exceptIgList.includes(val.igId) === true){
+            alert(`${val.igName} 은(는) 이미 제외 재료 목록에 포함되어 있습니다.`)
+        } else{
+            setExceptIgList([...exceptIgList, val.igId])
+            setExceptIgName([...exceptIgName, val.igName])
+        }
     }
 
     const setExceptInit = () => {
@@ -143,12 +156,13 @@ function RecipeSearchPage() {
             {/*재료 검색 버튼 클릭 시 보여주는 화면*/}
             <div>
                 {isVisible ? (
-                    <div className="BackStyle" onClick={() => { setIsVisible(false) }}></div>
+                    <div className="BackStyle"></div>
                 ) : null}
             </div>
             <div>
                 {isVisible ? (
                     <div className="Modal">
+                        <div id="close" onClick={() => { setIsVisible(false) }}>❌</div>
                         <h4>검색 결과</h4>
                         <table id="SearchTable">
                             {searchList.map((val) => {

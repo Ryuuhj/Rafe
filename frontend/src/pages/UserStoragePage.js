@@ -40,6 +40,7 @@ function UserStoragePage() {
     // 재료 검색 후 검색 결과 저장
     const getSearch = async (res) => {
         setIsVisible(true)
+        //try{const result = await axios.get("https://fd518520-055a-436e-a971-8a98dcc065fe.mock.pstmn.io/ingredient", {
         try{const result = await axios.get("http://localhost:8080/ingredient", {
             params: {
                 id: userId,
@@ -47,6 +48,7 @@ function UserStoragePage() {
             }
         })
         setSearchList(result.data.search_result)
+        setSearchtxt("")
     }
         catch(error){
             if (error.response.status === 404){
@@ -89,6 +91,8 @@ function UserStoragePage() {
 
         if (val.exists == true) {
             alert(`${val.igName} 은(는) 이미 내 창고에 있는 재료입니다.`)
+        } else if(selectIgId.includes(val.igId) === true){
+            alert(`${val.igName} 은(는) 이미 추가 목록에 담겨있습니다.`)
         } else {
             setSelectIgId([...selectIgId, val.igId])
             setSelectIgName([...selectIgName, val.igName])
@@ -169,13 +173,14 @@ function UserStoragePage() {
             {/*재료 검색 버튼 클릭 시 보여주는 화면*/}
             <div>
                 {isVisible ? (
-                    <div className="BackStyle" onClick={() => { setIsVisible(false) }}></div>
+                    <div className="BackStyle"></div>
                 ) : null}
             </div>
 
             <div>
                 {isVisible ? (
                     <div className="Modal">
+                        <div id="close" onClick={() => { setIsVisible(false) }}>❌</div>
                         <h4>검색 결과</h4>
                         <table id="SearchTable">
                             {searchList.map((val) => {
