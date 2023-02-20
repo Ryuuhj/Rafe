@@ -2,6 +2,7 @@ package com.project.rafe.controller;
 
 import com.project.rafe.domain.Recipe.dto.*;
 import com.project.rafe.domain.Recipe.search.SearchCondDto;
+import com.project.rafe.service.IngredientService;
 import com.project.rafe.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +21,7 @@ import java.util.Map;
 public class RecipeController {
 
     private final RecipeService recipeService;
+    private final IngredientService ingredientService;
     private static final Logger logger = LoggerFactory.getLogger(RecipeController.class);
 
     //레시피 좋아요 버튼
@@ -58,9 +61,13 @@ public class RecipeController {
 
     //레시피 검색 처리 및 반환
     @PostMapping("/recipe/result")
-    public List<SimpleRecipeDto> searchByCond(@RequestBody SearchCondDto condDto){
-        return recipeService.searchByCond(condDto);
+    public Map<String, Object> searchByCond(@RequestBody SearchCondDto condDto){
+        Map<String, Object> result = new HashMap<>();
+        result.put("recipe", recipeService.searchByCond(condDto));
+        result.put("exceptName", ingredientService.igIdToNameList(condDto.getExceptId()));
+        return result;
     }
+
     //메인화면 레시피 인기순 출력
     @GetMapping("/main/like")
     public List<HotRecipeDto> showHotList(){

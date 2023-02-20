@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -120,6 +121,24 @@ public class IngredientService {
                 .recipeList(simpelList)
                 .items(searchList)
                 .build();
+    }
+
+    public List<String> igIdToNameList(List<Long> igId) {
+        List<String> nameList = new ArrayList<>();
+        /*
+        if (!igId.isEmpty()) {
+            for (Long i : igId) {
+                nameList.add(ingredientRepo.findByIgId(i).get().getIgName());
+            }
+        }*/
+        if(igId.isEmpty()){
+
+        }else {
+            nameList = igId.stream()
+                    .map(id -> ingredientRepo.findByIgId(id).get().getIgName())
+                    .collect(Collectors.toList());
+        }
+        return nameList;
     }
 
     public List<ItemSearchResDto> naverProductList(String igName) throws ParseException {
