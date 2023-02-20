@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Entity
 public class BeanRecord {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "record_id")

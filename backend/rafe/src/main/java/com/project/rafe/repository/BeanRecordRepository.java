@@ -12,5 +12,7 @@ public interface BeanRecordRepository extends JpaRepository<BeanRecord, Long> {
 
     List<BeanRecord> findAllByUserId(Long userId);
 
+    List<BeanRecord> findByUserIdOrderByStarDesc(Long userId);
+
     Optional<BeanRecord> findBeanRecordById(Long id);
 }

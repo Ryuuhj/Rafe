@@ -41,10 +41,16 @@ public class BeanRecordService {
     }
 
     //2. 일기 미리보기
-    public List<RecordPreviewDto> getPreview(Long userId) {
+    public List<RecordPreviewDto> getPreview(Long userId, Integer star) {
         List<RecordPreviewDto> result;
-        //id로 조회
-        List<BeanRecord> records = beanRecordRepository.findAllByUserId(userId);
+        List<BeanRecord> records;
+        //id로 조회 - 최신순
+        if (star == 0) {
+            records = beanRecordRepository.findAllByUserId(userId);
+        }else {
+            records = beanRecordRepository.findByUserIdOrderByStarDesc(userId);
+        }
+
         if (records.isEmpty()) {
             result = new ArrayList<>();
         }else {
