@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -123,14 +122,14 @@ public class IngredientService {
                 .build();
     }
 
-    public List<String> igIdToNameList(List<Long> igId) {
+   /* public List<String> igIdToNameList(List<Long> igId) {
         List<String> nameList = new ArrayList<>();
-        /*
+        *//*
         if (!igId.isEmpty()) {
             for (Long i : igId) {
                 nameList.add(ingredientRepo.findByIgId(i).get().getIgName());
             }
-        }*/
+        }*//*
         if(igId.isEmpty()){
 
         }else {
@@ -140,7 +139,7 @@ public class IngredientService {
         }
         return nameList;
     }
-
+*/
     public List<ItemSearchResDto> naverProductList(String igName) throws ParseException {
         //1. URL 세팅해서 보내기
         String url = "https://openapi.naver.com/";

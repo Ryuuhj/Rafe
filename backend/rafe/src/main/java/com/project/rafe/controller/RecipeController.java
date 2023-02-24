@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,11 +60,8 @@ public class RecipeController {
 
     //레시피 검색 처리 및 반환
     @PostMapping("/recipe/result")
-    public Map<String, Object> searchByCond(@RequestBody SearchCondDto condDto){
-        Map<String, Object> result = new HashMap<>();
-        result.put("recipe", recipeService.searchByCond(condDto));
-        result.put("exceptName", ingredientService.igIdToNameList(condDto.getExceptId()));
-        return result;
+    public List<SimpleRecipeDto> searchByCond(@RequestBody SearchCondDto condDto){
+        return recipeService.searchByCond(condDto);
     }
 
     //메인화면 레시피 인기순 출력
