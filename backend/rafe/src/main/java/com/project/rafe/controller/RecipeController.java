@@ -2,6 +2,7 @@ package com.project.rafe.controller;
 
 import com.project.rafe.domain.Recipe.dto.*;
 import com.project.rafe.domain.Recipe.search.SearchCondDto;
+import com.project.rafe.service.IngredientService;
 import com.project.rafe.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -19,6 +20,7 @@ import java.util.Map;
 public class RecipeController {
 
     private final RecipeService recipeService;
+    private final IngredientService ingredientService;
     private static final Logger logger = LoggerFactory.getLogger(RecipeController.class);
 
     //레시피 좋아요 버튼
@@ -61,6 +63,7 @@ public class RecipeController {
     public List<SimpleRecipeDto> searchByCond(@RequestBody SearchCondDto condDto){
         return recipeService.searchByCond(condDto);
     }
+
     //메인화면 레시피 인기순 출력
     @GetMapping("/main/like")
     public List<HotRecipeDto> showHotList(){

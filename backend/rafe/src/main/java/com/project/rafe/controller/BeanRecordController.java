@@ -29,9 +29,9 @@ public class BeanRecordController {
     }
 
     //2.일기 미리보기
-    @GetMapping("/bean/{userId}")
-    public List<RecordPreviewDto> preview(@PathVariable("userId") Long userId) {
-        return beanRecordService.getPreview(userId);
+    @GetMapping("/bean/{userId}/{star}")
+    public List<RecordPreviewDto> preview(@PathVariable("userId") Long userId, @PathVariable("star") Integer star) {
+        return beanRecordService.getPreview(userId, star);
     }
 
     //3.일기 상세보기
