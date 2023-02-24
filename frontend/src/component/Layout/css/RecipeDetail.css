@@ -1,0 +1,131 @@
+.recipe__main {
+    position: relative;
+    top: 200px;
+}
+
+.recipe__title {
+    padding-top: 10px;
+    width: 60%;
+    display: inline-flex;
+    /* background-color: beige; */
+    /* padding-bottom: 7%; */
+}
+
+.recipe__imgBox {
+    /*object-fit: scale-down;*/
+    /* background-color: #0D3F3D; */
+    /* width: 40%; */
+    /* display: inline-block; */
+    position: relative;
+    width: 60%;
+    height: 350px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+/* .recipe__imgBox{
+    display: table;
+    width : 60%;
+    text-align: center;
+    background-color: #0D3F3D;
+}
+.recipe__imgBox_box{
+    display: table-cell;
+    vertical-align:middle;
+} */
+
+.recipe__img {
+    width: 30%;
+    margin-bottom: -10px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.recipe__like {
+    width: 13%;
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
+}
+.recipe__ig_title {
+    text-align: left;
+    margin-left: 20%;
+    /* margin-top: 43px; */
+    padding-top: 10%;
+}
+
+.recipe__step__title {
+    /* display: inline-flex; */
+    /* width: 60%; */
+    /* padding-top: 5%; */
+    /* background-color: beige; */
+    /* padding-bottom: 10px; */
+    text-align: left;
+    margin-left: 10%;
+    /* margin-top: 43px; */
+    padding-top: 10%;
+}
+
+.recipe__ig {
+    width: 60%;
+    margin-left: 20%;
+    padding-top: 10px;
+    padding-bottom: 5%;
+    text-align: left;
+    padding-left: 10px;
+    border-collapse: collapse;
+    margin-bottom: 7%;
+}
+
+#recipe__ig__cart{
+    width:30px;
+}
+
+
+.recipe__ig__yes{
+    background-color: #CBE1E0;
+}
+#recipe__ig__yes_title{
+    font-size: smaller;
+    margin-left: 20%;
+    text-align: left;
+    margin-bottom: 30px;
+    padding-top: 10px;
+}
+#highlight{
+    background-color: #CBE1E0;
+}
+
+
+.recipe__step {
+    width: 100%;
+    /* margin-left: 20%; */
+    padding-top: 10px;
+    padding-bottom: 5%;
+    text-align: left;
+    border-spacing: 20px;
+}
+
+.recipe__step__img {
+    width: 30%;
+}
+
+.recipe__step__info {
+    padding-left: 3%;
+}
+
+/* table {
+    width: 30%;
+    border: 1px solid #444444;
+  }
+  th, td {
+    border: 1px solid #444444;
+  }
+  table{
+    width : 30%;
+  } */
+
+  .recipe__ig__name{
+    width: 48%;
+  }

@@ -1,0 +1,14 @@
+.like_title_name{
+    position: absolute;
+    text-align: left;
+    margin-left: 10%;
+    top: 30%;
+}
+
+.like_no{
+    margin-top: 20%;
+}
+
+.like_no_btn{
+    margin-top: 5%;
+}

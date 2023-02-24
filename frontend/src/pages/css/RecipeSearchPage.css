@@ -1,0 +1,98 @@
+.IgSelectBox{
+    /* position: relative; */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 4%;
+    top: 40px;
+    gap: 10px;
+}
+
+.IgSelectBox__box{
+    margin-top: 10%;
+}
+
+.SelectBox{
+    /* position: absolute; */
+    top: 50%;
+    width: 100%;
+}
+
+.SelectBox__ig{
+    text-align: left;
+    margin-left: 12%;
+}
+
+.ExceptBox{
+    margin-bottom: 10%;
+    margin-top: 3%;
+    text-align: left;
+    margin-left: 15%;
+}
+
+.SelectBox__sumbit{
+    position: relative;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.btn {
+    background-color : #0D3F3D;
+    color : #FF8243;
+    padding : 10px 20px;
+    border : 0;
+    border-radius : 10px;
+}
+
+.btn_active {
+    background-color : #FF8243;
+    color : #0D3F3D;
+    padding : 10px 20px;
+    border : 0;
+    border-radius : 10px;
+}
+
+#Select__igList{
+    position: relative;
+    /* margin-top: 10%; */
+    /* margin-bottom: 5%; */
+    margin: 10%;
+    /* border: solid; */
+    border-radius: 15px;
+    /* width: 22%; */
+    padding: 2%;
+    background-color: #FFF9E9;
+    box-shadow: 3px 3px 13px lightgrey;
+}
+
+#recipe_search_title{
+    text-align: left;
+    margin-left: 13%;
+    /* margin-top: -40%; */
+    position: relative;
+    top: -44px;
+}
+.category{
+    margin-bottom: 14%;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 23px;
+    row-gap: 14px;
+    justify-content: center;
+}
+
+.tot{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 34%;
+    width: 100%;
+}
+
+#IngredientSearchBar_recipe{
+    margin-top: 2%;
+    margin-bottom: 6%;
+    /* position: relative; */
+    top: -26px;
+}

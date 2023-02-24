@@ -1,0 +1,32 @@
+.bean_pre_header{
+    text-align: left;
+    margin-left: 10%;
+    display: flex;
+    /* position: absolute; */
+    margin-left: 10%;
+    margin-top: 40%;
+
+}
+
+.bean_pre_header_title{
+    line-height: 38px;
+}
+
+.bean_sort_type {
+    margin-left: 10%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.bean_sort_on{
+    
+    text-decoration-line: underline;
+    text-decoration-color: #FF8243;
+    text-decoration-thickness: 3px;
+    text-align: left;
+}
+
+.bean_sort_off{
+    text-align: left;
+}

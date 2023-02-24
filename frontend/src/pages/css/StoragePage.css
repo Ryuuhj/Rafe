@@ -1,0 +1,16 @@
+.storage__tab {
+    position: absolute;
+    top: 31%;
+    margin-left: 10%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.storage__tab__on{
+    
+    text-decoration-line: underline;
+    text-decoration-color: #FF8243;
+    text-decoration-thickness: 3px;
+
+}

@@ -1,0 +1,38 @@
+.recipeBox{
+    position: absolute;
+    padding-bottom: 10%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+}
+
+.recipeBox__box{
+    width : 33%;
+    float : left;
+    margin: auto;
+}
+
+.footer{
+    position: absolute;
+    height: 60px;
+    width: 100%;
+    padding: 0 0;
+    line-height: 60px;
+    bottom: 0;
+}
+
+.recipeBox__image{
+    width:100%;
+    border-radius: 10px;
+}
+
+.recipeBox__link{
+    display: grid;
+    /* grid-template-columns: 150px 150px; */
+    grid-template-rows: 1fr 1fr;
+}
+
+.recipeBox__rate{
+    font-size :small;
+}

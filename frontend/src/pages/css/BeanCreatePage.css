@@ -1,0 +1,21 @@
+.bean_header{
+    position: absolute;
+    margin-left: 10%;
+    margin-top: 40%;
+}
+
+.bean_ex{
+    margin-top: 60%;
+    margin-bottom: 10%;
+}
+
+.been_ex_img{
+    width: 80%;
+}
+
+.been_ex_btn{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-right: 10%;
+    margin-left: 10%;
+}

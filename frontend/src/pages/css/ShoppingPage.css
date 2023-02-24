@@ -1,0 +1,20 @@
+.cart__title {
+    text-align: left;
+    margin-left: 13%;
+    /* margin-top: -40%; */
+    position: absolute;
+    top: 30%;
+}
+
+#CartTable{
+    border-collapse: collapse;
+    width: 80%;
+    position: absolute;
+    top: 40%;
+    margin-left: 3%;
+    /* margin-top: -16%; */
+}
+
+#no_cart_img{
+    width: 30%;
+}

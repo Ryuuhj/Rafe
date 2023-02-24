@@ -1,0 +1,31 @@
+.btnwrapper{
+    position : relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+/* .img-wrapper{
+    width : 100%;
+}
+img{
+    max-width: 100%;
+    height: auto;
+} */
+div{
+    text-align: center;
+}
+
+/* div>p{
+    color: #0D3F3D;
+    font-size: 5vmin;
+} */
+
+.wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    min-height: 100vh;
+    flex-direction: column-reverse;
+}

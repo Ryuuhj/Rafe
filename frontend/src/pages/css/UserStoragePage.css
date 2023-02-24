@@ -1,0 +1,174 @@
+#StorageHeader {
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    left: 0%;
+    /*top:140px;*/
+    top: 30%;
+    text-align: left;
+}
+
+pre {
+    font-weight: bold;
+    font-size: large;
+}
+
+.IngredientSearchBar {
+    margin-top: 2%;
+    margin-bottom: 6%;
+    position: relative;
+    top: -26px;
+}
+.IngredientSearchBar_user {
+    margin-top: 2%;
+    margin-bottom: 6%;
+    position: relative;
+    top: 5px;
+}
+
+button {
+    border: 0;
+    background-color: white;
+}
+
+.SearchInput {
+    border: 0;
+    border-radius: 15px;
+    box-shadow: 1px 1px 10px 1px gray;
+    margin-right: 10px;
+    padding-inline-end: 20px;
+    padding-inline-start: 20px;
+    outline: 0;
+    height: 30px;
+    width: 50%;
+}
+
+.Modal{
+background-color: white;
+  width: 20%;
+  min-width: 300px;
+  max-width: 600px;
+  height: 60%;
+  overflow-y: auto;
+  position:fixed;
+  left: 50%;
+  top: 60%;
+  padding: 5px;
+  transform: translate(-50%, -50%);
+  z-index: 1011;
+  border-radius: 10px;
+}
+
+#Modal__igList{
+    position: relative;
+    top: 30%;
+    padding-bottom: 20px;
+    font-size: smaller;
+}
+
+.BackStyle{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1010;
+  background-color: rgba(0, 0, 0, 0.65);
+}
+
+.StorageList{
+    margin-top: 20%;
+}
+
+#root > div > div > div.content > div{
+    margin-top : 30%
+}
+
+#StorageTable {
+    border-collapse: collapse;
+    width: 80%;
+    position: absolute;
+    top: 60%;
+    margin-left: 3%;
+}
+/* table th,table td {
+    border:1px solid #000;
+} */
+
+#StorageTable th {
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.name{
+    text-align: left;
+    padding-left: 10%;
+}
+#fast{
+    padding-left: 20%;
+    text-align: left;
+}
+
+#SearchTable{
+    width: 90%;
+    position: relative;
+    top: 15%;
+    margin-left: 10%;
+}
+
+#SearchTable>button{
+    width:100%;
+}
+
+h4{
+    position: relative;
+    top: 5%;
+}
+
+#closeBtn{
+    position: relative;
+    top: 30%;
+    padding-bottom: 10px;
+}
+
+.storage__title{
+    text-align: left;
+    margin-left: 13%;
+    /* margin-top: -40%; */
+    position: relative;
+    top: -8px;
+}
+
+#notice{
+    width: 104%;
+    position: relative;
+    margin-left: 12%;
+    /* border: solid; */
+    text-align: left;
+    font-size: smaller;
+    margin-top: -4px;
+    margin-bottom: 4%;
+}
+
+#no_storage_box{
+    /* width: 20%; */
+    position: absolute;
+    /* margin-left: 42%; */
+    padding-bottom: 6%;
+}
+
+#no_storage_img{
+    width: 36%;
+}
+
+.select{
+    width: 31%;
+}
+
+#close{
+    position: relative;
+    top: 2%;
+    text-align: right;
+    margin-right: 10px;
+}

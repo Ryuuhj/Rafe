@@ -1,2 +1,30 @@
-# Rafe
-홈카페 레시피 추천 서비스
+# frontend
+---
+## Project setup
+```
+npm install react-google-login
+npm install gapi-script
+npm install axios --save
+npm install http-proxy-middleware --save
+npm install react-router-dom
+npm install react-dom
+
+<bean - create page>
+npm install react-datepicker --save
+npm install date-fns
+npm install react-icons --save
+
+<main - slider>
+npm install react-slick --save
+npm install react-slick slick-carousel
+```
+
+### project start
+```
+npm start
+```
+
+### project end
+```
+ctrl + c
+```
