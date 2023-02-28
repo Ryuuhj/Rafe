@@ -17,7 +17,7 @@ public class Allergy {
     @Column(name = "allergy_id", nullable = false)
     private Long id;
 
-    @Column(name = "users_id")
+    @Column(name = "user_id")
     private Long userId;
 
     @ManyToOne(fetch = FetchType.LAZY)
