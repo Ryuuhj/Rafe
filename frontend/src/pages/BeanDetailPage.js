@@ -17,7 +17,7 @@ export default function BeanDetailPage() {
 
     useEffect(() => {
         //axios.get("https://fd518520-055a-436e-a971-8a98dcc065fe.mock.pstmn.io/bean/detail")
-            axios.get(`http://localhost:8080/bean/detail/${beanId}`)
+            axios.get(`http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/bean/detail/${beanId}`)
             .then(res => {
                 setBeanDetail(res.data);
                 console.log(res.data)
@@ -40,7 +40,7 @@ export default function BeanDetailPage() {
 
     //삭제 후 미리보기 페이지로 이동
     const submitDelete = () => {
-        axios.delete(`http://localhost:8080/bean/delete/${beanId}`)
+        axios.delete(`http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/bean/delete/${beanId}`)
         .then(()=> {
             navigate("/bean");
         })

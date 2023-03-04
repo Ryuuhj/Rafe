@@ -54,8 +54,7 @@ function RecipeSearchPage() {
     };
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/recipe/search/${userId}`)
-        //axios.get('https://fd518520-055a-436e-a971-8a98dcc065fe.mock.pstmn.io/recipe/search')
+        axios.get(`http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/recipe/search/${userId}`)
             .then(res => {
                 getIg(res);
             })
@@ -63,9 +62,8 @@ function RecipeSearchPage() {
 
     const getSearch = async (res) => {
         setIsVisible(true)
-        const result = await axios.get("http://localhost:8080/ingredient", {
-        //const result = await axios.get("https://fd518520-055a-436e-a971-8a98dcc065fe.mock.pstmn.io/ingredient", {
-            params: {
+        const result = await axios.get("http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/ingredient", {
+                   params: {
                 id: userId,
                 keyword: exceptTxt
             }

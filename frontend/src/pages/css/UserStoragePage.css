@@ -87,10 +87,10 @@ background-color: white;
 
 #StorageTable {
     border-collapse: collapse;
-    width: 80%;
+    width: 82%;
     position: absolute;
     top: 60%;
-    margin-left: 3%;
+    margin-left: 0%;
 }
 /* table th,table td {
     border:1px solid #000;
@@ -141,9 +141,20 @@ h4{
 }
 
 #notice{
-    width: 104%;
+    width: 125%;
     position: relative;
     margin-left: 12%;
+    /* border: solid; */
+    text-align: left;
+    font-size: smaller;
+    margin-top: -4px;
+    margin-bottom: 4%;
+}
+
+#notice_df{
+    width: 100%;
+    position: relative;
+    margin-left: 7%;
     /* border: solid; */
     text-align: left;
     font-size: smaller;

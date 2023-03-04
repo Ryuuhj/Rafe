@@ -27,7 +27,7 @@ const GoogleButton = ({onSocial}) => {
     
         
         //mock server로 진행 (post url 변경)
-        axios.post('http://localhost:8080/login/google', {
+        axios.post('http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/login/google', {
             name : result.name,
             email : result.email,
             picture : result.imageUrl

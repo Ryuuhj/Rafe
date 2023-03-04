@@ -17,7 +17,7 @@ function RecipeDetailPage(){
 
     useEffect(() => {
         //axios.get("http://localhost:3001/recipe_detail")
-        axios.post("http://localhost:8080/recipe/detail", data)
+        axios.post("http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/recipe/detail", data)
         .then(res => {
             setRecipeList(res.data);
             //console.log('recipeDetail res.data', res.data)
