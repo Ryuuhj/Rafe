@@ -4,9 +4,12 @@
 
 .main_title{
     text-align: left;
-    margin-left: 15%;
+    /* margin-left: 15%; */
     margin-bottom: -7%;
     /* margin-top: 15%; */
+    font-family: math;
+    font-size: larger;
+    text-align: center;
 }
 
 .main_box_box{
@@ -15,11 +18,14 @@
 
 .main_link{
     width: 20%;
+    margin-left: 55%;
 }
 
 .main_title_box{
-    display: flex;
-    gap: 10px;
+    display: grid;
+    gap: 50px;
+    /* flex-direction: column; */
+    margin-bottom: -9%;
 }
 
 .main_no_fast{
@@ -30,4 +36,26 @@
 .main_no_fast_text{
     font-size: smaller;
     margin-bottom: 5%;
+}
+
+#main_img{
+    width: 43%;
+    margin-top: -8%;
+}
+
+#main_notice_box{
+    display: grid;
+    gap: 13%;
+}
+
+#main_notice_title{
+    font-family: math;
+    font-size: larger;
+}
+
+#main_notice_p{
+    width: 90%;
+    margin-left: 5%;
+    font-size: smaller;
+    margin-bottom: 16%;
 }

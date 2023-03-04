@@ -1,4 +1,5 @@
-#root > div > div > div:nth-child(2) > div:nth-child(2) > div > div{
+/* #root > div > div > div:nth-child(2) > div:nth-child(2) > div > div{ */
+#root > div > div > div.main_box > div:nth-child(3) > div.main_slider > div{
     position: relative;
     display: block;
     box-sizing: border-box;
@@ -8,11 +9,12 @@
     -khtml-user-select: none;
     touch-action: pan-y;
     -webkit-tap-highlight-color: transparent;
-    width: 80%;
-    margin-left: 10%;
+    width: 123%;
+    margin-left: -31%;
 }
 
-#root > div > div > div:nth-child(2) > div:nth-child(3) > div > div{
+/*#root > div > div > div:nth-child(2) > div:nth-child(3) > div > div{*/
+#root > div > div > div.main_box > div:nth-child(4) > div.main_slider > div{
     position: relative;
     display: block;
     box-sizing: border-box;
@@ -22,12 +24,13 @@
     -khtml-user-select: none;
     touch-action: pan-y;
     -webkit-tap-highlight-color: transparent;
-    width: 80%;
-    margin-left: 10%;
+    width: 123%;
+    margin-left: -31%;
 }
 
 .main_slider{
-    margin-bottom: 30%;
+    padding-bottom: 14%;
+    margin-bottom: 10%;
     margin-top: 10%;
 }
 
@@ -35,9 +38,17 @@
     position: relative;
     width: 60%;
     height: 150px;
-    overflow: hidden;
+    /* overflow: hidden; */
     margin: 0 auto;
-    margin-left: 30%;
+    margin-left: 46%;
+
+
+    /* position: relative;
+    height: 150px;
+    overflow: hidden;
+    margin-left: 10%;
+    border: solid;
+     */
 }
 
 .slider_img{
@@ -46,6 +57,9 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+
+    width: 40%;
+    height: 83%;
 }
 
 .slick-track{
@@ -62,4 +76,29 @@
 
 .slider_title{
     margin-right: 60%;
+    margin-top: 3%;
+}
+
+/* #root > div > div > div.main_box > div:nth-child(2) > div.main_slider > div > ul{ best 하단 dot */
+#root > div > div > div.main_box > div:nth-child(3) > div.main_slider > div > ul{
+    position: absolute;
+    bottom: -16%;
+    display: block;
+    width: 33%;
+    padding: 0;
+    margin-left: 50%;
+    list-style: none;
+    text-align: center;
+}
+
+/* #root > div > div > div.main_box > div:nth-child(3) > div.main_slider > div > ul{ */
+#root > div > div > div.main_box > div:nth-child(4) > div.main_slider > div > ul{
+    position: absolute;
+    bottom: -16%;
+    display: block;
+    width: 33%;
+    padding: 0;
+    margin-left: 50%;
+    list-style: none;
+    text-align: center;
 }

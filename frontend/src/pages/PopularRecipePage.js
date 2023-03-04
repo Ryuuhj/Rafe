@@ -1,7 +1,7 @@
 import "../component/Layout/Text.css";
 import "./css/UserStoragePage.css";
 import RecipePageLayout from "../component/Layout/RecipePageLayout";
-import RecipeHeader from "../component/Layout/RecipeHeader";
+import DefaultRecipeHeader from "../component/Layout/DefaultRecipeHeader";
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -29,7 +29,7 @@ export default function PopularRecipePage() {
 
     return (
         <div className="Recipe">
-            <RecipeHeader category={categoryId}/>
+            <DefaultRecipeHeader category={categoryId}/>
             <RecipePageLayout recipe={recipeList} length={recipeList.length} />
         </div>
     )
