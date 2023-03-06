@@ -90,7 +90,7 @@ background-color: white;
     width: 82%;
     position: absolute;
     top: 60%;
-    margin-left: 0%;
+    margin-left: 10%;
 }
 /* table th,table td {
     border:1px solid #000;
@@ -152,9 +152,9 @@ h4{
 }
 
 #notice_df{
-    width: 100%;
+    width: 61%;
     position: relative;
-    margin-left: 7%;
+    margin-left: 11%;
     /* border: solid; */
     text-align: left;
     font-size: smaller;
