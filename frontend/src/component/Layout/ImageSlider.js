@@ -22,10 +22,11 @@ export default function ImageSlider(data) {
           return (
             <div className="slider_img_box">
               <Link to={`/recipe/detail`} state={{ recipeId: val.recipeId }}>
+              <img className="slider_img" src={val.recipeImg} alt={val.recipeTitle} style={{ width: '40%' }} />
                 {val.recipeTitle.length > 8
                 ? <p className="slider_title">{val.recipeTitle.slice(0,8)}..</p>
                 : <p className="slider_title">{val.recipeTitle}</p>}
-                <img className="slider_img" src={val.recipeImg} alt={val.recipeTitle} style={{ width: '40%' }} />
+                {/* <img className="slider_img" src={val.recipeImg} alt={val.recipeTitle} style={{ width: '40%' }} /> */}
               </Link>
             </div>
           )

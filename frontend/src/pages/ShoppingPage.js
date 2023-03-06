@@ -14,8 +14,7 @@ function ShoppingPage() {
 
     // 사용자가 장바구니 목록 가져오기 + 저장하기
     useEffect(() => {
-        //axios.get("https://fd518520-055a-436e-a971-8a98dcc065fe.mock.pstmn.io/cart")
-            axios.get(`http://localhost:8080/cart/${userId}`)
+            axios.get(`http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/cart/${userId}`)
             .then(res => {
                 getCart(res);
             })
@@ -35,7 +34,7 @@ function ShoppingPage() {
     //장바구니 목록 삭제 (삭제하려는 재료 id 보내주기)
     const submitDel = async (val) => {
         const igId = val.igId
-        axios.delete(`http://localhost:8080/cart/${userId}/${igId}`)
+        axios.delete(`http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/cart/${userId}/${igId}`)
             .then(res => {
                 getCart(res)
             })

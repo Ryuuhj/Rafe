@@ -27,7 +27,7 @@ function BeanPageLayout({ star }) {
         }
     };
     useEffect(() => {
-        axios.get(`http://localhost:8080/bean/${userId}/${star}`)
+        axios.get(`http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/bean/${userId}/${star}`)
             .then(res => {
                 getBean(res);
             })

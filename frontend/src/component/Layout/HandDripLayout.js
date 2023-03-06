@@ -144,7 +144,7 @@ export default function HandDripLayout({ editList }) {
     }, [score])
 
     const submit = () => {
-        axios.post("http://localhost:8080/bean/create", {
+        axios.post("http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/bean/create", {
             userId: localStorage.getItem('userId'),
             exId: exId,
             pickDate: pickDateString,
@@ -170,7 +170,7 @@ export default function HandDripLayout({ editList }) {
         })
     }
     const submitEdit = () => {
-        axios.post(`http://localhost:8080/bean/${beanId}`, {
+        axios.post(`http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/bean/${beanId}`, {
             userId : localStorage.getItem('userId'),
             exId: exId,
             pickDate: pickDateString,

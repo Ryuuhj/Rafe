@@ -16,8 +16,8 @@ function MainPage() {
 
     useEffect(() => {
         axios.all(
-            [axios.get("http://localhost:8080/main/like"),
-            axios.get(`http://localhost:8080/main/fastuse/${userId}`)])
+            [axios.get("http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/main/like"),
+            axios.get(`http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/main/fastuse/${userId}`)])
             .then(
                 axios.spread((res1, res2) => {
                     setLikeList(res1.data);
@@ -29,10 +29,15 @@ function MainPage() {
 
     return (
         <div className="main_box">
-            <h2>Rafe에 오신 걸 환영합니다!</h2>
+            <img id="main_img" src="../../img/main.png" alt="이미지를 불러올 수 없습니다."></img>
+            <div id="main_notice_box">
+            <p id="main_notice_title">| CURATION |</p>
+            <p id="main_notice_p">RAFE가 제안하는 인기순 레시피와<br/> 빨리 도전해볼 레시피를 확인해보세요.</p>
+            </div>
+
             <div className="main_box_box">
                 <div className="main_title_box">
-                    <p className="main_title">인기 많은 레시피</p>
+                    <p className="main_title">BEST RECIPE</p>
                     <p className="main_link"><Link to={`/recipe/popular`}>&gt;&gt; 더보기</Link></p>
                 </div>
                 {likeList && <ImageSlider data={likeList} />}
@@ -40,7 +45,7 @@ function MainPage() {
 
             <div className="main_box_box">
                 <div className="main_title_box">
-                    <p className="main_title">빨리 도전해보세요!</p>
+                    <p className="main_title">RECOMMEND RECIPE</p>
                     {fastList.length !== 0 &&
                         <p className="main_link"><Link to={`/recipe`} state={{ categoryId: 10 }}>&gt;&gt; 더보기</Link></p>
                     }

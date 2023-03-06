@@ -1,7 +1,7 @@
 import "../component/Layout/Text.css";
 import "./css/UserStoragePage.css";
 import RecipePageLayout from "../component/Layout/RecipePageLayout";
-import RecipeHeader from "../component/Layout/RecipeHeader";
+import DefaultRecipeHeader from "../component/Layout/DefaultRecipeHeader";
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -21,7 +21,7 @@ export default function PopularRecipePage() {
     }
 
     useEffect(() => {
-        axios.get("http://localhost:8080/main/like")
+        axios.get("http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/main/like")
         .then(res => {
                 getLikeList(res);
             })
@@ -29,7 +29,7 @@ export default function PopularRecipePage() {
 
     return (
         <div className="Recipe">
-            <RecipeHeader category={categoryId}/>
+            <DefaultRecipeHeader category={categoryId}/>
             <RecipePageLayout recipe={recipeList} length={recipeList.length} />
         </div>
     )

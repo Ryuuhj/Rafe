@@ -16,7 +16,7 @@ function RecipeDetail({ val, recipeLike }) {
             recipeId : val.recipeId,
             userId : localStorage.getItem('userId')
         }
-        axios.post('http://localhost:8080/recipe/like', req)
+        axios.post('http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/recipe/like', req)
         .then(res=> { //filled_Heart 값 넘어옴
             console.log('recipe/like res', res.data.filledHeart)
             setLike(res.data.filledHeart)
@@ -27,7 +27,7 @@ function RecipeDetail({ val, recipeLike }) {
         if(val.cart == 1){
             alert("이미 장바구니에 추가된 재료입니다.")
         }else{
-            axios.post("http://localhost:8080/cart", {
+            axios.post("http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/cart", {
                 userId: localStorage.getItem('userId'),
                 igId: val.igId
             }).then((res)=>{

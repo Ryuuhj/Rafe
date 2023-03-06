@@ -20,8 +20,7 @@ function UserStoragePage() {
 
     // 사용자가 가지고 있는 재료 목록 가져오기 + 저장하기
     useEffect(() => {
-        //axios.get("http://localhost:3001/data")
-        axios.get(`http://localhost:8080/storage/${userId}`)
+        axios.get(`http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/storage/${userId}`)
             .then(res => {
                 getStorage(res);
             })
@@ -29,7 +28,7 @@ function UserStoragePage() {
 
     const getStorage = async (res) => {
         console.log("getStorage res.data:", res.data)
-        if(res.data){
+        if(res.data.message !== "NO DATA"){
             setIsEmpty(false)
             setStorageList(res.data.data)
         }else{
@@ -40,8 +39,7 @@ function UserStoragePage() {
     // 재료 검색 후 검색 결과 저장
     const getSearch = async (res) => {
         setIsVisible(true)
-        //try{const result = await axios.get("https://fd518520-055a-436e-a971-8a98dcc065fe.mock.pstmn.io/ingredient", {
-        try{const result = await axios.get("http://localhost:8080/ingredient", {
+               try{const result = await axios.get("http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/ingredient", {
             params: {
                 id: userId,
                 keyword: searchtxt
@@ -62,7 +60,7 @@ function UserStoragePage() {
     const submitDel = async (val) => {  //재료 삭제 (삭제하려는 재료 id 보내주기)
         const igId = val.igId
         console.log('delete ingredient! id:', val.igId)
-        axios.delete(`http://localhost:8080/storage/${userId}/${igId}`)
+        axios.delete(`http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/storage/${userId}/${igId}`)
             .then(res => {
                 getStorage(res)
                 console.log(res)
@@ -76,7 +74,7 @@ function UserStoragePage() {
             userId: userId,
             igId: val.igId
         }
-        axios.patch('http://localhost:8080/storage/fast', dataFast)
+        axios.patch('http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/storage/fast', dataFast)
             .then(res => {
                 getStorage(res)
             })
@@ -96,11 +94,6 @@ function UserStoragePage() {
         } else {
             setSelectIgId([...selectIgId, val.igId])
             setSelectIgName([...selectIgName, val.igName])
-            
-            // axios.post('http://localhost:8080/storage/insert', addData)
-            //     .then(res => {
-            //         getStorage(res)
-            //     })
         }
     }
     // 추가하기 위해 선택한 재료 리스트 초기화
@@ -115,7 +108,7 @@ function UserStoragePage() {
             userId: userId,
             igIdList: selectIgId
         }
-        axios.post('http://localhost:8080/storage/insert', addData)
+        axios.post('http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/storage/insert', addData)
             .then(res => {
                 getStorage(res)
                 setIsVisible(false)
@@ -143,7 +136,7 @@ function UserStoragePage() {
                             <th></th>
                             <th></th>
                         </tr>
-                        <p id="notice">📢 빠르게 사용하고 싶은 재료는 체크 박스로 표시해주세요!</p>
+                        <p id="notice">📢 빠르게 사용하고 싶은 재료는<br />&ensp;&ensp;체크 박스로 표시해주세요!</p>
                     </thead>
                     <tbody>
                         {storageList.map((val) => {

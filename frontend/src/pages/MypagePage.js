@@ -12,7 +12,7 @@ function MypagePage() {
     const userId = localStorage.getItem('userId')
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/user/${userId}`)
+        axios.get(`http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/user/${userId}`)
         .then(res => {
             console.log(res.data);
             setUser(res.data);

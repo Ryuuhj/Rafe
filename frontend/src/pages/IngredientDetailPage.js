@@ -14,7 +14,7 @@ function IngredientDetailPage() {
     useEffect(() => {
         console.log("ingredintId,", ingredient_id)
         console.log('userid,', localStorage.getItem('userId'))
-        axios.post("http://localhost:8080/ingredient/detail", {
+        axios.post("http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/ingredient/detail", {
             userId: localStorage.getItem('userId'),
             igId: ingredient_id
         })
@@ -28,7 +28,7 @@ function IngredientDetailPage() {
         if(val === 1){
             alert("이미 장바구니에 추가된 재료입니다.")
         }else{
-            axios.post("http://localhost:8080/cart", {
+            axios.post("http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/cart", {
                 userId: localStorage.getItem('userId'),
                 igId: ingredient_id
             }).then((res)=>{

@@ -12,7 +12,7 @@
     /* border-style: outset; */
     background-color: rgb(245, 245, 245);
     border-radius: 20px;
-    width: 34%;
+    width: 60%;
 }
 .bean_pre_star{
     display: flex;
@@ -30,7 +30,7 @@
     margin-top: 10px;
 }
 .bean_pre_date{
-    font-size: smaller;
+    font-size: 13px;
     margin-top: 10px;
     text-align: left;
 }

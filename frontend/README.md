@@ -8,6 +8,7 @@ npm install axios --save
 npm install http-proxy-middleware --save
 npm install react-router-dom
 npm install react-dom
+npm i react-js-pagination
 
 <bean - create page>
 npm install react-datepicker --save

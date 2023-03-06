@@ -21,7 +21,7 @@ function AllergyPage() {
     // 사용자가 알레르기 목록 가져오기 + 저장하기
     useEffect(() => {
         //axios.get("http://localhost:3001/data")
-        axios.get(`http://localhost:8080/allergy/${userId}`)
+        axios.get(`http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/allergy/${userId}`)
             .then(res => {
                 getStorage(res);
             })
@@ -29,7 +29,7 @@ function AllergyPage() {
 
     const getStorage = async (res) => {
         console.log("getStorage res.data:", res.data)
-        if (res.data) {
+        if (res.data.message !== "NO DATA") {
             setIsEmpty(false)
             setStorageList(res.data.data)
         } else {
@@ -40,7 +40,7 @@ function AllergyPage() {
     // 재료 검색 후 검색 결과 저장
     const getSearch = async (res) => {
         setIsVisible(true)
-        const result = await axios.get("http://localhost:8080/ingredient", {
+        const result = await axios.get("http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/ingredient", {
             params: {
                 id: userId,
                 keyword: searchtxt
@@ -56,7 +56,7 @@ function AllergyPage() {
     const submitDel = async (val) => {  //재료 삭제 (삭제하려는 재료 id 보내주기)
         const igId = val.igId
         console.log('delete ingredient! id:', val.igId)
-        axios.delete(`http://localhost:8080/allergy/${userId}/${igId}`)
+        axios.delete(`http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/allergy/${userId}/${igId}`)
             .then(res => {
                 getStorage(res)
             })
@@ -93,7 +93,7 @@ function AllergyPage() {
             userId: userId,
             igIdList: selectIgId
         }
-        axios.post('http://localhost:8080/allergy/insert', addData)
+        axios.post('http://ec2-52-79-217-14.ap-northeast-2.compute.amazonaws.com:8080/allergy/insert', addData)
             .then(res => {
                 getStorage(res)
                 setIsVisible(false)
@@ -121,7 +121,7 @@ function AllergyPage() {
                                 <th></th>
                                 <th></th>
                             </tr>
-                            <p id="notice">📢 못 먹는 재료를 설정해주세요!<br />&emsp;&ensp;레시피 검색 시 자동으로 반영됩니다.</p>
+                            <p id="notice">📢 못 먹는 재료를 설정해주세요!<br />&ensp;&ensp;레시피 검색 시 자동으로 반영됩니다.</p>
                         </thead>
                         <tbody>
                             {storageList.map((val) => {
@@ -143,6 +143,7 @@ function AllergyPage() {
                     </table>
                     :
                     <div id="no_storage_box">
+                        <p id="notice_df">📢 못 먹는 재료를 설정해주세요!<br />&ensp;&ensp;레시피 검색 시 자동으로 반영됩니다.</p>
                         <img id="no_storage_img" src="../../img/no_storage.png" alt="이미지를 불러올 수 없습니다."></img>
                         <p>알레르기 설정 정보가 없습니다.</p>
                     </div>
