@@ -33,7 +33,7 @@ public class RecipeIngredientService {
         JSONParser parser = new JSONParser();
         try {
             // JSON 파일 이름
-            String fileName = "recipe_sample.json";
+            String fileName = "recipe.json";
 
             // JSON 파일 주소 => 각 Local PC마다 경로 다름
             String fileLoc = "C:\\git\\Rafe\\backend\\rafe\\src\\main\\resources\\json\\" + fileName;

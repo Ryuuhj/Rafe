@@ -61,6 +61,7 @@ public class RecipeController {
     //레시피 검색 처리 및 반환
     @PostMapping("/recipe/result")
     public List<SimpleRecipeDto> searchByCond(@RequestBody SearchCondDto condDto){
+        logger.error("keyword?"+condDto.getKeyword()+";;");
         return recipeService.searchByCond(condDto);
     }
 
