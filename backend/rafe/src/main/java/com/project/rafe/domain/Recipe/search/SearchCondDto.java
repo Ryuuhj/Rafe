@@ -25,7 +25,7 @@ public class SearchCondDto {
     public SearchCondDto(Long userId, Long categoryId, String keyword, List<Long> ingredientId, List<Long> exceptId) {
         this.userId = userId;
         this.categoryId = categoryId;
-        if (keyword.equals(null)||keyword.equals(" ")) {
+        if (keyword.isBlank()||keyword == null) {
             this.keyword = "";
         }else {
             this.keyword = keyword;
