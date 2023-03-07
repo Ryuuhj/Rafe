@@ -68,8 +68,9 @@ public class SearchQueryRepository {
                 .where(
                         eqCategory(cond.getCategoryId()),
                         includeIg(cond.getIngredientId()),
-                        includeKeyword(cond.getKeyword())
-                                .or(includeKeywordTag(cond.getKeyword())),
+                        keywordCheck(includeKeyword(cond.getKeyword()), includeKeywordTag(cond.getKeyword())),
+                        /*includeKeyword(cond.getKeyword())
+                                .or(includeKeywordTag(cond.getKeyword())),*/
                         recipeIngredient.recipe.recipeId.notIn(JPAExpressions
                                 .select(riSub.recipe.recipeId)
                                 .from(riSub)
@@ -86,19 +87,29 @@ public class SearchQueryRepository {
     }
 
     private BooleanExpression includeKeyword(String keyword) {
-        if (keyword.equals("")) {
+        if (keyword.isBlank()) {
             return null;
         }
         return recipeIngredient.recipe.recipeTitle.like("%" + keyword + "%");
     }
 
     private BooleanExpression includeKeywordTag(String keyword) {
-        if (keyword.equals("")) {
+        if (keyword.isBlank()) {
             return null;
         }
         return recipeIngredient.recipe.recipeTag.like("%" + keyword + "%");
     }
 
+    private BooleanExpression keywordCheck(BooleanExpression includea, BooleanExpression includeb){
+        if (includeb == null) {
+            return includea;
+        } else if (includea == null) {
+            return includeb;
+        } else if (includea.and(includeb)== null) {
+            return null;
+        }
+        return (includea.or(includeb));
+    }
     private BooleanExpression includeIg(List<Long> ingredientId) {
         if (ingredientId.isEmpty()) {
             return null;
