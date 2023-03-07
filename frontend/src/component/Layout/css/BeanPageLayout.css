@@ -1,18 +1,21 @@
 .bean_tot{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* gap: 6%; */
-    margin-left: 7%;
+    gap: 6%;
+    margin-left: 10%;
     margin-right: 7%;
-    margin-bottom: 25%;
-    margin-top: 10%;
+    /* margin-bottom: 21%; */
+    /* margin-top: 45%; */
+    position: fixed;
+    top: 40%;
+    width: 80%;
 }
 .bean_pre_box{
     padding: 10%;
     /* border-style: outset; */
     background-color: rgb(245, 245, 245);
     border-radius: 20px;
-    width: 60%;
+    width: 71%;
 }
 .bean_pre_star{
     display: flex;
@@ -33,4 +36,14 @@
     font-size: 13px;
     margin-top: 10px;
     text-align: left;
+}
+
+.bean_footer{
+    position: fixed;
+    /* height: 60px; */
+    width: 100%;
+    padding: 0 0;
+    line-height: 60px;
+    bottom: 0;
+    margin-bottom: 20px;
 }

@@ -1,7 +1,8 @@
 import "./Text.css";
 import "./css/BeanPageLayout.css"
-import TransBtn from "../Button/TransBtn";
-import Pagination from "./Pagination";
+//import Pagination from "./Pagination";
+import './css/Pagination.css';
+import Pagination from "react-js-pagination";
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -16,7 +17,10 @@ function BeanPageLayout({ star }) {
     const [page, setPage] = useState(1);
     const offset = (page - 1) * limit;
 
-    console.log('star:', star)
+    const handlePageChange = (page) => {
+        setPage(page);
+      };
+    
     //원두 미리보기 정보 가져오기
     const getBean = (res) => {
         if (res.data.success === undefined) {
@@ -76,13 +80,18 @@ function BeanPageLayout({ star }) {
                     )
                 })}
             </div>
-            <footer className="footer">
-                {beanList && <Pagination
-                    total={beanList.length}
-                    limit={limit}
-                    page={page}
-                    setPage={setPage}
-                />}
+            <footer className="bean_footer">
+                {beanList && 
+                <Pagination
+                activePage={page} // 현재 페이지
+                itemsCountPerPage={4} // 한 페이지랑 보여줄 아이템 갯수
+                totalItemsCount={beanList.length} // 총 아이템 갯수
+                pageRangeDisplayed={5} // paginator의 페이지 범위
+                prevPageText={"‹"} // "이전"을 나타낼 텍스트
+                nextPageText={"›"} // "다음"을 나타낼 텍스트
+                onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
+                
+              />}
             </footer>
         </div>
     )

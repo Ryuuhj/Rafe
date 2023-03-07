@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 
 function RecipeSearchPage() {
-    const [searchTxt, setSearchTxt] = useState([]);
+    const [searchTxt, setSearchTxt] = useState('');
     const [igList, setIgList] = useState([]);
     const categoryList = [
                         {id:0, name: "Coffee"},
