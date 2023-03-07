@@ -20,7 +20,7 @@ function NavBar() {
 
     return (
         <div>
-            <div className="btn-wrapper">
+            {/* <div className="btn-wrapper">
                 {userId
                 ? <Btn onClick={() => {
                     localStorage.clear()
@@ -30,7 +30,7 @@ function NavBar() {
                 : <Btn onClick={() => {
                     navigate("../login", { replace: true })
                 }} context={"LogIn"} orange={false} />}
-            </div>
+            </div> */}
             <div className="nav-wrapper">
                 <br />
                 <img src="../img/rafe_logo.png" alt="Rafe" width={"5%"} />

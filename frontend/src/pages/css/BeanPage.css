@@ -4,7 +4,9 @@
     display: flex;
     /* position: absolute; */
     margin-left: 10%;
-    margin-top: 40%;
+    /* margin-top: 40%; */
+    position: fixed;
+    top: 25%;
 
 }
 
@@ -17,6 +19,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     gap: 10px;
+    position: fixed;
+    top: 31%;
 }
 
 .bean_sort_on{
