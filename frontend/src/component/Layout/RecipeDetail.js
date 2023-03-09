@@ -62,7 +62,7 @@ function RecipeDetail({ val, recipeLike }) {
                                         <td className="recipe__ig__name"><Link to={`/ingredient/detail`} state={{igId : ig.igId}}>
                                         {ig.igName}
                                         </Link></td>
-                                        <td>·· &nbsp;&nbsp;{ig.igCount}</td>
+                                        <td className="recipe__ig__count">·· &nbsp;&nbsp;{ig.igCount}</td>
                                         <td>
                                             <img id="recipe__ig__cart" src="../../img/shopping_cart.png" alt="장바구니 추가" onClick={() => { submitCart(ig) }}/>
                                         </td>
