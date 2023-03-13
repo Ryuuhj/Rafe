@@ -4,7 +4,7 @@ import "./css/RecipeHeader.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function RecipeHeader({ category, exceptName, searchTxt }) {
+function RecipeHeader({ category, exceptName, searchTxt, selectName }) {
     let name = ""
     switch (category) {
         case 0:
@@ -44,8 +44,8 @@ function RecipeHeader({ category, exceptName, searchTxt }) {
             {(exceptName.length !== 0)
             ?
             <div> 
-                <div className="recipe_search_condition_title">제외 재료 :</div>
-            <div className="recipe_search_condition_ig">
+                <div className="recipe_search_except_title">제외 재료 :</div>
+            <div className="recipe_search_except_ig">
                 {exceptName.map((val)=>{
                     return(
                         <div>&nbsp;{val} |</div>
@@ -54,7 +54,23 @@ function RecipeHeader({ category, exceptName, searchTxt }) {
                 </div>
                 </div>
             :
-            <div className="recipe_search_condition_title">제외 재료가 없습니다.</div>}
+            <div className="recipe_search_except_title">제외 재료가 없습니다.</div>}
+            
+            {(selectName.length !== 0)
+            ?
+            <div> 
+                <div className="recipe_search_select_title">선택 재료 :</div>
+            <div className="recipe_search_select_ig">
+                {selectName.map((val)=>{
+                    return(
+                        <div>&nbsp;{val} |</div>
+                    )
+                })}
+                </div>
+                </div>
+            :
+            <div className="recipe_search_select_title">선택 재료가 없습니다.</div>}
+
         <div className="recipe_search_box">
             <h2 className="recipe_search_box__name">{name}</h2>
             <Link to={`/recipe/search`} state={{ categoryId: category }}>

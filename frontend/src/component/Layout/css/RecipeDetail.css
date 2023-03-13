@@ -50,7 +50,7 @@
 }
 .recipe__ig_title {
     text-align: left;
-    margin-left: 20%;
+    margin-left: 10%;
     /* margin-top: 43px; */
     padding-top: 10%;
 }
@@ -68,8 +68,8 @@
 }
 
 .recipe__ig {
-    width: 60%;
-    margin-left: 20%;
+    width: 76%;
+    margin-left: 10%;
     padding-top: 10px;
     padding-bottom: 5%;
     text-align: left;
@@ -88,7 +88,7 @@
 }
 #recipe__ig__yes_title{
     font-size: smaller;
-    margin-left: 20%;
+    margin-left: 10%;
     text-align: left;
     margin-bottom: 30px;
     padding-top: 10px;
@@ -127,5 +127,9 @@
   } */
 
   .recipe__ig__name{
-    width: 48%;
+    width: 40%;
+  }
+
+  .recipe__ig__count{
+    width: 45%;
   }

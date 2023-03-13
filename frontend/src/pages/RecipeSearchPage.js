@@ -219,7 +219,8 @@ function RecipeSearchPage() {
                     keyward : searchTxt,
                     ingredientId : selectIgList,
                     exceptIgId : exceptIgList,
-                    exceptIgName : exceptIgName
+                    exceptIgName : exceptIgName,
+                    selectIgName : selectIgName
                 }}>
                 <Btn context={"검색"} orange={false} />  
                 </Link>              

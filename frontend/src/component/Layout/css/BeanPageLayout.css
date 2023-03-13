@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 6%;
-    margin-left: 10%;
+    margin-left: 9%;
     margin-right: 7%;
     /* margin-bottom: 21%; */
     /* margin-top: 45%; */
@@ -15,7 +15,7 @@
     /* border-style: outset; */
     background-color: rgb(245, 245, 245);
     border-radius: 20px;
-    width: 71%;
+    width: 81%;
 }
 .bean_pre_star{
     display: flex;
