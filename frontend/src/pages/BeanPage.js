@@ -30,7 +30,7 @@ function BeanPage() {
                 <TransBtn context={"✏️"} onClick={(()=>{navigate('/bean/create')})} />
             </div>
             <div className="bean_sort_type">
-                <div className={newBtn? "bean_sort_on" : "bean_sort_off"} onClick={()=> {onNewest()}}>최신순</div>
+                <div className={newBtn? "bean_sort_on" : "bean_sort_off"} onClick={()=> {onNewest()}}>날짜순</div>
                 <div className={starBtn? "bean_sort_on" : "bean_sort_off"} onClick={()=> {onStar()}}>별점순</div>
             </div>
 
